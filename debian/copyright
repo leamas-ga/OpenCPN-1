@@ -1,0 +1,1922 @@
+Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: OpenCPN
+Upstream-Contact: Dave S. Register <bdbcat@yahoo.com>
+Source: http://www.opencpn.org
+Files-Excluded: .*
+ buildosx
+ buildandroid
+ buildwin
+ plugins/chartdldr_pi/src/tinyxml
+ plugins/grib_pi/src/bzip2
+
+
+Files: *
+Copyright: 2000-2018 The OpenCPN Authors
+License: GPL-2+
+
+
+Files:  plugins/chartdldr_pi/src/unarr/lzmasdk/7zTypes.h
+ plugins/chartdldr_pi/src/unarr/lzmasdk/CpuArch.c
+ plugins/chartdldr_pi/src/unarr/lzmasdk/CpuArch.h
+ plugins/chartdldr_pi/src/unarr/lzmasdk/LzmaDec.c
+ plugins/chartdldr_pi/src/unarr/lzmasdk/LzmaDec.h
+ plugins/chartdldr_pi/src/unarr/lzmasdk/Ppmd.h
+ plugins/chartdldr_pi/src/unarr/lzmasdk/Ppmd7.c
+ plugins/chartdldr_pi/src/unarr/lzmasdk/Ppmd7.h
+ plugins/chartdldr_pi/src/unarr/lzmasdk/Ppmd7Dec.c
+ plugins/chartdldr_pi/src/unarr/lzmasdk/Ppmd8.c
+ plugins/chartdldr_pi/src/unarr/lzmasdk/Ppmd8.h
+ plugins/chartdldr_pi/src/unarr/lzmasdk/Ppmd8Dec.c
+ plugins/chartdldr_pi/src/unarr/lzmasdk/Precomp.h
+ plugins/wmm_pi/src/WMM_SubLibrary.c
+ src/SQLiteCpp/sqlite3/sqlite3.c
+ src/SQLiteCpp/sqlite3/sqlite3.h
+Copyright: none
+License: public-domain
+Comment: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=694883
+ 
+Files:  src/glshim/CMakeLists.txt
+ src/glshim/README.md
+ src/glshim/include/GL/gl_mangle.h
+ src/glshim/include/GLES/egl.h
+ src/glshim/spec/gen.py
+ src/glshim/spec/requirements.txt
+ src/glshim/spec/template/base/base.j2
+ src/glshim/spec/template/base/fprint.j2
+ src/glshim/spec/template/base/header.j2
+ src/glshim/spec/template/base/headers.j2
+ src/glshim/spec/template/base/packed_call.j2
+ src/glshim/spec/template/base/wrap.c.j2
+ src/glshim/spec/template/base/wrap.h.j2
+ src/glshim/spec/template/client.c.j2
+ src/glshim/spec/template/eglwrap.c.j2
+ src/glshim/spec/template/gleswrap.c.j2
+ src/glshim/spec/template/glwrap.h.j2
+ src/glshim/spec/template/glxfuncs.j2
+ src/glshim/spec/template/host.c.j2
+ src/glshim/spec/template/proxy.h.j2
+ src/glshim/spec/xml/glx.xml
+ src/glshim/spec/xml/glxext.xml
+ src/glshim/spec/xml/opengl.xml
+ src/glshim/spec/xml/toyml.py
+ src/glshim/spec/xml/wgl.xml
+ src/glshim/spec/yml/alsa.yml
+ src/glshim/spec/yml/egl.yml
+ src/glshim/spec/yml/gles-1.1.yml
+ src/glshim/spec/yml/gles-2.0.yml
+ src/glshim/spec/yml/glext-1.1.yml
+ src/glshim/spec/yml/glx.yml
+ src/glshim/spec/yml/glxext.yml
+ src/glshim/spec/yml/my_glx.yml
+ src/glshim/spec/yml/opengl.yml
+ src/glshim/spec/yml/wgl.yml
+ src/glshim/src/CMakeLists.txt
+ src/glshim/src/config.h
+ src/glshim/src/gl/array.c
+ src/glshim/src/gl/array.h
+ src/glshim/src/gl/const.h
+ src/glshim/src/gl/defines.h
+ src/glshim/src/gl/eval.c
+ src/glshim/src/gl/eval.h
+ src/glshim/src/gl/gl.c
+ src/glshim/src/gl/gl.h
+ src/glshim/src/gl/light.c
+ src/glshim/src/gl/light.h
+ src/glshim/src/gl/line.c
+ src/glshim/src/gl/line.h
+ src/glshim/src/gl/list.c
+ src/glshim/src/gl/list.h
+ src/glshim/src/gl/pixel.c
+ src/glshim/src/gl/pixel.h
+ src/glshim/src/gl/raster.c
+ src/glshim/src/gl/raster.h
+ src/glshim/src/gl/stack.c
+ src/glshim/src/gl/stack.h
+ src/glshim/src/gl/state.h
+ src/glshim/src/gl/texgen.c
+ src/glshim/src/gl/texgen.h
+ src/glshim/src/gl/texture.c
+ src/glshim/src/gl/texture.h
+ src/glshim/src/gl/wrap/es.h
+ src/glshim/src/gl/wrap/gl.c
+ src/glshim/src/gl/wrap/gl.h
+ src/glshim/src/gl/wrap/gles.c
+ src/glshim/src/gl/wrap/gles.h
+ src/glshim/src/gl/wrap/gles2.c
+ src/glshim/src/gl/wrap/gles2.h
+ src/glshim/src/gl/wrap/glstub.c
+ src/glshim/src/gl/wrap/stub.h
+ src/glshim/src/glx/gles2funcs.inc
+ src/glshim/src/glx/glesfuncs.inc
+ src/glshim/src/glx/glx.c
+ src/glshim/src/glx/glx.h
+ src/glshim/src/glx/lookup.c
+ src/glshim/src/preload/preload.c
+ src/glshim/src/proxy/CMakeLists.txt
+ src/glshim/src/proxy/client/CMakeLists.txt
+ src/glshim/src/proxy/client/Versions
+ src/glshim/src/proxy/client/src/client.c
+ src/glshim/src/proxy/config.h
+ src/glshim/src/proxy/gl.h
+ src/glshim/src/proxy/host/host.c
+ src/glshim/src/proxy/host/host.h
+ src/glshim/src/proxy/proxy.h
+ src/glshim/src/tests/main.c
+Copyright: 2013 Ryan Hileman
+License: Expat
+Comment: https://github.com/lunixbochs/glshim/blob/unstable/LICENSE
+ 
+Files:plugins/wmm_pi/src/WMMHeader.h
+ plugins/wmm_pi/src/WmmUIDialog.cpp
+ plugins/wmm_pi/src/WmmUIDialog.h
+ plugins/wmm_pi/src/wmm.svg
+ plugins/wmm_pi/src/wmm_live.svg
+Copyright: 2014 ESA-VirES
+Comment: https://github.com/ESA-VirES/WMM/blob/master/LICENSE
+License: Expat
+
+
+Files: CMakeLists.txt
+ include/AISTargetAlertDialog.h
+ include/AISTargetListDialog.h
+ include/AISTargetQueryDialog.h
+ include/AIS_Bitstring.h
+ include/AIS_Decoder.h
+ include/AIS_Target_Data.h
+ include/ChInfoWin.h
+ include/ChartDataInputStream.h
+ include/ConnectionParams.h
+ include/DetailSlider.h
+ include/FlexHash.h
+ include/FontDesc.h
+ include/FontMgr.h
+ include/GoToPositionDialog.h
+ include/Hyperlink.h
+ include/IDX_entry.h
+ include/Layer.h
+ include/LinkPropDlg.h
+ include/MarkIcon.h
+ include/NMEALogWindow.h
+ include/NavObjectCollection.h
+ include/OCPNListCtrl.h
+ include/OCPNPlatform.h
+ include/OCPNRegion.h
+ include/OCPNSoundData.h
+ include/OCPN_DataStreamEvent.h
+ include/OCPN_Sound.h
+ include/OCP_DataStreamInput_Thread.h
+ include/Osenc.h
+ include/PositionParser.h
+ include/Quilt.h
+ include/RolloverWin.h
+ include/Route.h
+ include/RoutePoint.h
+ include/S57ClassRegistrar.h
+ include/S57Light.h
+ include/S57ObjectDesc.h
+ include/S57QueryDialog.h
+ include/S57Sector.h
+ include/Select.h
+ include/SelectItem.h
+ include/SendToGpsDlg.h
+ include/Station_Data.h
+ include/TCDS_Ascii_Harmonic.h
+ include/TCDS_Binary_Harmonic.h
+ include/TCDataFactory.h
+ include/TCDataSource.h
+ include/TCWin.h
+ include/TC_Error_Code.h
+ include/TTYScroll.h
+ include/TTYWindow.h
+ include/Track.h
+ include/TrackPropDlg.h
+ include/WindowDestroyListener.h
+ include/about.h
+ include/ais.h
+ include/androidUTIL.h
+ include/canvasMenu.h
+ include/chart1.h
+ include/chartbase.h
+ include/chartdb.h
+ include/chartdbs.h
+ include/chartimg.h
+ include/chartsymbols.h
+ include/chcanv.h
+ include/cm93.h
+ include/compass.h
+ include/concanv.h
+ include/cutil.h
+ include/dsPortType.h
+ include/dychart.h
+ include/georef.h
+ include/glChartCanvas.h
+ include/glTexCache.h
+ include/glTextureDescriptor.h
+ include/glTextureManager.h
+ include/iENCToolbar.h
+ include/kml.h
+ include/mbtiles.h
+ include/mygeom.h
+ include/navutil.h
+ include/ocpCursor.h
+ include/ocpn_pixel.h
+ include/ocpn_plugin.h
+ include/ocpn_types.h
+ include/options.h
+ include/piano.h
+ include/pluginmanager.h
+ include/printtable.h
+ include/razdsparser.h
+ include/routeman.h
+ include/routeprintout.h
+ include/routeprop.h
+ include/s52plib.h
+ include/s52s57.h
+ include/s57RegistrarMgr.h
+ include/s57chart.h
+ include/s57mgr.h
+ include/styles.h
+ include/tcmgr.h
+ include/thumbwin.h
+ include/tide_time.h
+ include/timers.h
+ include/toolbar.h
+ include/trackprintout.h
+ include/undo.h
+ include/vector2D.h
+ include/viewport.h
+ include/wificlient.h
+ include/wx28compat.h
+ plugins/CMakeLists.txt
+ plugins/chartdldr_pi/cmake/wxWTranslateCatalog.h.in
+ plugins/dashboard_pi/CMakeLists.txt
+ plugins/dashboard_pi/src/baro_history.h
+ plugins/dashboard_pi/src/clock.cpp
+ plugins/dashboard_pi/src/clock.h
+ plugins/dashboard_pi/src/compass.cpp
+ plugins/dashboard_pi/src/compass.h
+ plugins/dashboard_pi/src/dashboard_pi.cpp
+ plugins/dashboard_pi/src/dashboard_pi.h
+ plugins/dashboard_pi/src/depth.cpp
+ plugins/dashboard_pi/src/depth.h
+ plugins/dashboard_pi/src/dial.cpp
+ plugins/dashboard_pi/src/dial.h
+ plugins/dashboard_pi/src/from_ownship.cpp
+ plugins/dashboard_pi/src/from_ownship.h
+ plugins/dashboard_pi/src/gps.cpp
+ plugins/dashboard_pi/src/gps.h
+ plugins/dashboard_pi/src/instrument.cpp
+ plugins/dashboard_pi/src/instrument.h
+ plugins/dashboard_pi/src/rudder_angle.cpp
+ plugins/dashboard_pi/src/rudder_angle.h
+ plugins/dashboard_pi/src/speedometer.cpp
+ plugins/dashboard_pi/src/speedometer.h
+ plugins/dashboard_pi/src/wind.cpp
+ plugins/dashboard_pi/src/wind.h
+ plugins/dashboard_pi/src/wind_history.h
+ plugins/demo_pi_sample/cmake/wxWTranslateCatalog.h.in
+ plugins/demo_pi_sample/src/demo_pi.cpp
+ plugins/demo_pi_sample/src/demo_pi.h
+ plugins/grib_pi/CMakeLists.txt
+ plugins/grib_pi/src/CursorData.cpp
+ plugins/grib_pi/src/CursorData.h
+ plugins/grib_pi/src/GrabberWin.cpp
+ plugins/grib_pi/src/GrabberWin.h
+ plugins/grib_pi/src/GribOverlayFactory.cpp
+ plugins/grib_pi/src/GribOverlayFactory.h
+ plugins/grib_pi/src/GribRecordSet.h
+ plugins/grib_pi/src/GribRequestDialog.cpp
+ plugins/grib_pi/src/GribRequestDialog.h
+ plugins/grib_pi/src/GribTable.cpp
+ plugins/grib_pi/src/GribTable.h
+ plugins/grib_pi/src/GribUIDialog.cpp
+ plugins/grib_pi/src/GribUIDialog.h
+ plugins/grib_pi/src/grib_pi.cpp
+ plugins/grib_pi/src/grib_pi.h
+ plugins/wmm_pi/cmake/wxWTranslateCatalog.h.in
+ src/AISTargetAlertDialog.cpp
+ src/AISTargetListDialog.cpp
+ src/AISTargetQueryDialog.cpp
+ src/AIS_Bitstring.cpp
+ src/AIS_Decoder.cpp
+ src/AIS_Target_Data.cpp
+ src/ChInfoWin.cpp
+ src/ChartDataInputStream.cpp
+ src/ConnectionParams.cpp
+ src/DarkMode.h
+ src/DarkMode.mm
+ src/DetailSlider.cpp
+ src/FlexHash.cpp
+ src/FontDesc.cpp
+ src/FontMgr.cpp
+ src/GoToPositionDialog.cpp
+ src/Hyperlink.cpp
+ src/IDX_entry.cpp
+ src/Layer.cpp
+ src/LinkPropDlg.cpp
+ src/NMEALogWindow.cpp
+ src/NavObjectCollection.cpp
+ src/OCPNListCtrl.cpp
+ src/OCPNPlatform.cpp
+ src/OCPNRegion.cpp
+ src/OCPNSoundData.cpp
+ src/OCPN_DataStreamEvent.cpp
+ src/OCPN_Sound.cpp
+ src/OCP_DataStreamInput_Thread.cpp
+ src/Osenc.cpp
+ src/PositionParser.cpp
+ src/Quilt.cpp
+ src/RolloverWin.cpp
+ src/Route.cpp
+ src/RoutePoint.cpp
+ src/S57QueryDialog.cpp
+ src/Select.cpp
+ src/SelectItem.cpp
+ src/SendToGpsDlg.cpp
+ src/Station_Data.cpp
+ src/TCDS_Ascii_Harmonic.cpp
+ src/TCDS_Binary_Harmonic.cpp
+ src/TCDataFactory.cpp
+ src/TCDataSource.cpp
+ src/TTYScroll.cpp
+ src/TTYWindow.cpp
+ src/Track.cpp
+ src/TrackPropDlg.cpp
+ src/about.cpp
+ src/ais.cpp
+ src/androidUTIL.cpp
+ src/bitmaps/13xX_svg_src/create_all_13xX.sh
+ src/bitmaps/16x16_svg_src/create_all_16x16.sh
+ src/bitmaps/28x28_svg_src/create_all_28x28.sh
+ src/bitmaps/32x32_svg_src/cursor/create_all_32x32.sh
+ src/bitmaps/32x32_svg_src/ribbon/create_all_32x32.sh
+ src/bitmaps/other_svg_src/create_ship.sh
+ src/canvasMenu.cpp
+ src/chart1.cpp
+ src/chartdb.cpp
+ src/chartdbs.cpp
+ src/chartimg.cpp
+ src/chartsymbols.cpp
+ src/chcanv.cpp
+ src/cm93.cpp
+ src/compass.cpp
+ src/compasswin.cpp
+ src/concanv.cpp
+ src/cutil.cpp
+ src/georef.cpp
+ src/glChartCanvas.cpp
+ src/glTexCache.cpp
+ src/glTextureDescriptor.cpp
+ src/glTextureManager.cpp
+ src/iENCToolbar.cpp
+ src/kml.cpp
+ src/mbtiles.cpp
+ src/mygeom.cpp
+ src/navutil.cpp
+ src/ocpCursor.cpp
+ src/ocpn_pixel.cpp
+ src/options.cpp
+ src/piano.cpp
+ src/pluginmanager.cpp
+ src/printtable.cpp
+ src/razdsparser.cpp
+ src/routeman.cpp
+ src/routeprintout.cpp
+ src/routeprop.cpp
+ src/s52plib.cpp
+ src/s57RegistrarMgr.cpp
+ src/s57chart.cpp
+ src/s57mgr.cpp
+ src/s57obj.cpp
+ src/styles.cpp
+ src/tcmgr.cpp
+ src/thumbwin.cpp
+ src/toolbar.cpp
+ src/trackprintout.cpp
+ src/undo.cpp
+ src/viewport.cpp
+ src/wificlient.cpp
+ src/TCWin.cpp
+Copyright: 2010, David S. Register
+  2012, David S. Register
+  2013, David S. Register
+  2014, David S. Register
+  2015, David S. Register
+  2016, David S. Register
+  2017, David S. Register
+  2018, David S. Register
+License: GPL-2+
+
+Files: src/wxsvg/include/wxSVG/Animated.h
+ src/wxsvg/include/wxSVG/CSSStyleDeclaration.h
+ src/wxsvg/include/wxSVG/CSSValue.h
+ src/wxsvg/include/wxSVG/CSSValues.h
+ src/wxsvg/include/wxSVG/Document.h
+ src/wxsvg/include/wxSVG/DocumentCSS.h
+ src/wxsvg/include/wxSVG/DocumentEvent.h
+ src/wxsvg/include/wxSVG/Element.h
+ src/wxsvg/include/wxSVG/ElementTimeControl.h
+ src/wxsvg/include/wxSVG/EventTarget.h
+ src/wxsvg/include/wxSVG/GetSVGDocument.h
+ src/wxsvg/include/wxSVG/NodeList.h
+ src/wxsvg/include/wxSVG/RGBColor.h
+ src/wxsvg/include/wxSVG/SVGAElement.h
+ src/wxsvg/include/wxSVG/SVGAltGlyphDefElement.h
+ src/wxsvg/include/wxSVG/SVGAltGlyphElement.h
+ src/wxsvg/include/wxSVG/SVGAltGlyphItemElement.h
+ src/wxsvg/include/wxSVG/SVGAngle.h
+ src/wxsvg/include/wxSVG/SVGAnimateColorElement.h
+ src/wxsvg/include/wxSVG/SVGAnimateElement.h
+ src/wxsvg/include/wxSVG/SVGAnimateMotionElement.h
+ src/wxsvg/include/wxSVG/SVGAnimateTransformElement.h
+ src/wxsvg/include/wxSVG/SVGAnimatedAngle.h
+ src/wxsvg/include/wxSVG/SVGAnimatedBoolean.h
+ src/wxsvg/include/wxSVG/SVGAnimatedEnumeration.h
+ src/wxsvg/include/wxSVG/SVGAnimatedInteger.h
+ src/wxsvg/include/wxSVG/SVGAnimatedLength.h
+ src/wxsvg/include/wxSVG/SVGAnimatedLengthList.h
+ src/wxsvg/include/wxSVG/SVGAnimatedNumber.h
+ src/wxsvg/include/wxSVG/SVGAnimatedNumberList.h
+ src/wxsvg/include/wxSVG/SVGAnimatedPathData.h
+ src/wxsvg/include/wxSVG/SVGAnimatedPoints.h
+ src/wxsvg/include/wxSVG/SVGAnimatedPreserveAspectRatio.h
+ src/wxsvg/include/wxSVG/SVGAnimatedRect.h
+ src/wxsvg/include/wxSVG/SVGAnimatedString.h
+ src/wxsvg/include/wxSVG/SVGAnimatedTransformList.h
+ src/wxsvg/include/wxSVG/SVGAnimationElement.h
+ src/wxsvg/include/wxSVG/SVGCSSRule.h
+ src/wxsvg/include/wxSVG/SVGCanvas.h
+ src/wxsvg/include/wxSVG/SVGCanvasItem.h
+ src/wxsvg/include/wxSVG/SVGCircleElement.h
+ src/wxsvg/include/wxSVG/SVGClipPathElement.h
+ src/wxsvg/include/wxSVG/SVGColor.h
+ src/wxsvg/include/wxSVG/SVGColorProfileElement.h
+ src/wxsvg/include/wxSVG/SVGColorProfileRule.h
+ src/wxsvg/include/wxSVG/SVGComponentTransferFunctionElement.h
+ src/wxsvg/include/wxSVG/SVGCursorElement.h
+ src/wxsvg/include/wxSVG/SVGDTD.h
+ src/wxsvg/include/wxSVG/SVGDefinitionSrcElement.h
+ src/wxsvg/include/wxSVG/SVGDefsElement.h
+ src/wxsvg/include/wxSVG/SVGDescElement.h
+ src/wxsvg/include/wxSVG/SVGDocument.h
+ src/wxsvg/include/wxSVG/SVGElement.h
+ src/wxsvg/include/wxSVG/SVGElementInstance.h
+ src/wxsvg/include/wxSVG/SVGElementInstanceList.h
+ src/wxsvg/include/wxSVG/SVGEllipseElement.h
+ src/wxsvg/include/wxSVG/SVGEvent.h
+ src/wxsvg/include/wxSVG/SVGExternalResourcesRequired.h
+ src/wxsvg/include/wxSVG/SVGFEBlendElement.h
+ src/wxsvg/include/wxSVG/SVGFEColorMatrixElement.h
+ src/wxsvg/include/wxSVG/SVGFEComponentTransferElement.h
+ src/wxsvg/include/wxSVG/SVGFECompositeElement.h
+ src/wxsvg/include/wxSVG/SVGFEConvolveMatrixElement.h
+ src/wxsvg/include/wxSVG/SVGFEDiffuseLightingElement.h
+ src/wxsvg/include/wxSVG/SVGFEDisplacementMapElement.h
+ src/wxsvg/include/wxSVG/SVGFEDistantLightElement.h
+ src/wxsvg/include/wxSVG/SVGFEFloodElement.h
+ src/wxsvg/include/wxSVG/SVGFEFuncAElement.h
+ src/wxsvg/include/wxSVG/SVGFEFuncBElement.h
+ src/wxsvg/include/wxSVG/SVGFEFuncGElement.h
+ src/wxsvg/include/wxSVG/SVGFEFuncRElement.h
+ src/wxsvg/include/wxSVG/SVGFEGaussianBlurElement.h
+ src/wxsvg/include/wxSVG/SVGFEImageElement.h
+ src/wxsvg/include/wxSVG/SVGFEMergeElement.h
+ src/wxsvg/include/wxSVG/SVGFEMergeNodeElement.h
+ src/wxsvg/include/wxSVG/SVGFEMorphologyElement.h
+ src/wxsvg/include/wxSVG/SVGFEOffsetElement.h
+ src/wxsvg/include/wxSVG/SVGFEPointLightElement.h
+ src/wxsvg/include/wxSVG/SVGFESpecularLightingElement.h
+ src/wxsvg/include/wxSVG/SVGFESpotLightElement.h
+ src/wxsvg/include/wxSVG/SVGFETileElement.h
+ src/wxsvg/include/wxSVG/SVGFETurbulenceElement.h
+ src/wxsvg/include/wxSVG/SVGFilterElement.h
+ src/wxsvg/include/wxSVG/SVGFilterPrimitiveStandardAttributes.h
+ src/wxsvg/include/wxSVG/SVGFitToViewBox.h
+ src/wxsvg/include/wxSVG/SVGFontElement.h
+ src/wxsvg/include/wxSVG/SVGFontFaceElement.h
+ src/wxsvg/include/wxSVG/SVGFontFaceFormatElement.h
+ src/wxsvg/include/wxSVG/SVGFontFaceNameElement.h
+ src/wxsvg/include/wxSVG/SVGFontFaceSrcElement.h
+ src/wxsvg/include/wxSVG/SVGFontFaceUriElement.h
+ src/wxsvg/include/wxSVG/SVGForeignObjectElement.h
+ src/wxsvg/include/wxSVG/SVGGElement.h
+ src/wxsvg/include/wxSVG/SVGGlyphElement.h
+ src/wxsvg/include/wxSVG/SVGGlyphRefElement.h
+ src/wxsvg/include/wxSVG/SVGGradientElement.h
+ src/wxsvg/include/wxSVG/SVGHKernElement.h
+ src/wxsvg/include/wxSVG/SVGICCColor.h
+ src/wxsvg/include/wxSVG/SVGImageElement.h
+ src/wxsvg/include/wxSVG/SVGLangSpace.h
+ src/wxsvg/include/wxSVG/SVGLength.h
+ src/wxsvg/include/wxSVG/SVGLengthCalculate.h
+ src/wxsvg/include/wxSVG/SVGLengthList.h
+ src/wxsvg/include/wxSVG/SVGLineElement.h
+ src/wxsvg/include/wxSVG/SVGLinearGradientElement.h
+ src/wxsvg/include/wxSVG/SVGLocatable.h
+ src/wxsvg/include/wxSVG/SVGMPathElement.h
+ src/wxsvg/include/wxSVG/SVGMarkerElement.h
+ src/wxsvg/include/wxSVG/SVGMaskElement.h
+ src/wxsvg/include/wxSVG/SVGMatrix.h
+ src/wxsvg/include/wxSVG/SVGMissingGlyphElement.h
+ src/wxsvg/include/wxSVG/SVGNumber.h
+ src/wxsvg/include/wxSVG/SVGNumberList.h
+ src/wxsvg/include/wxSVG/SVGPaint.h
+ src/wxsvg/include/wxSVG/SVGPathElement.h
+ src/wxsvg/include/wxSVG/SVGPathSeg.h
+ src/wxsvg/include/wxSVG/SVGPathSegArcAbs.h
+ src/wxsvg/include/wxSVG/SVGPathSegArcRel.h
+ src/wxsvg/include/wxSVG/SVGPathSegClosePath.h
+ src/wxsvg/include/wxSVG/SVGPathSegCurvetoCubicAbs.h
+ src/wxsvg/include/wxSVG/SVGPathSegCurvetoCubicRel.h
+ src/wxsvg/include/wxSVG/SVGPathSegCurvetoCubicSmoothAbs.h
+ src/wxsvg/include/wxSVG/SVGPathSegCurvetoCubicSmoothRel.h
+ src/wxsvg/include/wxSVG/SVGPathSegCurvetoQuadraticAbs.h
+ src/wxsvg/include/wxSVG/SVGPathSegCurvetoQuadraticRel.h
+ src/wxsvg/include/wxSVG/SVGPathSegCurvetoQuadraticSmoothAbs.h
+ src/wxsvg/include/wxSVG/SVGPathSegCurvetoQuadraticSmoothRel.h
+ src/wxsvg/include/wxSVG/SVGPathSegLinetoAbs.h
+ src/wxsvg/include/wxSVG/SVGPathSegLinetoHorizontalAbs.h
+ src/wxsvg/include/wxSVG/SVGPathSegLinetoHorizontalRel.h
+ src/wxsvg/include/wxSVG/SVGPathSegLinetoRel.h
+ src/wxsvg/include/wxSVG/SVGPathSegLinetoVerticalAbs.h
+ src/wxsvg/include/wxSVG/SVGPathSegLinetoVerticalRel.h
+ src/wxsvg/include/wxSVG/SVGPathSegList.h
+ src/wxsvg/include/wxSVG/SVGPathSegMovetoAbs.h
+ src/wxsvg/include/wxSVG/SVGPathSegMovetoRel.h
+ src/wxsvg/include/wxSVG/SVGPatternElement.h
+ src/wxsvg/include/wxSVG/SVGPoint.h
+ src/wxsvg/include/wxSVG/SVGPointList.h
+ src/wxsvg/include/wxSVG/SVGPolygonElement.h
+ src/wxsvg/include/wxSVG/SVGPolylineElement.h
+ src/wxsvg/include/wxSVG/SVGPreserveAspectRatio.h
+ src/wxsvg/include/wxSVG/SVGRadialGradientElement.h
+ src/wxsvg/include/wxSVG/SVGRect.h
+ src/wxsvg/include/wxSVG/SVGRectElement.h
+ src/wxsvg/include/wxSVG/SVGRenderingIntent.h
+ src/wxsvg/include/wxSVG/SVGSVGElement.h
+ src/wxsvg/include/wxSVG/SVGScriptElement.h
+ src/wxsvg/include/wxSVG/SVGSetElement.h
+ src/wxsvg/include/wxSVG/SVGStopElement.h
+ src/wxsvg/include/wxSVG/SVGStringList.h
+ src/wxsvg/include/wxSVG/SVGStylable.h
+ src/wxsvg/include/wxSVG/SVGStyleElement.h
+ src/wxsvg/include/wxSVG/SVGSwitchElement.h
+ src/wxsvg/include/wxSVG/SVGSymbolElement.h
+ src/wxsvg/include/wxSVG/SVGTBreakElement.h
+ src/wxsvg/include/wxSVG/SVGTRefElement.h
+ src/wxsvg/include/wxSVG/SVGTSpanElement.h
+ src/wxsvg/include/wxSVG/SVGTests.h
+ src/wxsvg/include/wxSVG/SVGTextContentElement.h
+ src/wxsvg/include/wxSVG/SVGTextElement.h
+ src/wxsvg/include/wxSVG/SVGTextPathElement.h
+ src/wxsvg/include/wxSVG/SVGTextPositioningElement.h
+ src/wxsvg/include/wxSVG/SVGTitleElement.h
+ src/wxsvg/include/wxSVG/SVGTransform.h
+ src/wxsvg/include/wxSVG/SVGTransformList.h
+ src/wxsvg/include/wxSVG/SVGTransformable.h
+ src/wxsvg/include/wxSVG/SVGURIReference.h
+ src/wxsvg/include/wxSVG/SVGUnitTypes.h
+ src/wxsvg/include/wxSVG/SVGUseElement.h
+ src/wxsvg/include/wxSVG/SVGVKernElement.h
+ src/wxsvg/include/wxSVG/SVGVideoElement.h
+ src/wxsvg/include/wxSVG/SVGViewElement.h
+ src/wxsvg/include/wxSVG/SVGViewSpec.h
+ src/wxsvg/include/wxSVG/SVGZoomAndPan.h
+ src/wxsvg/include/wxSVG/SVGZoomEvent.h
+ src/wxsvg/include/wxSVG/String_wxsvg.h
+ src/wxsvg/include/wxSVG/ViewCSS.h
+ src/wxsvg/include/wxSVG/svg.h
+ src/wxsvg/include/wxSVG/svgctrl.h
+ src/wxsvg/src/CSSStyleDeclaration.cpp
+ src/wxsvg/src/CSSValue.cpp
+ src/wxsvg/src/Elements_CopyConstructors.cpp
+ src/wxsvg/src/Elements_GetAttribute.cpp
+ src/wxsvg/src/Elements_GetAttributes.cpp
+ src/wxsvg/src/Elements_HasAttribute.cpp
+ src/wxsvg/src/Elements_SetAttribute.cpp
+ src/wxsvg/src/GetSVGDocument.cpp
+ src/wxsvg/src/SVGAngle.cpp
+ src/wxsvg/src/SVGAnimationElement.cpp
+ src/wxsvg/src/SVGCanvas.cpp
+ src/wxsvg/src/SVGCircleElement.cpp
+ src/wxsvg/src/SVGColor.cpp
+ src/wxsvg/src/SVGDocument.cpp
+ src/wxsvg/src/SVGDocument_CreateElement.cpp
+ src/wxsvg/src/SVGElementInstanceList.cpp
+ src/wxsvg/src/SVGEllipseElement.cpp
+ src/wxsvg/src/SVGFEGaussianBlurElement.cpp
+ src/wxsvg/src/SVGFilterElement.cpp
+ src/wxsvg/src/SVGImageElement.cpp
+ src/wxsvg/src/SVGLength.cpp
+ src/wxsvg/src/SVGLengthList.cpp
+ src/wxsvg/src/SVGLineElement.cpp
+ src/wxsvg/src/SVGLocatable.cpp
+ src/wxsvg/src/SVGMarkerElement.cpp
+ src/wxsvg/src/SVGMatrix.cpp
+ src/wxsvg/src/SVGNumberList.cpp
+ src/wxsvg/src/SVGPaint.cpp
+ src/wxsvg/src/SVGPathElement.cpp
+ src/wxsvg/src/SVGPathSegList.cpp
+ src/wxsvg/src/SVGPoint.cpp
+ src/wxsvg/src/SVGPointList.cpp
+ src/wxsvg/src/SVGPolygonElement.cpp
+ src/wxsvg/src/SVGPolylineElement.cpp
+ src/wxsvg/src/SVGPreserveAspectRatio.cpp
+ src/wxsvg/src/SVGRect.cpp
+ src/wxsvg/src/SVGRectElement.cpp
+ src/wxsvg/src/SVGSVGElement.cpp
+ src/wxsvg/src/SVGStringList.cpp
+ src/wxsvg/src/SVGStylable.cpp
+ src/wxsvg/src/SVGTests.cpp
+ src/wxsvg/src/SVGTextContentElement.cpp
+ src/wxsvg/src/SVGTextElement.cpp
+ src/wxsvg/src/SVGTransform.cpp
+ src/wxsvg/src/SVGTransformList.cpp
+ src/wxsvg/src/SVGTransformable.cpp
+ src/wxsvg/src/SVGUseElement.cpp
+ src/wxsvg/src/SVGVideoElement.cpp
+ src/wxsvg/src/cairo/SVGCanvasCairo.cpp
+ src/wxsvg/src/cairo/SVGCanvasCairo.h
+ src/wxsvg/src/cairo/SVGCanvasPathCairo.cpp
+ src/wxsvg/src/cairo/SVGCanvasPathCairo.h
+ src/wxsvg/src/css_colors.cpp
+ src/wxsvg/src/css_properties.cpp
+ src/wxsvg/src/css_values.cpp
+ src/wxsvg/src/svgctrl.cpp
+Copyright: (c) 2005 Alex Thuering
+Comment: GPLv2+ with some relaxed conditions
+License: wxWidgets
+
+Files: plugins/dashboard_pi/src/nmea0183/LatLong.hpp
+ plugins/dashboard_pi/src/nmea0183/RMB.hpp
+ plugins/dashboard_pi/src/nmea0183/RMC.HPP
+ plugins/dashboard_pi/src/nmea0183/Response.hpp
+ plugins/dashboard_pi/src/nmea0183/SatInfo.h
+ plugins/dashboard_pi/src/nmea0183/Sentence.hpp
+ plugins/dashboard_pi/src/nmea0183/dbt.cpp
+ plugins/dashboard_pi/src/nmea0183/dbt.hpp
+ plugins/dashboard_pi/src/nmea0183/dpt.cpp
+ plugins/dashboard_pi/src/nmea0183/dpt.hpp
+ plugins/dashboard_pi/src/nmea0183/expid.cpp
+ plugins/dashboard_pi/src/nmea0183/gga.cpp
+ plugins/dashboard_pi/src/nmea0183/gga.hpp
+ plugins/dashboard_pi/src/nmea0183/gll.cpp
+ plugins/dashboard_pi/src/nmea0183/gll.hpp
+ plugins/dashboard_pi/src/nmea0183/gsv.cpp
+ plugins/dashboard_pi/src/nmea0183/gsv.hpp
+ plugins/dashboard_pi/src/nmea0183/hdg.cpp
+ plugins/dashboard_pi/src/nmea0183/hdg.hpp
+ plugins/dashboard_pi/src/nmea0183/hdm.cpp
+ plugins/dashboard_pi/src/nmea0183/hdm.hpp
+ plugins/dashboard_pi/src/nmea0183/hdt.cpp
+ plugins/dashboard_pi/src/nmea0183/hdt.hpp
+ plugins/dashboard_pi/src/nmea0183/hexvalue.cpp
+ plugins/dashboard_pi/src/nmea0183/lat.cpp
+ plugins/dashboard_pi/src/nmea0183/latlong.cpp
+ plugins/dashboard_pi/src/nmea0183/long.cpp
+ plugins/dashboard_pi/src/nmea0183/mda.cpp
+ plugins/dashboard_pi/src/nmea0183/mda.hpp
+ plugins/dashboard_pi/src/nmea0183/mta.cpp
+ plugins/dashboard_pi/src/nmea0183/mta.hpp
+ plugins/dashboard_pi/src/nmea0183/mtw.cpp
+ plugins/dashboard_pi/src/nmea0183/mtw.hpp
+ plugins/dashboard_pi/src/nmea0183/mwd.cpp
+ plugins/dashboard_pi/src/nmea0183/mwd.hpp
+ plugins/dashboard_pi/src/nmea0183/mwv.cpp
+ plugins/dashboard_pi/src/nmea0183/mwv.hpp
+ plugins/dashboard_pi/src/nmea0183/nmea0183.cpp
+ plugins/dashboard_pi/src/nmea0183/nmea0183.h
+ plugins/dashboard_pi/src/nmea0183/nmea0183.hpp
+ plugins/dashboard_pi/src/nmea0183/response.cpp
+ plugins/dashboard_pi/src/nmea0183/rmb.cpp
+ plugins/dashboard_pi/src/nmea0183/rmc.cpp
+ plugins/dashboard_pi/src/nmea0183/rsa.cpp
+ plugins/dashboard_pi/src/nmea0183/rsa.hpp
+ plugins/dashboard_pi/src/nmea0183/rte.cpp
+ plugins/dashboard_pi/src/nmea0183/rte.hpp
+ plugins/dashboard_pi/src/nmea0183/sentence.cpp
+ plugins/dashboard_pi/src/nmea0183/talkerid.cpp
+ plugins/dashboard_pi/src/nmea0183/vhw.cpp
+ plugins/dashboard_pi/src/nmea0183/vhw.hpp
+ plugins/dashboard_pi/src/nmea0183/vlw.hpp
+ plugins/dashboard_pi/src/nmea0183/vtg.cpp
+ plugins/dashboard_pi/src/nmea0183/vtg.hpp
+ plugins/dashboard_pi/src/nmea0183/vwr.cpp
+ plugins/dashboard_pi/src/nmea0183/vwr.hpp
+ plugins/dashboard_pi/src/nmea0183/vwt.cpp
+ plugins/dashboard_pi/src/nmea0183/vwt.hpp
+ plugins/dashboard_pi/src/nmea0183/wpl.cpp
+ plugins/dashboard_pi/src/nmea0183/wpl.hpp
+ plugins/dashboard_pi/src/nmea0183/xdr.cpp
+ plugins/dashboard_pi/src/nmea0183/xdr.hpp
+ plugins/dashboard_pi/src/nmea0183/zda.cpp
+ plugins/dashboard_pi/src/nmea0183/zda.hpp
+ plugins/demo_pi_sample/src/nmea0183/LatLong.hpp
+ plugins/demo_pi_sample/src/nmea0183/RMB.hpp
+ plugins/demo_pi_sample/src/nmea0183/RMC.HPP
+ plugins/demo_pi_sample/src/nmea0183/Response.hpp
+ plugins/demo_pi_sample/src/nmea0183/Sentence.hpp
+ plugins/demo_pi_sample/src/nmea0183/expid.cpp
+ plugins/demo_pi_sample/src/nmea0183/gga.cpp
+ plugins/demo_pi_sample/src/nmea0183/gga.hpp
+ plugins/demo_pi_sample/src/nmea0183/gll.cpp
+ plugins/demo_pi_sample/src/nmea0183/gll.hpp
+ plugins/demo_pi_sample/src/nmea0183/gsv.cpp
+ plugins/demo_pi_sample/src/nmea0183/gsv.hpp
+ plugins/demo_pi_sample/src/nmea0183/hdg.cpp
+ plugins/demo_pi_sample/src/nmea0183/hdg.hpp
+ plugins/demo_pi_sample/src/nmea0183/hdm.cpp
+ plugins/demo_pi_sample/src/nmea0183/hdm.hpp
+ plugins/demo_pi_sample/src/nmea0183/hdt.cpp
+ plugins/demo_pi_sample/src/nmea0183/hdt.hpp
+ plugins/demo_pi_sample/src/nmea0183/hexvalue.cpp
+ plugins/demo_pi_sample/src/nmea0183/lat.cpp
+ plugins/demo_pi_sample/src/nmea0183/latlong.cpp
+ plugins/demo_pi_sample/src/nmea0183/long.cpp
+ plugins/demo_pi_sample/src/nmea0183/nmea0183.cpp
+ plugins/demo_pi_sample/src/nmea0183/nmea0183.h
+ plugins/demo_pi_sample/src/nmea0183/nmea0183.hpp
+ plugins/demo_pi_sample/src/nmea0183/response.cpp
+ plugins/demo_pi_sample/src/nmea0183/rmb.cpp
+ plugins/demo_pi_sample/src/nmea0183/rmc.cpp
+ plugins/demo_pi_sample/src/nmea0183/rte.cpp
+ plugins/demo_pi_sample/src/nmea0183/rte.hpp
+ plugins/demo_pi_sample/src/nmea0183/sentence.cpp
+ plugins/demo_pi_sample/src/nmea0183/talkerid.cpp
+ plugins/demo_pi_sample/src/nmea0183/vtg.cpp
+ plugins/demo_pi_sample/src/nmea0183/vtg.hpp
+ plugins/demo_pi_sample/src/nmea0183/wpl.cpp
+ plugins/demo_pi_sample/src/nmea0183/wpl.hpp
+ src/nmea0183/GPwpl.cpp
+ src/nmea0183/GPwpl.hpp
+ src/nmea0183/LatLong.hpp
+ src/nmea0183/RMB.hpp
+ src/nmea0183/RMC.HPP
+ src/nmea0183/Response.hpp
+ src/nmea0183/Sentence.hpp
+ src/nmea0183/apb.cpp
+ src/nmea0183/apb.hpp
+ src/nmea0183/expid.cpp
+ src/nmea0183/gga.cpp
+ src/nmea0183/gga.hpp
+ src/nmea0183/gll.cpp
+ src/nmea0183/gll.hpp
+ src/nmea0183/gsv.cpp
+ src/nmea0183/gsv.hpp
+ src/nmea0183/hdg.cpp
+ src/nmea0183/hdg.hpp
+ src/nmea0183/hdm.cpp
+ src/nmea0183/hdm.hpp
+ src/nmea0183/hdt.cpp
+ src/nmea0183/hdt.hpp
+ src/nmea0183/hexvalue.cpp
+ src/nmea0183/lat.cpp
+ src/nmea0183/latlong.cpp
+ src/nmea0183/long.cpp
+ src/nmea0183/nmea0183.cpp
+ src/nmea0183/nmea0183.h
+ src/nmea0183/nmea0183.hpp
+ src/nmea0183/response.cpp
+ src/nmea0183/rmb.cpp
+ src/nmea0183/rmc.cpp
+ src/nmea0183/rte.cpp
+ src/nmea0183/rte.hpp
+ src/nmea0183/sentence.cpp
+ src/nmea0183/talkerid.cpp
+ src/nmea0183/vtg.cpp
+ src/nmea0183/vtg.hpp
+ src/nmea0183/wpl.cpp
+ src/nmea0183/wpl.hpp
+ src/nmea0183/xte.cpp
+ src/nmea0183/xte.hpp
+Copyright: 2010, Samuel R. Blackburn, David S Register
+License: GPL-2+
+
+Files: plugins/grib_pi/src/jasper/base/jas_getopt.c
+ plugins/grib_pi/src/jasper/base/jas_image.c
+ plugins/grib_pi/src/jasper/base/jas_malloc.c
+ plugins/grib_pi/src/jasper/base/jas_seq.c
+ plugins/grib_pi/src/jasper/base/jas_stream.c
+ plugins/grib_pi/src/jasper/base/jas_string.c
+ plugins/grib_pi/src/jasper/include/jasper/jas_fix.h
+ plugins/grib_pi/src/jasper/include/jasper/jas_getopt.h
+ plugins/grib_pi/src/jasper/include/jasper/jas_image.h
+ plugins/grib_pi/src/jasper/include/jasper/jas_malloc.h
+ plugins/grib_pi/src/jasper/include/jasper/jas_math.h
+ plugins/grib_pi/src/jasper/include/jasper/jas_seq.h
+ plugins/grib_pi/src/jasper/include/jasper/jas_stream.h
+ plugins/grib_pi/src/jasper/include/jasper/jas_string.h
+ plugins/grib_pi/src/jasper/include/jasper/jas_types.h
+ plugins/grib_pi/src/jasper/include/jasper/jas_version.h
+ plugins/grib_pi/src/jasper/jp2/jp2_cod.c
+ plugins/grib_pi/src/jasper/jp2/jp2_cod.h
+ plugins/grib_pi/src/jasper/jp2/jp2_dec.c
+ plugins/grib_pi/src/jasper/jp2/jp2_dec.h
+ plugins/grib_pi/src/jasper/jp2/jp2_enc.c
+ plugins/grib_pi/src/jasper/jpc/jpc_bs.c
+ plugins/grib_pi/src/jasper/jpc/jpc_bs.h
+ plugins/grib_pi/src/jasper/jpc/jpc_cod.h
+ plugins/grib_pi/src/jasper/jpc/jpc_cs.c
+ plugins/grib_pi/src/jasper/jpc/jpc_cs.h
+ plugins/grib_pi/src/jasper/jpc/jpc_dec.c
+ plugins/grib_pi/src/jasper/jpc/jpc_dec.h
+ plugins/grib_pi/src/jasper/jpc/jpc_enc.c
+ plugins/grib_pi/src/jasper/jpc/jpc_enc.h
+ plugins/grib_pi/src/jasper/jpc/jpc_fix.h
+ plugins/grib_pi/src/jasper/jpc/jpc_flt.h
+ plugins/grib_pi/src/jasper/jpc/jpc_math.c
+ plugins/grib_pi/src/jasper/jpc/jpc_mct.c
+ plugins/grib_pi/src/jasper/jpc/jpc_mct.h
+ plugins/grib_pi/src/jasper/jpc/jpc_mqcod.c
+ plugins/grib_pi/src/jasper/jpc/jpc_mqcod.h
+ plugins/grib_pi/src/jasper/jpc/jpc_mqdec.c
+ plugins/grib_pi/src/jasper/jpc/jpc_mqdec.h
+ plugins/grib_pi/src/jasper/jpc/jpc_mqenc.c
+ plugins/grib_pi/src/jasper/jpc/jpc_mqenc.h
+ plugins/grib_pi/src/jasper/jpc/jpc_qmfb.c
+ plugins/grib_pi/src/jasper/jpc/jpc_qmfb.h
+ plugins/grib_pi/src/jasper/jpc/jpc_t1cod.c
+ plugins/grib_pi/src/jasper/jpc/jpc_t1cod.h
+ plugins/grib_pi/src/jasper/jpc/jpc_t1dec.c
+ plugins/grib_pi/src/jasper/jpc/jpc_t1dec.h
+ plugins/grib_pi/src/jasper/jpc/jpc_t1enc.c
+ plugins/grib_pi/src/jasper/jpc/jpc_t1enc.h
+ plugins/grib_pi/src/jasper/jpc/jpc_t2cod.c
+ plugins/grib_pi/src/jasper/jpc/jpc_t2cod.h
+ plugins/grib_pi/src/jasper/jpc/jpc_t2dec.c
+ plugins/grib_pi/src/jasper/jpc/jpc_t2dec.h
+ plugins/grib_pi/src/jasper/jpc/jpc_t2enc.c
+ plugins/grib_pi/src/jasper/jpc/jpc_t2enc.h
+ plugins/grib_pi/src/jasper/jpc/jpc_tagtree.c
+ plugins/grib_pi/src/jasper/jpc/jpc_tagtree.h
+ plugins/grib_pi/src/jasper/jpc/jpc_tsfb.c
+ plugins/grib_pi/src/jasper/jpc/jpc_tsfb.h
+ plugins/grib_pi/src/jasper/jpc/jpc_util.c
+Copyright: 1999-2000, Image Power, Inc. and the University of
+  2001-2002, Michael David Adams.
+  2001-2003, Michael David Adams.
+  2001-2004, Michael David Adams.
+License: Jasper
+
+Files: src/mygdal/cpl_config.h
+ src/mygdal/cpl_conv.cpp
+ src/mygdal/cpl_conv.h
+ src/mygdal/cpl_csv.cpp
+ src/mygdal/cpl_csv.h
+ src/mygdal/cpl_findfile.cpp
+ src/mygdal/cpl_minixml.cpp
+ src/mygdal/cpl_minixml.h
+ src/mygdal/cpl_multiproc.h
+ src/mygdal/cpl_odbc.h
+ src/mygdal/cpl_path.cpp
+ src/mygdal/cpl_port.h
+ src/mygdal/cpl_vsi.h
+ src/mygdal/cpl_vsisimple.cpp
+ src/mygdal/cplgetsymbol.cpp
+ src/mygdal/ddfrecordindex.cpp
+ src/mygdal/gdal.h
+ src/mygdal/gdal_frmts.h
+ src/mygdal/gdal_misc.cpp
+ src/mygdal/gdal_priv.h
+ src/mygdal/ogr_api.h
+ src/mygdal/ogr_core.h
+ src/mygdal/ogr_geometry.h
+ src/mygdal/ogr_p.h
+ src/mygdal/ogr_s57.h
+ src/mygdal/ograssemblepolygon.cpp
+ src/mygdal/ogrcurve.cpp
+ src/mygdal/ogrgeometry.cpp
+ src/mygdal/ogrgeometrycollection.cpp
+ src/mygdal/ogrgeometryfactory.cpp
+ src/mygdal/ogrlinearring.cpp
+ src/mygdal/ogrlinestring.cpp
+ src/mygdal/ogrmultilinestring.cpp
+ src/mygdal/ogrmultipoint.cpp
+ src/mygdal/ogrmultipolygon.cpp
+ src/mygdal/ogrpoint.cpp
+ src/mygdal/ogrpolygon.cpp
+ src/mygdal/ogrs57layer.cpp
+ src/mygdal/ogrutils.cpp
+ src/mygdal/s57.h
+ src/mygdal/s57classregistrar.cpp
+ src/mygdal/s57featuredefns.cpp
+ src/mygdal/s57reader.cpp
+ src/myiso8211/ddffield.cpp
+ src/myiso8211/ddffielddefn.cpp
+ src/myiso8211/ddfmodule.cpp
+ src/myiso8211/ddfrecord.cpp
+ src/myiso8211/ddfsubfielddefn.cpp
+ src/myiso8211/ddfutils.cpp
+Copyright: 1998, 2002, Frank Warmerdam
+  1998, Frank Warmerdam
+  1999, 2001, 2003, Frank Warmerdam
+  1999, 2001, Frank Warmerdam
+  1999, Frank Warmerdam
+  2000, Frank Warmerdam
+  2001, Frank Warmerdam
+  2002, Frank Warmerdam
+  2003, Frank Warmerdam
+License: Expat
+
+Files: src/glshim/include/GL/glu.h
+ src/glu/include/gluos.h
+ src/glu/libtess/README
+ src/glu/libtess/alg-outline
+ src/glu/libtess/dict-list.h
+ src/glu/libtess/dict.c
+ src/glu/libtess/dict.h
+ src/glu/libtess/geom.c
+ src/glu/libtess/geom.h
+ src/glu/libtess/memalloc.c
+ src/glu/libtess/memalloc.h
+ src/glu/libtess/mesh.c
+ src/glu/libtess/mesh.h
+ src/glu/libtess/normal.c
+ src/glu/libtess/normal.h
+ src/glu/libtess/priorityq-heap.c
+ src/glu/libtess/priorityq-heap.h
+ src/glu/libtess/priorityq-sort.h
+ src/glu/libtess/priorityq.c
+ src/glu/libtess/priorityq.h
+ src/glu/libtess/render.c
+ src/glu/libtess/render.h
+ src/glu/libtess/sweep.c
+ src/glu/libtess/sweep.h
+ src/glu/libtess/tess.c
+ src/glu/libtess/tess.h
+ src/glu/libtess/tessmono.c
+ src/glu/libtess/tessmono.h
+ src/glu/libutil/error.c
+ src/glu/libutil/glue.c
+ src/glu/libutil/gluint.h
+ src/glu/libutil/mipmap.c
+ src/glu/libutil/project.c
+ src/glu/libutil/quad.c
+ src/glu/libutil/registry.c
+Copyright: 1991-2000, Silicon Graphics, Inc.
+License: SGI-B-2.0
+
+Files: plugins/chartdldr_pi/src/unarr/_7z/_7z.c
+ plugins/chartdldr_pi/src/unarr/_7z/_7z.h
+ plugins/chartdldr_pi/src/unarr/common/allocator.h
+ plugins/chartdldr_pi/src/unarr/common/conv.c
+ plugins/chartdldr_pi/src/unarr/common/crc32.c
+ plugins/chartdldr_pi/src/unarr/common/custalloc.c
+ plugins/chartdldr_pi/src/unarr/common/stream.c
+ plugins/chartdldr_pi/src/unarr/common/unarr-imp.h
+ plugins/chartdldr_pi/src/unarr/common/unarr.c
+ plugins/chartdldr_pi/src/unarr/main.c
+ plugins/chartdldr_pi/src/unarr/rar/filter-rar.c
+ plugins/chartdldr_pi/src/unarr/rar/huffman-rar.c
+ plugins/chartdldr_pi/src/unarr/rar/lzss.h
+ plugins/chartdldr_pi/src/unarr/rar/parse-rar.c
+ plugins/chartdldr_pi/src/unarr/rar/rar.c
+ plugins/chartdldr_pi/src/unarr/rar/rar.h
+ plugins/chartdldr_pi/src/unarr/rar/rarvm.c
+ plugins/chartdldr_pi/src/unarr/rar/rarvm.h
+ plugins/chartdldr_pi/src/unarr/rar/uncompress-rar.c
+ plugins/chartdldr_pi/src/unarr/tar/parse-tar.c
+ plugins/chartdldr_pi/src/unarr/tar/tar.c
+ plugins/chartdldr_pi/src/unarr/tar/tar.h
+ plugins/chartdldr_pi/src/unarr/unarr.h
+ plugins/chartdldr_pi/src/unarr/zip/inflate.c
+ plugins/chartdldr_pi/src/unarr/zip/inflate.h
+ plugins/chartdldr_pi/src/unarr/zip/parse-zip.c
+ plugins/chartdldr_pi/src/unarr/zip/uncompress-zip.c
+ plugins/chartdldr_pi/src/unarr/zip/zip.c
+ plugins/chartdldr_pi/src/unarr/zip/zip.h
+Copyright: 2015, the unarr project authors (see AUTHORS file).
+License: LGPL-3
+
+Files: include/wx/json_defs.h
+ include/wx/jsonreader.h
+ include/wx/jsonval.h
+ include/wx/jsonwriter.h
+ plugins/dashboard_pi/src/wxJSON/json_defs.h
+ plugins/dashboard_pi/src/wxJSON/jsonreader.cpp
+ plugins/dashboard_pi/src/wxJSON/jsonreader.h
+ plugins/dashboard_pi/src/wxJSON/jsonval.cpp
+ plugins/dashboard_pi/src/wxJSON/jsonval.h
+ plugins/dashboard_pi/src/wxJSON/jsonwriter.cpp
+ plugins/dashboard_pi/src/wxJSON/jsonwriter.h
+ plugins/grib_pi/src/json_defs.h
+ plugins/grib_pi/src/jsonreader.cpp
+ plugins/grib_pi/src/jsonreader.h
+ plugins/grib_pi/src/jsonval.cpp
+ plugins/grib_pi/src/jsonval.h
+ plugins/grib_pi/src/jsonwriter.cpp
+ plugins/grib_pi/src/jsonwriter.h
+ plugins/wmm_pi/src/json_defs.h
+ plugins/wmm_pi/src/jsonreader.cpp
+ plugins/wmm_pi/src/jsonreader.h
+ plugins/wmm_pi/src/jsonval.cpp
+ plugins/wmm_pi/src/jsonval.h
+ plugins/wmm_pi/src/jsonwriter.cpp
+ plugins/wmm_pi/src/jsonwriter.h
+ src/wxJSON/jsonreader.cpp
+ src/wxJSON/jsonval.cpp
+ src/wxJSON/jsonwriter.cpp
+Copyright: (c) 2007 Luciano Cattani
+License: wxWidgets
+
+Files: src/texcmp/squish/alpha.cpp
+ src/texcmp/squish/alpha.h
+ src/texcmp/squish/colourblock.cpp
+ src/texcmp/squish/colourblock.h
+ src/texcmp/squish/colourfit.cpp
+ src/texcmp/squish/colourfit.h
+ src/texcmp/squish/colourset.cpp
+ src/texcmp/squish/colourset.h
+ src/texcmp/squish/config.h
+ src/texcmp/squish/maths.cpp
+ src/texcmp/squish/maths.h
+ src/texcmp/squish/rangefit.cpp
+ src/texcmp/squish/rangefit.h
+ src/texcmp/squish/simd.h
+ src/texcmp/squish/simd_float.h
+ src/texcmp/squish/simd_sse.h
+ src/texcmp/squish/simd_ve.h
+ src/texcmp/squish/singlecolourfit.cpp
+ src/texcmp/squish/singlecolourfit.h
+ src/texcmp/squish/squish.cpp
+ src/texcmp/squish/squish.h
+Copyright: 2006, Simon Brown si@sjbrown.co.uk
+License: Expat
+
+Files: include/LLRegion.h
+ include/TexFont.h
+ include/ocpndc.h
+ plugins/grib_pi/src/GribSettingsDialog.cpp
+ plugins/grib_pi/src/GribSettingsDialog.h
+ plugins/grib_pi/src/TexFont.cpp
+ plugins/grib_pi/src/TexFont.h
+ plugins/wmm_pi/src/MagneticPlotMap.cpp
+ plugins/wmm_pi/src/MagneticPlotMap.h
+ plugins/wmm_pi/src/TexFont.cpp
+ plugins/wmm_pi/src/TexFont.h
+ src/LLRegion.cpp
+ src/TexFont.cpp
+ src/mipmap/mipmap.c
+ src/mipmap/mipmap.h
+ src/mipmap/mipmap_avx2.c
+ src/mipmap/mipmap_neon.c
+ src/mipmap/mipmap_sse.c
+ src/mipmap/mipmap_sse2.c
+ src/mipmap/mipmap_ssse3.c
+ src/ocpndc.cpp
+Copyright: 2011, Sean D'Epagnier
+  2013, Sean D'Epagnier
+  2014, Sean D'Epagnier
+  2015, Sean D'Epagnier
+  2016, Sean D'Epagnier
+License: GPL-2+
+
+Files: plugins/grib_pi/src/jasper/base/jas_cm.c
+ plugins/grib_pi/src/jasper/base/jas_debug.c
+ plugins/grib_pi/src/jasper/base/jas_icc.c
+ plugins/grib_pi/src/jasper/base/jas_init.c
+ plugins/grib_pi/src/jasper/base/jas_tmr.c
+ plugins/grib_pi/src/jasper/base/jas_tvp.c
+ plugins/grib_pi/src/jasper/base/jas_version.c
+ plugins/grib_pi/src/jasper/include/jasper/jas_cm.h
+ plugins/grib_pi/src/jasper/include/jasper/jas_config2.h
+ plugins/grib_pi/src/jasper/include/jasper/jas_debug.h
+ plugins/grib_pi/src/jasper/include/jasper/jas_icc.h
+ plugins/grib_pi/src/jasper/include/jasper/jas_init.h
+ plugins/grib_pi/src/jasper/include/jasper/jas_tmr.h
+ plugins/grib_pi/src/jasper/include/jasper/jas_tvp.h
+ plugins/grib_pi/src/jasper/include/jasper/jasper.h
+ plugins/grib_pi/src/jasper/jpc/jpc_math.h
+ plugins/grib_pi/src/jasper/jpc/jpc_util.h
+Copyright: 2001-2002, Michael David Adams.
+  2001-2003, Michael David Adams.
+  2002-2003, Michael David Adams.
+  2004, Michael David Adams.
+License: Jasper
+
+Files: src/wxcurl/base.cpp
+ src/wxcurl/dav.cpp
+ src/wxcurl/davtool.cpp
+ src/wxcurl/ftp.cpp
+ src/wxcurl/http.cpp
+ src/wxcurl/telnet.cpp
+ src/wxcurl/wx/curl/base.h
+ src/wxcurl/wx/curl/dav.h
+ src/wxcurl/wx/curl/davtool.h
+ src/wxcurl/wx/curl/ftp.h
+ src/wxcurl/wx/curl/http.h
+ src/wxcurl/wx/curl/telnet.h
+ src/wxcurl/wx/curl/http.h
+ src/wxcurl/wx/curl/telnet.h
+ src/wxcurl/include/README
+Copyright: 2004, Casey O'Donnell.
+License: wxWidgets
+
+Files: src/SQLiteCpp/include/SQLiteCpp/Assertion.h
+ src/SQLiteCpp/include/SQLiteCpp/Column.h
+ src/SQLiteCpp/include/SQLiteCpp/Database.h
+ src/SQLiteCpp/include/SQLiteCpp/Exception.h
+ src/SQLiteCpp/include/SQLiteCpp/SQLiteCpp.h
+ src/SQLiteCpp/include/SQLiteCpp/Statement.h
+ src/SQLiteCpp/include/SQLiteCpp/Transaction.h
+ src/SQLiteCpp/include/SQLiteCpp/Utils.h
+ src/SQLiteCpp/src/Column.cpp
+ src/SQLiteCpp/src/Database.cpp
+ src/SQLiteCpp/src/Exception.cpp
+ src/SQLiteCpp/src/Statement.cpp
+ src/SQLiteCpp/src/Transaction.cpp
+Copyright: 2012-2013, Sebastien Rombauts (sebastien.rombauts@gmail.com)
+  2012-2018, Sebastien Rombauts (sebastien.rombauts@gmail.com)
+  2013-2018, Sebastien Rombauts (sebastien.rombauts@gmail.com)
+License: wxWidgets
+
+Files: plugins/grib_pi/src/GribReader.cpp
+ plugins/grib_pi/src/GribReader.h
+ plugins/grib_pi/src/GribRecord.cpp
+ plugins/grib_pi/src/GribRecord.h
+ plugins/grib_pi/src/GribV1Record.cpp
+ plugins/grib_pi/src/GribV1Record.h
+ plugins/grib_pi/src/GribV2Record.cpp
+ plugins/grib_pi/src/GribV2Record.h
+ plugins/grib_pi/src/IsoLine.cpp
+ plugins/grib_pi/src/IsoLine.h
+ plugins/grib_pi/src/zuFile.cpp
+ plugins/grib_pi/src/zuFile.h
+Copyright: 2008, - Jacques Zaninetti - http:www.zygrib.org
+License: GPL-3+
+
+Files: src/garmin/jeeps/garminusb.h
+ src/garmin/jeeps/gpsdevice.c
+ src/garmin/jeeps/gpsdevice.h
+ src/garmin/jeeps/gpsdevice_ser.c
+ src/garmin/jeeps/gpsdevice_usb.c
+ src/garmin/jeeps/gpsusbcommon.c
+ src/garmin/jeeps/gpsusbcommon.h
+ src/garmin/jeeps/gpsusbint.h
+ src/garmin/jeeps/gpsusbread.c
+ src/garmin/jeeps/gpsusbsend.c
+ src/garmin/jeeps/gpsusbwin.c
+Copyright: 2004, 2006, Robert Lipe, robertlipe@usa.net
+  2004-2006, Robert Lipe, robertlipe@usa.net
+  2005-2006, Robert Lipe, robertlipe@usa.net
+  2006, Robert Lipe, robertlipe@usa.net
+License: GPL-2+
+
+Files: src/wxcurl/include/curl/curl.h
+ src/wxcurl/include/curl/curlbuild.h
+ src/wxcurl/include/curl/curlbuild.h.cmake
+ src/wxcurl/include/curl/curlbuild.h.in
+ src/wxcurl/include/curl/curlrules.h
+ src/wxcurl/include/curl/curlver.h
+ src/wxcurl/include/curl/easy.h
+ src/wxcurl/include/curl/mprintf.h
+ src/wxcurl/include/curl/multi.h
+ src/wxcurl/include/curl/stdcheaders.h
+ src/wxcurl/include/curl/typecheck-gcc.h
+Copyright: 1998-2008, Daniel Stenberg, <daniel@haxx.se>, et al.
+  1998-2010, Daniel Stenberg, <daniel@haxx.se>, et al.
+  1998-2012, Daniel Stenberg, <daniel@haxx.se>, et al.
+  1998-2013, Daniel Stenberg, <daniel@haxx.se>, et al.
+  1998-2014, Daniel Stenberg, <daniel@haxx.se>, et al.
+License: MIT-CURL
+
+Files: Curl.cmake
+ plugins/chartdldr_pi/cmake/PluginConfigure.cmake
+ plugins/chartdldr_pi/cmake/PluginInstall.cmake
+ plugins/chartdldr_pi/cmake/PluginPackage.cmake
+ plugins/demo_pi_sample/cmake/PluginConfigure.cmake
+ plugins/demo_pi_sample/cmake/PluginInstall.cmake
+ plugins/demo_pi_sample/cmake/PluginLocalization.cmake
+ plugins/demo_pi_sample/cmake/PluginPackage.cmake
+ plugins/wmm_pi/cmake/PluginConfigure.cmake
+ plugins/wmm_pi/cmake/PluginInstall.cmake
+ plugins/wmm_pi/cmake/PluginPackage.cmake
+Copyright: APvel Xalian
+License: GPL-3+
+
+Files: src/garmin/jeeps/gpsprot.c
+ src/garmin/jeeps/gpsprot.h
+ src/garmin/jeeps/gpsread.c
+ src/garmin/jeeps/gpsread.h
+ src/garmin/jeeps/gpsrqst.c
+ src/garmin/jeeps/gpsrqst.h
+ src/garmin/jeeps/gpssend.c
+ src/garmin/jeeps/gpssend.h
+ src/garmin/jeeps/gpsserial.c
+ src/garmin/jeeps/gpsserial.h
+Copyright: 1999, Alan Bleasby
+  1999-2000, Alan Bleasby
+  2006, Robert Lipe
+License: LGPL-2+
+
+Files: include/GL/glext.h
+ src/glshim/include/EGL/egl.h
+ src/glshim/include/EGL/eglext.h
+ src/glshim/include/EGL/eglplatform.h
+ src/glshim/include/GL/glext.h
+ src/glshim/include/GL/glxext.h
+ src/glshim/include/GLES/gl3.h
+ src/glshim/include/KHR/khrplatform.h
+ src/glshim/spec/xml/egl.xml
+Copyright: 2007, The Khronos Group Inc.
+  2007-2009, The Khronos Group Inc.
+  2007-2010, The Khronos Group Inc.
+  2007-2012, The Khronos Group Inc.
+  2008-2009, The Khronos Group Inc.
+  2013, The Khronos Group Inc.
+License: MIT-KHRONOS
+
+Files: src/garmin/jeeps/gpsapp.c
+ src/garmin/jeeps/gpsapp.h
+ src/garmin/jeeps/gpsfmt.h
+ src/garmin/jeeps/gpsinput.h
+ src/garmin/jeeps/gpsmem.c
+ src/garmin/jeeps/gpsmem.h
+ src/garmin/jeeps/gpsport.h
+ src/garmin/jeeps/gpsproj.h
+Copyright: 1999, Alan Bleasby
+  1999-2000, Alan Bleasby
+  2004-2006, Robert Lipe
+  2006, Robert Lipe
+  2007, Achim Schumacher
+License: LGPL-2+
+
+Files: src/glshim/include/GLES/gl.h
+ src/glshim/include/GLES/gl2.h
+ src/glshim/include/GLES/gl2ext.h
+ src/glshim/include/GLES/gl2platform.h
+ src/glshim/include/GLES/gl3ext.h
+ src/glshim/include/GLES/gl3platform.h
+ src/glshim/include/GLES/glext.h
+ src/glshim/include/GLES/glplatform.h
+Copyright: NONE
+License: SGI-B-2.0
+
+Files: src/wxcurl/dialog.cpp
+ src/wxcurl/panel.cpp
+ src/wxcurl/thread.cpp
+ src/wxcurl/utils.cpp
+ src/wxcurl/wx/curl/dialog.h
+ src/wxcurl/wx/curl/panel.h
+ src/wxcurl/wx/curl/thread.h
+ src/wxcurl/wx/curl/utils.h
+Copyright: (c) 2007 Francesco Montorsi
+License: wxWidgets
+
+Files: src/wxsvg/include/wxSVG/ExifHandler.h
+ src/wxsvg/include/wxSVG/imagsvg.h
+ src/wxsvg/include/wxSVG/mediadec_ffmpeg.h
+ src/wxsvg/src/ExifHandler.cpp
+ src/wxsvg/src/SVGAnimateMotionElement.cpp
+ src/wxsvg/src/SVGCanvasItem.cpp
+ src/wxsvg/src/imagsvg.cpp
+ src/wxsvg/src/mediadec_ffmpeg.cpp
+Copyright: (c) Alex Thuering
+License: wxWidgets
+
+Files: src/mygdal/ogr_feature.h
+ src/mygdal/ogr_spatialref.h
+ src/mygdal/ogrfeature.cpp
+ src/mygdal/ogrfeaturedefn.cpp
+ src/mygdal/ogrfielddefn.cpp
+ src/mygdal/ogrlayer.cpp
+ src/mygdal/ogrsf_frmts.h
+Copyright: 1999, Les Technologies SoftMap Inc.
+License: Expat
+
+Files: plugins/chartdldr_pi/src/chartcatalog.cpp
+ plugins/chartdldr_pi/src/chartcatalog.h
+ plugins/chartdldr_pi/src/chartdldr_pi.cpp
+ plugins/chartdldr_pi/src/chartdldr_pi.h
+ plugins/wmm_pi/src/WMM_COF.h
+ plugins/wmm_pi/src/wmm_pi.cpp
+ plugins/wmm_pi/src/wmm_pi.h
+Copyright: 2011, Pavel Kalian
+License: GPL-2+
+
+
+Files: include/GL/gl.h
+ include/GL/gl_private.h
+ src/glshim/include/GL/glx.h
+ src/glshim/include/GL/glx_mangle.h
+ src/glshim/src/gl/math/eval.c
+ src/glshim/src/gl/math/eval.h
+Copyright: 1999-2001, Brian Paul
+  1999-2006, Brian Paul
+  1999-2007, Brian Paul
+License: Expat
+
+Files: src/garmin/jeeps/garmin_gps.h
+ src/garmin/jeeps/garmin_wrapper.cpp
+ src/garmin/jeeps/garmin_wrapper.h
+ src/garmin/jeeps/garmin_wrapper_utils.c
+ src/garmin/jeeps/garmin_wrapper_utils.h
+Copyright: 2010, David S Register
+License: GPL-2+
+
+Files: plugins/dashboard_pi/src/baro_history.cpp
+ plugins/dashboard_pi/src/wind_history.cpp
+ plugins/demo_pi_sample/CMakeLists.txt
+ plugins/grib_pi/src/CustomGrid.cpp
+ plugins/grib_pi/src/CustomGrid.h
+Copyright: 2010, David S. Register *
+License: GPL-2+
+
+Files: plugins/chartdldr_pi/po/chartdldr_pi.pot
+ plugins/dashboard_pi/po/dashboard_pi.pot
+ plugins/grib_pi/po/grib_pi.pot
+ plugins/wmm_pi/po/wmm_pi.pot
+ po/opencpn.pot
+Copyright: YEAR THE PACKAGE'S COPYRIGHT HOLDER
+License: UNKNOWN
+
+Files: src/texcmp/lz4/lz4.c
+ src/texcmp/lz4/lz4.h
+ src/texcmp/lz4/lz4hc.c
+ src/texcmp/lz4/lz4hc.h
+Copyright: 2011-2013, Yann Collet.
+  2011-2014, Yann Collet.
+License: BSD-2-clause
+
+Files: src/mygdal/cpl_error.cpp
+ src/mygdal/cpl_error.h
+ src/mygdal/cpl_string.cpp
+ src/mygdal/cpl_string.h
+Copyright: 1998, Daniel Morissette
+License: Expat
+
+Files: src/texcmp/squish/singlecolourfitfast.cpp
+ src/texcmp/squish/singlecolourfitfast.h
+ src/texcmp/squish/twocolourfitfast.cpp
+ src/texcmp/squish/twocolourfitfast.h
+Copyright: 2015, Sean D'EPagnier
+License: Expat
+
+Files: src/garmin/jeeps/gpsmath.c
+ src/garmin/jeeps/gpsmath.h
+ src/garmin/jeeps/gpsutil.c
+ src/garmin/jeeps/gpsutil.h
+Copyright: 1999, Alan Bleasby
+License: LGPL-2+
+
+Files: src/wxsvg/include/wxSVGXML/svgxml.h
+ src/wxsvg/include/wxSVGXML/svgxmlhelpr.h
+ src/wxsvg/src/svgxml/svgxml.cpp
+ src/wxsvg/src/svgxml/svgxmlhelpr.cpp
+Copyright: (c) 2000 Vaclav Slavik
+License: wxWidgets
+
+Files: src/wxsvg/src/cairo/SVGCanvasImageCairo.cpp
+ src/wxsvg/src/cairo/SVGCanvasImageCairo.h
+ src/wxsvg/src/cairo/SVGCanvasTextCairo.cpp
+ src/wxsvg/src/cairo/SVGCanvasTextCairo.h
+Copyright: (c) 2011 Alex Thuering
+License: wxWidgets
+
+Files: include/macutils.h
+ plugins/dashboard_pi/src/iirfilter.h
+ plugins/dashboard_pi/src/iirfilter.cpp
+ src/macutils.c
+Copyright: 2007 Transmitterdan
+  2016 Transmitterdan
+License: GPL-2+
+
+Files: src/wxsvg/include/wxSVG/SVGAnimatedType.h
+ src/wxsvg/src/SVGAnimateTransformElement.cpp
+ src/wxsvg/src/SVGAnimatedType.cpp
+Copyright: (c) 2014 Alex Thuering
+License: wxWidgets
+
+Files: src/mygdal/iso8211.h
+ src/mygdal/ogr_attrind.h
+Copyright: 1999, Frank Warmerdam <warmerdam@pobox.com>
+  2003, Frank Warmerdam <warmerdam@pobox.com>
+License: Expat
+
+Files: src/texcmp/squish/clusterfit.cpp
+ src/texcmp/squish/clusterfit.h
+Copyright: 2006, Simon Brown si@sjbrown.co.uk
+  2007, Ignacio Castano icastano@nvidia.com
+License: Expat
+
+Files: include/gshhs.h
+ src/gshhs.cpp
+Copyright: 2008, - Jacques Zaninetti - http:www.zygrib.org
+  2012, David S. Register
+  zUGrib: meteorologic GRIB file data viewer
+License: GPL-2+
+
+Files: include/routemanagerdialog.h
+ src/routemanagerdialog.cpp
+Copyright: 2010, Anders Lund <anders@alweb.dk>
+License: GPL-2+
+
+Files: src/ssl/sha1.c
+ src/ssl/sha1.h
+Copyright: 2006-2013, Brainspark B.V.
+  2006-2014, Brainspark B.V.
+License: GPL-2+
+
+Files: src/s52cnsy.cpp
+ src/s52utils.cpp
+Copyright: 2000-2001, Sylvain Duclos
+  2000-2004, Sylvain Duclos
+  2010, David S. Register
+License: GPL-2+
+
+Files: src/garmin/jeeps/gpscom.c
+ src/garmin/jeeps/gpscom.h
+Copyright: 1999, Alan Bleasby
+  2005-2006, Robert Lipe
+  2007, Achim Schumacher
+  2010, Martin Buck
+License: LGPL-2+
+
+Files: include/crashprint.h
+ src/crashprint.cpp
+Copyright: (c) 2004 wxCode
+License: wxWidgets
+
+Files: plugins/chartdldr_pi/src/checkedlistctrl.cpp
+ plugins/chartdldr_pi/src/checkedlistctrl.h
+Copyright: (c) 2005 Francesco Montorsi
+License: wxWidgets
+
+Files: src/wxsvg/include/wxSVG/SVGCoordinates.h
+ src/wxsvg/src/SVGFitToViewBox.cpp
+Copyright: (c) 2006 Alex Thuering
+License: wxWidgets
+
+Files: plugins/grib_pi/src/smapi.cpp
+ plugins/grib_pi/src/smapi.h
+Copyright: (c) PJ Naughter
+License: wxWidgets
+
+Files: include/pugixml.hpp
+ src/pugixml.cpp
+Copyright: 2006-2016, Arseny Kapoulkine (arseny.kapoulkine@gmail.com)
+License: Expat
+
+Files: src/SQLiteCpp/include/SQLiteCpp/Backup.h
+ src/SQLiteCpp/src/Backup.cpp
+Copyright: 2015, Shibao HONG (shibaohong@outlook.com)
+  2015-2018, Sebastien Rombauts (sebastien.rombauts@gmail.com)
+License: Expat
+
+Files: FindGTK3.cmake
+Copyright: 2012, Raphael Kubo da Costa <rakuco@webkit.org>
+  2013, Igalia S.L.
+License: BSD-2-clause
+
+Files: Findgps.cmake
+Copyright: 2000-2009, Kitware, Inc., Insight Software Consortium
+  2006, Alexander Neundorf <neundorf@kde.org>
+  2006-2009, Kitware, Inc.
+  2010, David Register
+License: BSD-3-clause
+
+Files: FindPortaudio.cmake
+Copyright: 2006, Andreas Schneider <mail@cynapses.org>
+License: BSD-3-clause
+
+Files: src/texcmp/etcpak.cpp
+Copyright: 2013, Bartosz Taudul <wolf.pld@gmail.com>
+License: BSD-3-clause
+
+Files: src/mygdal/cpl_list.h
+Copyright: 2003, Andrey Kiselev <dron@remotesensing.org>
+License: Expat
+
+Files: src/glshim/src/util/khash.h
+Copyright: 2008-2009, 2011, Attractive Chaos <attractor@live.co.uk>
+License: Expat
+
+Files: src/glshim/include/GL/gl.h
+Copyright: 1999-2006, Brian Paul
+  2009, VMware, Inc.
+License: Expat
+
+Files: src/glshim/LICENSE
+Copyright: 2013, Ryan Hileman
+License: Expat
+
+Files: src/SQLiteCpp/LICENSE.txt
+Copyright: 2012-2018, Sebastien Rombauts (sebastien.rombauts@gmail.com)
+License: Expat
+
+Files: plugins/dashboard_pi/src/nmea0183/vlw.cpp
+Copyright: 2010, Samuel R. Blackburn, David S Register *
+License: GPL-2+
+
+Files: include/s52utils.h
+Copyright: 2000-2004, Sylvain Duclos sduclos@users.sourceforgue.net
+License: GPL-2+
+
+Files: src/ocpnhelper.c
+Copyright: 2006, dsr
+License: GPL-2+
+
+Files: FindEXIF.cmake
+Copyright: 2011, Simone Rossetto <simros85@gmail.com>
+License: GPL-3+
+
+Files: src/glshim/include/GL/glu_mangle.h
+Copyright: 1995-1998, Brian Paul
+License: LGPL-2+
+
+Files: include/GL/glu.h
+Copyright: 1991-2000, Silicon Graphics, Inc.
+License: SGI-B-1.1
+
+Files: plugins/chartdldr_pi/src/base64.h
+Copyright: (c) 2005 Angelo Mandato (http:www.spaceblue.com)
+License: wxWidgets
+
+Files: src/wxsvg/src/NodeList.cpp
+Copyright: (c) 2005 Edouard TISSERANT
+License: wxWidgets
+
+Files: src/wxsvg/include/wxSVG/NodeListCls.h
+Copyright: (c) 2005 Jonathan Hurtrel
+License: wxWidgets
+
+Files: src/wxsvg/src/SVGRadialGradientElement.cpp
+Copyright: (c) 2012 Alex Thuering
+License: wxWidgets
+
+Files: src/bbox.cpp include/bbox.h
+Copyright: 2000, (c) Klaas Holwerda
+License: wxWidgets
+
+Files: FindFFmpeg.cmake
+Copyright: 2006, Matthias Kretz, <kretz@kde.org>
+  2008, Alexander Neundorf, <neundorf@kde.org>
+  2011, Michael Jansen, <kde@michael-jansen.biz>
+License: BSD-CMAKE
+
+Files: src/geodesic.cpp  include/geodesic.h
+Copyright: 2012 Charles F. F. Karney (charles@karney.com) 
+Comment: https://geographiclib.sourceforge.io/
+License: Expat
+
+Files: src/glshim/include/GL/internal/dri_interface.h
+Copyright: 1998-1999, Precision Insight, Inc., Cedar Park, Texas.
+  2007-2008, Red Hat, Inc.
+  IBM Corporation 2004
+License: Expat
+
+Files: plugins/chartdldr_pi/CMakeLists.txt
+Copyright: 2014 Pavel Kalian
+License: GPL-2
+
+Files: src/SQLiteCpp/include/SQLiteCpp/VariadicBind.h
+Copyright: 2016, Paul Dreik (github@pauldreik.se)
+  2016-2018, Sebastien Rombauts (sebastien.rombauts@gmail.com)
+License: Expat
+
+Files: src/glshim/spec/xml/gles-2.0.xml
+Copyright: 2012-2013, Wladimir J. van der Laan
+License: Expat
+
+
+License: GPL-2+
+ This program is free software; you can redistribute it and/or modify  
+ it under the terms of the GNU General Public License as published by 
+ the Free Software Foundation; either version 2 of the License, or 
+ (at your option) any later version
+ .   
+ On Debian systems, the full text of the GNU General Public
+ License version 2 can be found in the file
+ `/usr/share/common-licenses/GPL-2'.
+ Otherwise, refer to the online version at GNU website
+ `https://gnu.org/licenses/old-licenses/gpl-1.0.txt`.
+
+
+License: GPL-2
+ This program is free software; you can redistribute it and/or modify  
+ it under the terms of the GNU General Public License version 2 as 
+ published by the Free Software Foundation
+ .   
+ On Debian systems, the full text of the GNU General Public
+ License version 2 can be found in the file
+ `/usr/share/common-licenses/GPL-2'.
+ Otherwise, refer to the online version at GNU website
+ `https://gnu.org/licenses/old-licenses/gpl-2.0.txt`.
+
+
+License: GPL-3+
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version
+ .
+ On Debian systems, the full text of the GNU General Public
+ License version 3 can be found in the file
+ `/usr/share/common-licenses/GPL-3'.
+ Otherwise, refer to the online version at GNU website
+ `https://gnu.org/licenses/gpl-3.0.txt`.
+
+
+License: LGPL-2+
+ This library is free software; you can redistribute it and/or
+ modify it under the terms of the GNU Library General Public
+ License as published by the Free Software Foundation; either
+ version 2 of the License, or (at your option) any later version
+ .
+ On Debian systems, the full text of the Lesser GNU General Public
+ License version 2 can be found in the file
+ `/usr/share/common-licenses/LGPL-2'.
+ Otherwise, refer to the online version at GNU website
+ `https://gnu.org/licenses/old-licenses/gpl-2.0.txt`.
+
+
+License: LGPL-3
+ On Debian systems, the full text of the Lesser GNU General Public
+ License version 3 can be found in the file
+ `/usr/share/common-licenses/LGPL-3'.
+ Otherwise, refer to the online version at GNU website
+ `https://www.gnu.org/licenses/lgpl-3.0.html`.
+
+
+License: wxWidgets
+ wxWindows Library License, Version 3.1
+ Copyright (c) 1998-2005 Julian Smart, Robert Roebling et al
+ .
+ Everyone is permitted to copy and distribute verbatim copies of this licence 
+ document, but changing it is not allowed
+ .
+ WXWINDOWS LIBRARY LICENCE
+ TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
+ .
+ This library is free software; you can redistribute it and/or modify it 
+ under the terms of the GNU Library General Public Licence as published by 
+ the Free Software Foundation; either version 2 of the Licence, or (at 
+ your option) any later version
+ .
+ This library is distributed in the hope that it will be useful, but WITHOUT 
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 
+ FITNESS FOR A PARTICULAR PURPOSE. See the GNU Library General Public Licence 
+ for more details
+ .
+ You should have received a copy of the GNU Library General Public Licence along 
+ with this software, usually in a file named COPYING.LIB. If not, write to the 
+ Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 
+ USA
+ .
+ EXCEPTION NOTICE
+ .
+ 1. As a special exception, the copyright holders of this library give permission
+ for additional uses of the text contained in this release of the library as 
+ licenced under the wxWindows Library Licence, applying either version 3.1 of the 
+ Licence, or (at your option) any later version of the Licence as published by the 
+ copyright holders of version 3.1 of the Licence document
+ .
+ 2. The exception is that you may use, copy, link, modify and distribute under your 
+ own terms, binary object code versions of works based on the Library
+ .
+ 3. If you copy code from files distributed under the terms of the GNU General 
+ Public Licence or the GNU Library General Public Licence into a copy of this 
+ library, as this licence permits, the exception does not apply to the code that 
+ you add in this way. To avoid misleading anyone as to the status of such modified 
+ files, you must delete this exception notice from such code and/or adjust the 
+ licensing conditions notice accordingly
+ .
+ 4. If you write modifications of your own for this library, it is your choice whether 
+ to permit this exception to apply to your modifications. If you do not wish that, 
+ you must delete the exception notice from such code and/or adjust the licensing '
+ conditions notice accordingly.
+
+
+License: Expat
+ Permission is hereby granted, free of charge, to any person obtaining a
+ copy of this software and associated documentation files (the "Software"),
+ to deal in the Software without restriction, including without limitation
+ the rights to use, copy, modify, merge, publish, distribute, sublicense,
+ and/or sell copies of the Software, and to permit persons to whom the
+ Software is furnished to do so, subject to the following conditions
+ :
+ The above copyright notice and this permission notice shall be included
+ in all copies or substantial portions of the Software
+ .
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+ OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+ THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+ DEALINGS IN THE SOFTWARE.
+
+
+License: SGI-B-1.1
+ License Applicability. Except to the extent portions of this file are
+ made subject to an alternative license as permitted in the SGI Free
+ Software License B, Version 1.1 (the "License"), the contents of this
+ file are subject only to the provisions of the License. You may not use
+ this file except in compliance with the License. You may obtain a copy
+ of the License at Silicon Graphics, Inc., attn: Legal Services, 1600
+ Amphitheatre Parkway, Mountain View, CA 94043-1351, or at
+ :
+ http://oss.sgi.com/projects/FreeB
+ .
+ Note that, as provided in the License, the Software is distributed on an
+ "AS IS" basis, with ALL EXPRESS AND IMPLIED WARRANTIES AND CONDITIONS
+ DISCLAIMED, INCLUDING, WITHOUT LIMITATION, ANY IMPLIED WARRANTIES AND
+ CONDITIONS OF MERCHANTABILITY, SATISFACTORY QUALITY, FITNESS FOR A
+ PARTICULAR PURPOSE, AND NON-INFRINGEMENT
+ .
+ Original Code. The Original Code is: OpenGL Sample Implementation,
+ Version 1.2.1, released January 26, 2000, developed by Silicon Graphics,
+ Inc. The Original Code is Copyright (c) 1991-2000 Silicon Graphics, Inc.
+ Copyright in any portions created by third parties is as indicated
+ elsewhere herein. All Rights Reserved
+ .
+ Additional Notice Provisions: This software was created using the
+ OpenGL(R) version 1.2.1 Sample Implementation published by SGI, but has
+ not been independently verified as being compliant with the OpenGL(R)
+ version 1.2.1 Specification.
+
+
+License: SGI-B-2.0
+ SGI FREE SOFTWARE LICENSE B (Version 2.0, Sept. 18, 2008)
+ Copyright (C) 1991-2000 Silicon Graphics, Inc. All Rights Reserved
+ .
+ Permission is hereby granted, free of charge, to any person obtaining a
+ copy of this software and associated documentation files (the "Software"),
+ to deal in the Software without restriction, including without limitation
+ the rights to use, copy, modify, merge, publish, distribute, sublicense,
+ and/or sell copies of the Software, and to permit persons to whom the
+ Software is furnished to do so, subject to the following conditions:
+ :
+ The above copyright notice including the dates of first publication and
+ either this permission notice or a reference to
+ http://oss.sgi.com/projects/FreeB/
+ shall be included in all copies or substantial portions of the Software
+ .
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+ OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+ SILICON GRAPHICS, INC. BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+ WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF
+ OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ SOFTWARE
+ .
+ Except as contained in this notice, the name of Silicon Graphics, Inc.
+ shall not be used in advertising or otherwise to promote the sale, use or
+ other dealings in this Software without prior written authorization from
+ Silicon Graphics, Inc.
+
+
+License: Jasper
+ Jasper License Version 2.0
+ All rights reserved
+ .
+ Permission is hereby granted, free of charge, to any person (the
+ "User") obtaining a copy of this software and associated documentation
+ files (the "Software"), to deal in the Software without restriction,
+ including without limitation the rights to use, copy, modify, merge,
+ publish, distribute, and/or sell copies of the Software, and to permit
+ persons to whom the Software is furnished to do so, subject to the
+ following conditions
+ :
+ 1.  The above copyright notices and this permission notice (which
+ includes the disclaimer below) shall be included in all copies or
+ substantial portions of the Software
+ .
+ 2.  The name of a copyright holder shall not be used to endorse or
+ promote products derived from the Software without specific prior
+ written permission
+ .
+ THIS DISCLAIMER OF WARRANTY CONSTITUTES AN ESSENTIAL PART OF THIS
+ LICENSE.  NO USE OF THE SOFTWARE IS AUTHORIZED HEREUNDER EXCEPT UNDER
+ THIS DISCLAIMER.  THE SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS
+ "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING
+ BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+ PARTICULAR PURPOSE AND NONINFRINGEMENT OF THIRD PARTY RIGHTS.  IN NO
+ EVENT SHALL THE COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, OR ANY SPECIAL
+ INDIRECT OR CONSEQUENTIAL DAMAGES, OR ANY DAMAGES WHATSOEVER RESULTING
+ FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT,
+ NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION
+ WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.  NO ASSURANCES ARE
+ PROVIDED BY THE COPYRIGHT HOLDERS THAT THE SOFTWARE DOES NOT INFRINGE
+ THE PATENT OR OTHER INTELLECTUAL PROPERTY RIGHTS OF ANY OTHER ENTITY.
+ EACH COPYRIGHT HOLDER DISCLAIMS ANY LIABILITY TO THE USER FOR CLAIMS
+ BROUGHT BY ANY OTHER ENTITY BASED ON INFRINGEMENT OF INTELLECTUAL
+ PROPERTY RIGHTS OR OTHERWISE.  AS A CONDITION TO EXERCISING THE RIGHTS
+ GRANTED HEREUNDER, EACH USER HEREBY ASSUMES SOLE RESPONSIBILITY TO SECURE
+ ANY OTHER INTELLECTUAL PROPERTY RIGHTS NEEDED, IF ANY.  THE SOFTWARE
+ IS NOT FAULT-TOLERANT AND IS NOT INTENDED FOR USE IN MISSION-CRITICAL
+ SYSTEMS, SUCH AS THOSE USED IN THE OPERATION OF NUCLEAR FACILITIES,
+ AIRCRAFT NAVIGATION OR COMMUNICATION SYSTEMS, AIR TRAFFIC CONTROL
+ SYSTEMS, DIRECT LIFE SUPPORT MACHINES, OR WEAPONS SYSTEMS, IN WHICH
+ THE FAILURE OF THE SOFTWARE OR SYSTEM COULD LEAD DIRECTLY TO DEATH,
+ PERSONAL INJURY, OR SEVERE PHYSICAL OR ENVIRONMENTAL DAMAGE ("HIGH
+ RISK ACTIVITIES").  THE COPYRIGHT HOLDERS SPECIFICALLY DISCLAIM ANY
+ EXPRESS OR IMPLIED WARRANTY OF FITNESS FOR HIGH RISK ACTIVITIES.
+
+
+License: MIT-CURL
+ COPYRIGHT AND PERMISSION NOTICE
+ .
+ All rights reserved
+ . 
+ Permission to use, copy, modify, and distribute this software for any purpose with 
+ or without fee is hereby granted, provided that the above copyright notice and this 
+ permission notice appear in all copies
+ .
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, 
+ INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
+ PARTICULAR PURPOSE AND NONINFRINGEMENT OF THIRD PARTY RIGHTS. IN NO EVENT SHALL 
+ THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+ WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN 
+ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE
+ .
+ Except as contained in this notice, the name of a copyright holder shall not be 
+ used in advertising or otherwise to promote the sale, use or other dealings in 
+ this Software without prior written authorization of the copyright holder.
+
+
+License: BSD-2-clause
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are met:
+ :
+ 1. Redistributions of source code must retain the above copyright notice,
+ this list of conditions and the following disclaimer.
+ 2. Redistributions in binary form must reproduce the above copyright notice,
+ this list of conditions and the following disclaimer in the documentation
+ and/or other materials provided with the distribution
+ .
+ THIS SOFTWARE IS PROVIDED BY THE FREEBSD PROJECT ''AS IS'' AND ANY EXPRESS OR
+ IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+ MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
+ EVENT SHALL THE FREEBSD PROJECT OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+ INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+ BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+ LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+ OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+
+License: BSD-3-clause
+ Redistribution and use in source and binary forms are permitted
+ provided that the above copyright notice and this paragraph are
+ duplicated in all such forms and that any documentation, advertising
+ materials, and other materials related to such distribution and use
+ acknowledge that the software was developed by the University of
+ Southern California, Information Sciences Institute.  The name of the
+ University may not be used to endorse or promote products derived from
+ this software without specific prior written permission
+ .
+ THIS SOFTWARE IS PROVIDED "AS IS" AND WITHOUT ANY EXPRESS OR IMPLIED
+ WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF
+ MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+
+
+License: BSD-CMAKE
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions
+ are met
+ :
+ 1. Redistributions of source code must retain the copyright
+    notice, this list of conditions and the following disclaimer.
+ 2. Redistributions in binary form must reproduce the copyright
+    notice, this list of conditions and the following disclaimer in the
+    documentation and/or other materials provided with the distribution.
+ 3. The name of the author may not be used to endorse or promote products 
+    derived from this software without specific prior written permission
+ .
+ THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR
+ IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+ IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT,
+ INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+ NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
+ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE
+
+License: MIT-KHRONOS
+ Permission is hereby granted, free of charge, to any person obtaining a
+ copy of this software and/or associated documentation files (the
+ "Materials"), to deal in the Materials without restriction, including
+ without limitation the rights to use, copy, modify, merge, publish,
+ distribute, sublicense, and/or sell copies of the Materials, and to
+ permit persons to whom the Materials are furnished to do so, subject to
+ the following conditions
+ :
+ The above copyright notice and this permission notice shall be included
+ in all copies or substantial portions of the Materials
+ .
+ THE MATERIALS ARE PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+ IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
+
+
+License: public-domain
+ No license required for any purpose; the work is not subject to
+ copyright in any jurisdiction. 

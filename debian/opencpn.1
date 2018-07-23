@@ -1,0 +1,57 @@
+.\"                                      Hey, EMACS: -*- nroff -*-
+.\" (C) Copyright 2018 Alec Leamas <leamas.alec@gmail.com>,
+.\"
+.\" First parameter, NAME, should be all caps
+.\" Second parameter, SECTION, should be 1-8, maybe w/ subsection
+.\" other parameters are allowed: see man(7), man(1)
+.TH Opencpn SECTION "July 22 2018"
+.\" Please adjust this date whenever revising the manpage.
+.\"
+.\" Some roff macros, for reference:
+.\" .nh        disable hyphenation
+.\" .hy        enable hyphenation
+.\" .ad l      left justify
+.\" .ad b      justify to both left and right margins
+.\" .nf        disable filling
+.\" .fi        enable filling
+.\" .br        insert line break
+.\" .sp <n>    insert n+1 empty lines
+.\" for manpage-specific macros, see man(7)
+.SH NAME
+opencpn \- Chartplotter and GPS Navigation Software
+.SH SYNOPSIS
+.B opencpn
+.RI [ options ] 
+.SH DESCRIPTION
+OpenCPN is a chartplotter and navigation GUI program supporting navigation
+under way as well as planning. It supports a wide range of chart formats
+using a plugin system. Other plugins provides support for e. g. radar, AIS
+and weather maps. Program is localized in 20+ languages.
+
+.SH OPTIONS
+.TP
+.B \-h, \-\-help
+Show help info.
+.TP
+.B \-p
+Run in portable mode.
+.TP
+.B  \-fullscreen
+Switch to full screen mode on start.
+.TP
+.B  \-no_opengl
+Disable OpenGL video acceleration. This setting will be remembered.
+.TP
+.B  \-rebuild_gl_raster_cache
+Rebuild OpenGL raster cache on start.
+.TP
+.B  \-parse_all_enc
+Convert all S-57 charts to OpenCPN's internal format on start.
+.TP
+.B  \-unit_test_1:<num>
+Display a slideshow of <num> charts and then exit. Zero or negative <num> 
+specifies no limit.
+
+.SH SEE ALSO
+.BR
+http://www.opencpn.org

@@ -1,0 +1,30 @@
+#!/usr/bin/make -f
+PKD  = $(abspath $(dir $(MAKEFILE_LIST)))
+PKG  = $(word 2,$(shell dpkg-parsechangelog -l$(PKD)/changelog --show-field=Source))
+VER ?= $(shell dpkg-parsechangelog -l$(PKD)/changelog | \
+           perl -ne 'print $$1 if m{^Version:\s+(?:\d+:)?(\d.*)(?:\-\d+.*)};')
+
+
+%:
+	dh $@
+
+override_dh_auto_configure:
+	dh_auto_configure -- \
+	    -DCMAKE_LIBRARY_PATH=$(DEB_HOST_MULTIARCH) \
+	    -DCMAKE_INSTALL_PREFIX=/usr \
+	    -DBUNDLE_DOCS=ON \
+            -DBUNDLE_TCDATA=ON \
+            -DBUNDLE_GSHHS=CRUDE \
+            -DBUILD_SHARED_LIBS=OFF
+
+get-orig-source:  $(info I: $(PKG)_$(VER))
+	# Walk around what's seemingly a tar bug, see 
+	# https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=831870
+	@echo "# Downloading..."
+	test -d utmp || mkdir utmp; rm -rf utmp/*
+	uscan  --destdir=$(CURDIR)/utmp --check-dirname-level=0 \
+	    --force-download --safe --download-version $(VER) $(PKD)
+	cd utmp;tar xaf opencpn-$(VER).tar.gz; 
+	cd utmp;tar caf opencpn-$(VER).tar.gz OpenCPN-$(VER)
+	mk-origtargz --compression bzip2 --repack utmp/opencpn-$(VER).tar.gz \
+	    && rm -rf utmp

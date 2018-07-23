@@ -24,3 +24,4 @@ buildwin/liblzma.dll
 buildwin/archive.*
 src/opencpn.rc
 .DS_Store
+debian/files
