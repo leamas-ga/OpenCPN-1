@@ -1,0 +1,11 @@
+usr/bin/opencpn
+usr/share/opencpn/plugins
+usr/share/opencpn/s57data
+usr/share/opencpn/sounds
+usr/share/opencpn/uidata
+usr/share/opencpn/license*
+usr/share/applications/opencpn.desktop
+usr/share/icons/hicolor/*/apps/opencpn.*
+usr/share/locale/*/LC_MESSAGES/*.mo
+usr/lib/opencpn/*.so
+
