@@ -1,0 +1,25 @@
+From 71576a82f6f66d8675ac0e313612560642de7a01 Mon Sep 17 00:00:00 2001
+From: Alec Leamas <leamas.alec@nowhere.nt>
+Date: Mon, 9 Nov 2020 22:41:09 +0100
+Subject: [PATCH 2/2] qt/window.h: Add missing #include <wx/scopedptr.h>.
+
+---
+ include/wx/qt/window.h | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/include/wx/qt/window.h b/include/wx/qt/window.h
+index a426af9f67..cbee25be3b 100644
+--- a/include/wx/qt/window.h
++++ b/include/wx/qt/window.h
+@@ -9,6 +9,8 @@
+ #ifndef _WX_QT_WINDOW_H_
+ #define _WX_QT_WINDOW_H_
+ 
++#include <wx/scopedptr.h>
++
+ class QShortcut;
+ template < class T > class QList;
+ 
+-- 
+2.26.2
+

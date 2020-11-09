@@ -113,8 +113,14 @@ Is this still problem? If so, generator expressions seem to be the solution.
 cmake_minimum_required(VERSION 3.1.1)
 cmake_policy(SET CMP0043 NEW)
 cmake_policy(SET CMP0025 NEW)
+if (POLICY CMP0056)
+  cmake_policy(SET CMP0056 NEW)
+endif ()
 if (POLICY CMP0057)
   cmake_policy(SET CMP0057 NEW)
+endif ()
+if (POLICY CMP0066)
+  cmake_policy(SET CMP0066 NEW)
 endif ()
 if (POLICY CMP0077)
   cmake_policy(SET CMP0077 NEW)
@@ -709,87 +715,116 @@ if ((NOT OPENGLES_FOUND) AND (NOT QT_ANDROID))
 
 endif ()
 
-if (NOT QT_ANDROID)
-  # Find wxWidgets here, and the setting get inherited by all plugins. These
-  # options can be used to set the linux widgets build type
-  set(wxWidgets_USE_DEBUG OFF)
-  set(wxWidgets_USE_UNICODE ON)
-  set(wxWidgets_USE_UNIVERSAL OFF)
-  set(wxWidgets_USE_STATIC OFF)
+# Find wxWidgets here, and the setting get inherited by all plugins. These
+# options can be used to set the linux widgets build type
+set(wxWidgets_USE_DEBUG OFF)
+set(wxWidgets_USE_UNICODE ON)
+set(wxWidgets_USE_UNIVERSAL OFF)
+set(wxWidgets_USE_STATIC OFF)
 
-  if (OCPN_WXWIDGETS_FORCE_VERSION)
-      set (wxWidgets_CONFIG_OPTIONS --version=${OCPN_WXWIDGETS_FORCE_VERSION})
-  endif ()
+if (OCPN_WXWIDGETS_FORCE_VERSION)
+    set (wxWidgets_CONFIG_OPTIONS --version=${OCPN_WXWIDGETS_FORCE_VERSION})
+endif ()
 
-  if (MSVC)
-    # Exclude wxexpat.lib, since we use our own version. Other things are
-    # excluded as well, but we don't need them
-    set(wxWidgets_EXCLUDE_COMMON_LIBRARIES TRUE)
-  endif (MSVC)
+if (MSVC)
+  # Exclude wxexpat.lib, since we use our own version. Other things are
+  # excluded as well, but we don't need them
+  set(wxWidgets_EXCLUDE_COMMON_LIBRARIES TRUE)
+endif (MSVC)
 
-  if (GTK2_FOUND)
-    set(wxWidgets_CONFIG_OPTIONS ${wxWidgets_CONFIG_OPTIONS} --toolkit=gtk2)
-  elseif (GTK3_FOUND)
-    set(wxWidgets_CONFIG_OPTIONS ${wxWidgets_CONFIG_OPTIONS} --toolkit=gtk3)
-  endif ()
+if (QT_ANDROID)
+  find_package(Qt5 COMPONENTS Core Widgets OpenGL REQUIRED)
+  get_target_property(core_location Qt5::Core LOCATION)
+  get_target_property(widgets_location Qt5::Widgets LOCATION)
 
+  message(STATUS "QT_LIBRARIES: ${widgets_location} ${core_location}")
+#[[
+    # Link order is critical to avoid circular dependencies
+    ${wxQt_Base}/${wxQt_Build}/lib/libwx_qtu_html-3.1-arm-linux-androideabi.a
+    ${wxQt_Base}/${wxQt_Build}/lib/libwx_baseu_xml-3.1-arm-linux-androideabi.a
+    ${wxQt_Base}/${wxQt_Build}/lib/libwx_qtu_qa-3.1-arm-linux-androideabi.a
+    ${wxQt_Base}/${wxQt_Build}/lib/libwx_qtu_adv-3.1-arm-linux-androideabi.a
+    ${wxQt_Base}/${wxQt_Build}/lib/libwx_qtu_core-3.1-arm-linux-androideabi.a
+    ${wxQt_Base}/${wxQt_Build}/lib/libwx_baseu-3.1-arm-linux-androideabi.a
+    ${wxQt_Base}/${wxQt_Build}/lib/libwx_qtu_aui-3.1-arm-linux-androideabi.a
+    ${wxQt_Base}/${wxQt_Build}/lib/libwxexpat-3.1-arm-linux-androideabi.a
+    ${wxQt_Base}/${wxQt_Build}/lib/libwxregexu-3.1-arm-linux-androideabi.a
+    ${wxQt_Base}/${wxQt_Build}/lib/libwxjpeg-3.1-arm-linux-androideabi.a
+    ${wxQt_Base}/${wxQt_Build}/lib/libwxpng-3.1-arm-linux-androideabi.a
+    ${wxQt_Base}/${wxQt_Build}/lib/libwx_qtu_gl-3.1-arm-linux-androideabi.a
+    ${wxQt_Base}/${wxQt_Build}/lib/libwx_baseu_net-3.1-arm-linux-androideabi.a
+
+    ${Qt_Base}/${Qt_Build}/lib/libQt5Core.so
+    ${Qt_Base}/${Qt_Build}/lib/libQt5OpenGL.so
+    ${Qt_Base}/${Qt_Build}/lib/libQt5Widgets.so
+    ${Qt_Base}/${Qt_Build}/lib/libQt5Gui.so
+    ${Qt_Base}/${Qt_Build}/lib/libQt5AndroidExtras.so
+#]]
+endif ()
+
+
+if (GTK2_FOUND)
+  set(wxWidgets_CONFIG_OPTIONS ${wxWidgets_CONFIG_OPTIONS} --toolkit=gtk2)
+elseif (GTK3_FOUND)
+  set(wxWidgets_CONFIG_OPTIONS ${wxWidgets_CONFIG_OPTIONS} --toolkit=gtk3)
+endif ()
+
+find_package(wxWidgets COMPONENTS ${wxWidgets_FIND_COMPONENTS})
+if (wxWidgets_FOUND AND OCPN_USE_WEBVIEW)
+  message(STATUS "Found wxWidgets webview add-on")
+  add_definitions(-DwxUSE_WEBVIEW=1 -DHAVE_WEBVIEW)
+else ()
+  add_definitions(-DwxUSE_WEBVIEW=0)
+  list(REMOVE_ITEM wxWidgets_FIND_COMPONENTS webview)
+  message(STATUS "Could not find wxWidgets webview add-on")
   find_package(wxWidgets COMPONENTS ${wxWidgets_FIND_COMPONENTS})
-  if (wxWidgets_FOUND AND OCPN_USE_WEBVIEW)
-    message(STATUS "Found wxWidgets webview add-on")
-    add_definitions(-DwxUSE_WEBVIEW=1 -DHAVE_WEBVIEW)
-  else ()
-    add_definitions(-DwxUSE_WEBVIEW=0)
-    list(REMOVE_ITEM wxWidgets_FIND_COMPONENTS webview)
-    message(STATUS "Could not find wxWidgets webview add-on")
-    find_package(wxWidgets COMPONENTS ${wxWidgets_FIND_COMPONENTS})
+endif ()
+if (NOT wxWidgets_FOUND)
+  message (FATAL_ERROR
+    "Cannot find wxWidgets, giving up. On linux you might want to try"
+    " using -DOCPN_FORCE_GTK3."
+  )
+endif ()
+if (MSYS)
+  # Convert msys to windows paths, and handle the missing /usr
+  string(
+    REGEX
+    REPLACE
+      "/usr/local"            ";C:/MinGW/msys/1.0/local"
+      wxWidgets_INCLUDE_DIRS  "${wxWidgets_INCLUDE_DIRS}"
+  )
+endif (MSYS)
+include(${wxWidgets_USE_FILE})
+
+# As of cmake 3.11.2, these libraries are missing in list despite that we
+# looked for them. This is a nasty fix which might fail miserably. Assumption:
+# All builds using GTK uses unicode and wxWidgets 3.0
+if (GTK3_FOUND)
+  list(APPEND wxWidgets_LIBRARIES "-lwx_gtk3u_aui-3.0")
+  if (OPENGL_FOUND)
+    list(APPEND wxWidgets_LIBRARIES "-lwx_gtk3u_gl-3.0")
   endif ()
-  if (NOT wxWidgets_FOUND)
-    message (FATAL_ERROR
-      "Cannot find wxWidgets, giving up. On linux you might want to try"
-      " using -DOCPN_FORCE_GTK3."
+endif ()
+
+message(STATUS "Found wxWidgets...")
+message(STATUS " wxWidgets Include: ${wxWidgets_INCLUDE_DIRS}")
+message(STATUS " wxWidgets Libraries: ${wxWidgets_LIBRARIES}")
+
+# We need to remove GLU from the wxWidgets_LIBRARIES list It only appears to
+# get on the list for MSW...
+foreach (_currentLibFile ${wxWidgets_LIBRARIES})
+  set(UCNAME ${_currentLibFile})
+  string(TOUPPER ${UCNAME} UCNAME)
+  if (NOT ${UCNAME} MATCHES "(.*)GLU(.*)")
+    set(
+      REVISED_wxWidgets_LIBRARIES ${REVISED_wxWidgets_LIBRARIES}
+      ${_currentLibFile}
     )
   endif ()
-  if (MSYS)
-    # Convert msys to windows paths, and handle the missing /usr
-    string(
-      REGEX
-      REPLACE
-        "/usr/local"            ";C:/MinGW/msys/1.0/local"
-        wxWidgets_INCLUDE_DIRS  "${wxWidgets_INCLUDE_DIRS}"
-    )
-  endif (MSYS)
-  include(${wxWidgets_USE_FILE})
+endforeach (_currentLibFile)
+set(wxWidgets_LIBRARIES ${REVISED_wxWidgets_LIBRARIES})
 
-  # As of cmake 3.11.2, these libraries are missing in list despite that we
-  # looked for them. This is a nasty fix which might fail miserably. Assumption:
-  # All builds using GTK uses unicode and wxWidgets 3.0
-  if (GTK3_FOUND)
-    list(APPEND wxWidgets_LIBRARIES "-lwx_gtk3u_aui-3.0")
-    if (OPENGL_FOUND)
-      list(APPEND wxWidgets_LIBRARIES "-lwx_gtk3u_gl-3.0")
-    endif ()
-  endif ()
-
-  message(STATUS "Found wxWidgets...")
-  message(STATUS " wxWidgets Include: ${wxWidgets_INCLUDE_DIRS}")
-  message(STATUS " wxWidgets Libraries: ${wxWidgets_LIBRARIES}")
-
-  # We need to remove GLU from the wxWidgets_LIBRARIES list It only appears to
-  # get on the list for MSW...
-  foreach (_currentLibFile ${wxWidgets_LIBRARIES})
-    set(UCNAME ${_currentLibFile})
-    string(TOUPPER ${UCNAME} UCNAME)
-    if (NOT ${UCNAME} MATCHES "(.*)GLU(.*)")
-      set(
-        REVISED_wxWidgets_LIBRARIES ${REVISED_wxWidgets_LIBRARIES}
-        ${_currentLibFile}
-      )
-    endif ()
-  endforeach (_currentLibFile)
-  set(wxWidgets_LIBRARIES ${REVISED_wxWidgets_LIBRARIES})
-
-  message(STATUS " Revised wxWidgets Libraries: ${wxWidgets_LIBRARIES}")
-endif (NOT QT_ANDROID)
+message(STATUS " Revised wxWidgets Libraries: ${wxWidgets_LIBRARIES}")
 
 # Handle #1500: Force NDEBUG on gtk3 for wxwidgets < 3.2 (all builds)
 if (GTK3_FOUND)
@@ -817,38 +852,12 @@ if (GTK3_FOUND)
   endif ()
 endif ()
 
-IF(QT_ANDROID)
-  SET( wxWidgets_LIBRARIES
-
-    # Link order is critical to avoid circular dependencies
-    ${wxQt_Base}/${wxQt_Build}/lib/libwx_qtu_html-3.1-arm-linux-androideabi.a
-    ${wxQt_Base}/${wxQt_Build}/lib/libwx_baseu_xml-3.1-arm-linux-androideabi.a
-    ${wxQt_Base}/${wxQt_Build}/lib/libwx_qtu_qa-3.1-arm-linux-androideabi.a
-    ${wxQt_Base}/${wxQt_Build}/lib/libwx_qtu_adv-3.1-arm-linux-androideabi.a
-    ${wxQt_Base}/${wxQt_Build}/lib/libwx_qtu_core-3.1-arm-linux-androideabi.a
-    ${wxQt_Base}/${wxQt_Build}/lib/libwx_baseu-3.1-arm-linux-androideabi.a
-    ${wxQt_Base}/${wxQt_Build}/lib/libwx_qtu_aui-3.1-arm-linux-androideabi.a
-    ${wxQt_Base}/${wxQt_Build}/lib/libwxexpat-3.1-arm-linux-androideabi.a
-    ${wxQt_Base}/${wxQt_Build}/lib/libwxregexu-3.1-arm-linux-androideabi.a
-    ${wxQt_Base}/${wxQt_Build}/lib/libwxjpeg-3.1-arm-linux-androideabi.a
-    ${wxQt_Base}/${wxQt_Build}/lib/libwxpng-3.1-arm-linux-androideabi.a
-    ${wxQt_Base}/${wxQt_Build}/lib/libwx_qtu_gl-3.1-arm-linux-androideabi.a
-    ${wxQt_Base}/${wxQt_Build}/lib/libwx_baseu_net-3.1-arm-linux-androideabi.a
-
-    ${Qt_Base}/${Qt_Build}/lib/libQt5Core.so
-    ${Qt_Base}/${Qt_Build}/lib/libQt5OpenGL.so
-    ${Qt_Base}/${Qt_Build}/lib/libQt5Widgets.so
-    ${Qt_Base}/${Qt_Build}/lib/libQt5Gui.so
-    ${Qt_Base}/${Qt_Build}/lib/libQt5AndroidExtras.so
-
-  )
-ENDIF(QT_ANDROID)
-
 message(STATUS "")
 message(STATUS "*** Staging to build ${PACKAGE_NAME}  ***")
 message(STATUS "*** Build type: ${CMAKE_BUILD_TYPE}")
 message(STATUS "*** Will install to ${CMAKE_INSTALL_PREFIX}  ***")
 
+#[[
 IF(QT_ANDROID)
   INCLUDE_DIRECTORIES("${Qt_Base}/${Qt_Build}/include/QtCore")
   INCLUDE_DIRECTORIES("${Qt_Base}/${Qt_Build}/include")
@@ -861,9 +870,8 @@ IF(QT_ANDROID)
       "${wxQt_Base}/${wxQt_Build}/lib/wx/include/arm-linux-androideabi-qt-unicode-static-3.1")
   INCLUDE_DIRECTORIES("${wxQt_Base}/include")
   include_directories("${CMAKE_SOURCE_DIR}/include")
-
-  add_definitions(-DQT_WIDGETS_LIB)
 endif (QT_ANDROID)
+#]]
 
 set(
   HDRS
@@ -1191,6 +1199,14 @@ if (APPLE)
   )
 endif ()
 
+if (QT_ANDRIOD)
+  target_link_libraries(
+    ${PACKAGE_NAME}
+    PRIVATE Qt5::Widgets Qt5::Core Qt5::OpenGL Qt5::AndroidExtras
+  )
+  add_definitions(-DQT_WIDGETS_LIB)
+endif ()
+#
 # IF(NOT WIN32) include(OcpnFindGpsd) if (TARGET ocpn::gpsd)
 # target_link_libraries(${PACKAGE_NAME} ocpn::gpsd) endif () ENDIF (NOT WIN32)
 
@@ -1198,6 +1214,17 @@ find_package(Gettext REQUIRED)
 
 add_subdirectory(libs/ssl_sha1)
 target_link_libraries(${PACKAGE_NAME} PRIVATE ssl::sha1)
+
+#
+# Android: locate QT5
+#
+if (QT_ANDROID)
+  find_package(Qt5 COMPONENTS Core Widgets OpenGL AndroidExtras REQUIRED)
+  target_link_libraries(
+    ${PACKAGE_NAME} Qt5::Widgets Qt5::Core Qt5::OpenGL Qt5::AndroidExtras
+  )
+  add_definitions(-DQT_WIDGETS_LIB)
+endif ()
 
 #
 # Linux: set up GTK
@@ -1350,61 +1377,52 @@ if (OCPN_USE_CURL)
     set(OCPN_USE_EXTERN_CURL ON)
   endif (CMAKE_HOST_WIN32)
 
-  if (NOT QT_ANDROID)
-    if (OCPN_USE_EXTERN_CURL)
-      find_package(CURL REQUIRED)
-      target_include_directories(${PACKAGE_NAME} PRIVATE ${CURL_INCLUDE_DIRS})
-    else (OCPN_USE_EXTERN_CURL)
-      include("Curl")
-      message(STATUS "Using bundled curl library...")
-    endif (OCPN_USE_EXTERN_CURL)
+  if (OCPN_USE_EXTERN_CURL)
+    find_package(CURL REQUIRED)
+    target_include_directories(${PACKAGE_NAME} PRIVATE ${CURL_INCLUDE_DIRS})
+  else (OCPN_USE_EXTERN_CURL)
+    include("Curl")
+    message(STATUS "Using bundled curl library...")
+  endif (OCPN_USE_EXTERN_CURL)
 
-    pkg_search_module(SYS_WXCURL libwxcurl wxcurl)
-    use_bundled_lib(USE_BUNDLED_WXCURL wxcurl)
-    if (SYS_WXCURL_FOUND AND NOT USE_BUNDLED_WXCURL)
-      message(STATUS "Building with system wxcurl")
-      target_include_directories(
-        ${PACKAGE_NAME}
-        PRIVATE ${CURL_INCLUDE_DIRS} ${SYS_WXCURL_INCLUDE_DIR}
-      )
-      target_link_libraries(${PACKAGE_NAME} PRIVATE ${SYS_WXCURL_LIBRARIES})
-    else ()
-      message(STATUS "Building with bundled wxcurl")
-      include("Curl")
-      add_subdirectory("libs/wxcurl")
-      target_link_libraries(${PACKAGE_NAME} PRIVATE ocpn::wxcurl)
-    endif ()
+  pkg_search_module(SYS_WXCURL libwxcurl wxcurl)
+  use_bundled_lib(USE_BUNDLED_WXCURL wxcurl)
+  if (SYS_WXCURL_FOUND AND NOT USE_BUNDLED_WXCURL)
+    message(STATUS "Building with system wxcurl")
+    target_include_directories(
+      ${PACKAGE_NAME}
+      PRIVATE ${CURL_INCLUDE_DIRS} ${SYS_WXCURL_INCLUDE_DIR}
+    )
+    target_link_libraries(${PACKAGE_NAME} PRIVATE ${SYS_WXCURL_LIBRARIES})
+  else ()
+    message(STATUS "Building with bundled wxcurl")
+    include("Curl")
+    add_subdirectory("libs/wxcurl")
+    target_link_libraries(${PACKAGE_NAME} PRIVATE ocpn::wxcurl)
+  endif ()
 
-    target_link_libraries(${PACKAGE_NAME} PRIVATE ${CURL_LIBRARIES})
+  target_link_libraries(${PACKAGE_NAME} PRIVATE ${CURL_LIBRARIES})
 
-    if (WIN32 AND OCPN_USE_EXTERN_CURL)
-      find_library(
-        CURL_LIBRARY_DLL
-        NAMES
-          curl
-          curllib
-          libcurl_imp
-          curllib_static
-          libcurl
-        PATH_SUFFIXES dll
-      )
-      install(FILES ${CURL_LIBRARY_DLL} DESTINATION ".")
-    endif (WIN32 AND OCPN_USE_EXTERN_CURL)
-  else (NOT QT_ANDROID)
-    target_include_directories( ${PACKAGE_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/buildandroid/libcurl/include)
-    target_link_libraries(${PACKAGE_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/buildandroid/libcurl/${ANDROID_ARCH}/libcurl.a)
-  endif (NOT QT_ANDROID)
+  if (WIN32 AND OCPN_USE_EXTERN_CURL)
+    find_library(
+      CURL_LIBRARY_DLL
+      NAMES
+        curl
+        curllib
+        libcurl_imp
+        curllib_static
+        libcurl
+      PATH_SUFFIXES dll
+    )
+    install(FILES ${CURL_LIBRARY_DLL} DESTINATION ".")
+  endif (WIN32 AND OCPN_USE_EXTERN_CURL)
 endif (OCPN_USE_CURL)
-
-if (QT_ANDROID)
-  target_include_directories( ${PACKAGE_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/buildandroid/libexpat/include)
-endif (QT_ANDROID)
 
 if (OCPN_USE_SVG)
   message(STATUS "SVG support enabled...")
+  include(OcpnFindExpat)
   if (NOT QT_ANDROID)
     include(OcpnFindCairo)
-    include(OcpnFindExpat)
     if (CMAKE_HOST_WIN32)
       # On Windows, we have our own expat and cairo
       file(GLOB gtkdll_files "${CMAKE_CURRENT_SOURCE_DIR}/buildwin/gtk/*.dll")
@@ -1444,6 +1462,7 @@ if (OCPN_USE_SVG)
     target_link_libraries(${PACKAGE_NAME} PRIVATE ocpn::wxsvg)
 
   else(NOT QT_ANDROID)
+    target_link_libraries(${PACKAGE_NAME} PRIVATE ocpn::expat)
     ADD_DEFINITIONS(-DocpnUSE_SVG)
     INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/libs/wxsvg/include/wxSVG)
     INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/libs/wxsvg/include/wxSVGXML)
@@ -1494,9 +1513,6 @@ if (OPENGL_FOUND)
   )
 endif ()
 
-# Building for QT_ANDROID involves a cross-building environment, So the include
-# directories, flags, etc must be stated explicitly without trying to locate
-# them on the host build system.
 if (QT_ANDROID)
   message(STATUS "Using GLESv1 for Android")
   add_definitions(-DocpnUSE_GLES)
@@ -1517,12 +1533,7 @@ if (OCPN_VERBOSE)
   message(STATUS "    Revised GL Lib (with local): " ${OPENGL_LIBRARIES})
 endif ()
 
-if (QT_ANDROID)
-  target_include_directories(${PACKAGE_NAME}
-    PRIVATE ${CMAKE_SOURCE_DIR}/buildandroid/libarchive/include)
-  target_link_libraries(${PACKAGE_NAME}
-    PRIVATE ${CMAKE_SOURCE_DIR}/buildandroid/libarchive/${ANDROID_ARCH}/libarchive.a)
-elseif ( APPLE )
+if (APPLE)
     #  TODO This is a hack, due to the way libarchive is built and installed in CI build environment 
     target_include_directories(${PACKAGE_NAME} PRIVATE /usr/local/include)
     target_link_libraries(${PACKAGE_NAME} PRIVATE /usr/local/lib/libarchive.dylib)
@@ -1530,7 +1541,7 @@ else ()
   find_package(LibArchive REQUIRED)
   target_include_directories(${PACKAGE_NAME} PRIVATE ${LibArchive_INCLUDE_DIRS})
   target_link_libraries(${PACKAGE_NAME} PRIVATE ${LibArchive_LIBRARIES})
-endif (QT_ANDROID)
+endif ()
 
 message(STATUS "    Adding local LIBTESS2")
 add_subdirectory(libs/libtess2)
@@ -1599,10 +1610,7 @@ target_link_libraries(
 )
 
 IF(NOT QT_ANDROID)
-   target_link_libraries(S57ENC PUBLIC
-      ocpn::wxsvg
-    ocpn::wxcurl
-)
+   target_link_libraries(S57ENC PUBLIC ocpn::wxsvg ocpn::wxcurl)
 ENDIF(NOT QT_ANDROID)
 
 add_subdirectory(libs/iso8211)
@@ -1708,7 +1716,7 @@ endif ()
 configure_file(config.h.in ${CMAKE_BINARY_DIR}/include/config.h)
 include_directories(BEFORE "${CMAKE_BINARY_DIR}/include")
 
-if (NOT APPLE AND NOT QT_ANDROID)
+if (NOT APPLE)
   target_link_libraries(${PACKAGE_NAME} PRIVATE ${wxWidgets_LIBRARIES})
 endif ()
 
@@ -2097,7 +2105,6 @@ if (APPLE)
 endif (APPLE)
 
 if (QT_ANDROID)
-  target_link_libraries( ${PACKAGE_NAME} PRIVATE ${wxWidgets_LIBRARIES} )
   target_link_libraries( ${PACKAGE_NAME} PRIVATE GLESv2 EGL z)
   target_link_libraries( ${PACKAGE_NAME} PRIVATE ${OPENGL_LIBRARIES} )
   target_link_libraries( ${PACKAGE_NAME} PRIVATE NMEA0183 )
