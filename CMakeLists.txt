@@ -126,6 +126,10 @@ if (POLICY CMP0077)
   cmake_policy(SET CMP0077 NEW)
 endif ()
 
+
+
+
+
 # Prefer libGL.so to libOpenGL.so, see CMP0072
 set(OpenGL_GL_PREFERENCE "LEGACY")
 
@@ -151,18 +155,26 @@ set(
   ${CMAKE_SOURCE_DIR}/cmake
 )
 
-IF(DEFINED _wx_selected_config)
-  MESSAGE (STATUS "selected config ${_wx_selected_config}")
-  IF(_wx_selected_config MATCHES "androideabi-qt")
-    MESSAGE (STATUS "Building for wxQt-Android, ANDROID_ARCH: ${ANDROID_ARCH}")
-    SET(QT_ANDROID "ON")
-    if(ANDROID_ARCH MATCHES "arm64")
-      add_definitions("-DANDROID_ARM64")
-    else ()
-      add_definitions("-DANDROID_ARMHF")
-    endif ()
-  ENDIF(_wx_selected_config MATCHES "androideabi-qt")
-ENDIF(DEFINED _wx_selected_config)
+if ("${wxWidgets_CONFIG_EXECUTABLE}" STREQUAL "")
+  set(wxWidgets_CONFIG_EXECUTABLE "wx-config")
+endif()
+message(STATUS "wxWidgets_CONFIG_EXECUTABLE: ${wxWidgets_CONFIG_EXECUTABLE}")
+execute_process(
+  COMMAND ${wxWidgets_CONFIG_EXECUTABLE} --selected-config
+  OUTPUT_VARIABLE wx_selected_config
+  OUTPUT_STRIP_TRAILING_WHITESPACE
+)
+
+message (STATUS "selected config ${wx_selected_config}")
+if(wx_selected_config MATCHES "android.*-qt")
+  message (STATUS "Building for wxQt-Android, ANDROID_ARCH: ${ANDROID_ARCH}")
+  set(QT_ANDROID "ON")
+  if(ANDROID_ARCH MATCHES "arm64")
+    add_definitions("-DANDROID_ARM64")
+  else ()
+    add_definitions("-DANDROID_ARMHF")
+  endif ()
+endif()
 
 if( QT_ANDROID )
   set(PACKAGE_NAME gorp)
@@ -645,27 +657,25 @@ if (ARCH MATCHES "arm*" AND (NOT QT_ANDROID))
   add_definitions(-DocpnARM)
 endif (ARCH MATCHES "arm*" AND (NOT QT_ANDROID))
 
-IF(DEFINED _wx_selected_config)
-  IF(_wx_selected_config MATCHES "androideabi-qt")
-    MESSAGE (STATUS "Qt_Base: " ${Qt_Base})
-    MESSAGE (STATUS "wxQt_Base/Build: " ${wxQt_Base} "/" ${wxQt_Build})
-    ADD_DEFINITIONS(-DocpnUSE_GLES)
-    ADD_DEFINITIONS(-DocpnUSE_GL)
-    ADD_DEFINITIONS(-DARMHF)
+if (${wx_selected_config} MATCHES "android.*-qt")
+  message (STATUS "Qt_Base: " ${Qt_Base})
+  message (STATUS "wxQt_Base/Build: " ${wxQt_Base} "/" ${wxQt_Build})
+  add_definitions(-DocpnUSE_GLES)
+  add_definitions(-DocpnUSE_GL)
+  add_definitions(-DARMHF)
 
-    SET(OPENGLES_FOUND "YES")
-    SET(OPENGL_FOUND "YES")
+  set(OPENGLES_FOUND "YES")
+  set(OPENGL_FOUND "YES")
 
-    ADD_DEFINITIONS(-DUSE_GLU_TESS)
-    SET(USE_GLES2 ON )
-    MESSAGE (STATUS "Using GLESv2 for Android")
-    ADD_DEFINITIONS(-DUSE_ANDROID_GLES2)
-    ADD_DEFINITIONS(-DUSE_GLSL)
-    INCLUDE_DIRECTORIES( ${CMAKE_SOURCE_DIR}/libs/glshim/include/GLES )
-  ENDIF(_wx_selected_config MATCHES "androideabi-qt")
-ENDIF(DEFINED _wx_selected_config)
+  add_definitions(-DUSE_GLU_TESS)
+  set(USE_GLES2 ON )
+  message (STATUS "Using GLESv2 for Android")
+  add_definitions(-DUSE_ANDROID_GLES2)
+  add_definitions(-DUSE_GLSL)
+  include_directories( ${CMAKE_SOURCE_DIR}/libs/glshim/include/GLES )
+endif ()
 
-if ((_wx_selected_config MATCHES "qt-armv7"))
+if (${wx_selected_config} MATCHES "qt-armv7")
   set(wxWidgets_FIND_COMPONENTS base core xml html adv aui)
 elseif (OCPN_USE_WEBVIEW)
   set(wxWidgets_FIND_COMPONENTS net xml html adv aui core base webview)
@@ -734,10 +744,6 @@ endif (MSVC)
 
 if (QT_ANDROID)
   find_package(Qt5 COMPONENTS Core Widgets OpenGL REQUIRED)
-  get_target_property(core_location Qt5::Core LOCATION)
-  get_target_property(widgets_location Qt5::Widgets LOCATION)
-
-  message(STATUS "QT_LIBRARIES: ${widgets_location} ${core_location}")
 #[[
     # Link order is critical to avoid circular dependencies
     ${wxQt_Base}/${wxQt_Build}/lib/libwx_qtu_html-3.1-arm-linux-androideabi.a
@@ -1220,8 +1226,8 @@ target_link_libraries(${PACKAGE_NAME} PRIVATE ssl::sha1)
 #
 if (QT_ANDROID)
   find_package(Qt5 COMPONENTS Core Widgets OpenGL AndroidExtras REQUIRED)
-  target_link_libraries(
-    ${PACKAGE_NAME} Qt5::Widgets Qt5::Core Qt5::OpenGL Qt5::AndroidExtras
+  target_link_libraries(${PACKAGE_NAME}
+    PRIVATE  Qt5::Widgets Qt5::Core Qt5::OpenGL Qt5::AndroidExtras
   )
   add_definitions(-DQT_WIDGETS_LIB)
 endif ()
@@ -1236,17 +1242,15 @@ endif (NOT WIN32 AND NOT APPLE AND NOT QT_ANDROID)
 
 # Search for opengles, short of running a program to test the speed of
 # acceleration, I simply use gles on "native linux" arm systems
-if (DEFINED _wx_selected_config)
-  message(STATUS "selected config ${_wx_selected_config}")
-  if (_wx_selected_config MATCHES "androideabi-qt")
-    message(STATUS "Building for wxQt-Android")
-    message(STATUS "Qt_Base: " ${Qt_Base})
-    message(STATUS "wxQt_Base/Build:  ${wxQt_Base}/${wxQt_Build}")
-    set(QT_ANDROID "ON")
-  endif (_wx_selected_config MATCHES "androideabi-qt")
-endif (DEFINED _wx_selected_config)
+message(STATUS "selected config ${wx_selected_config}")
+if (${wx_selected_config} MATCHES "android.*-qt")
+  message(STATUS "Building for wxQt-Android")
+  message(STATUS "Qt_Base: " ${Qt_Base})
+  message(STATUS "wxQt_Base/Build:  ${wxQt_Base}/${wxQt_Build}")
+  set(QT_ANDROID "ON")
+endif ()
 
-if ((_wx_selected_config MATCHES "qt-armv7"))
+if (${wx_selected_config} MATCHES "qt-armv7")
   set(wxWidgets_FIND_COMPONENTS base core xml html adv aui)
 else ()
   set(wxWidgets_FIND_COMPONENTS net xml html adv aui core base webview)
