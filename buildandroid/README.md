@@ -276,3 +276,16 @@ Fix wx-config broken symlink with absolute path:
 
     $ cd ~/lib/android-sysroot/usr/bin/
     $ ln -sf ../lib/aarch64-linux-android/wx/config/aarch64-linux-android-qt-unicode-static-* wx-config 
+
+
+TODO:
+  - Make the sysroot acceptable by the ndk tools (basically, build the sysroot inside the ndk)
+  - Adapt to circlei defaults:
+      + ndk and sdk installations at /opt/android/
+      + Use API 28 and sdk r20:
+
+           $ ls /opt/android
+           android-ndk-r20  sdk
+
+           $ ls /opt/android/sdk/platforms/
+           android-28
