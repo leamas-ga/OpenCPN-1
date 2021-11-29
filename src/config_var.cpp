@@ -2,6 +2,10 @@
 
 #include "config_var.h"
 
+#include <atomic>
+#include <sstream>
+
+
 namespace ocpn {
 
 std::string ptr_key(const void* ptr) {
@@ -21,6 +25,8 @@ std::istream& operator>>(std::istream& input, wxString& ws) {
   return input;
 }
 
+/* SingletonVar implementation. */
+
 SingletonVar* SingletonVar::getInstance(const std::string& key) {
   static std::map<std::string, SingletonVar*> instances;
 
@@ -32,16 +38,27 @@ SingletonVar* SingletonVar::getInstance(const std::string& key) {
 
 /* ObservedVar implementation. */
 
-void ObservedVar::listen(wxWindow* listener, wxEventType ev_type) {
-  singleton->listeners[listener] = ev_type;
+void ObservedVar::listen(wxEvtHandler* listener, wxEventType type) {
+  singleton->listeners[listener] = type;
 }
 
-const void ObservedVar::notify() {
+const void ObservedVar::notify(const std::string& s, void* client_data) {
   auto& listeners = singleton->listeners;
   for (auto l = listeners.begin(); l != listeners.end(); l++) {
     wxCommandEvent ev(l->second);
+    ev.SetClientData(client_data);
+    ev.SetString(s);
     wxPostEvent(l->first, ev);
   }
+}
+
+const void ObservedVar::notify() { notify("", 0); }
+
+/* EventVar implementation. */
+
+std::string EventVar::autokey() {
+  static  std::atomic<unsigned long> last_ix(0);
+  return std::string("!@%/+") + std::to_string(last_ix++);
 }
 
 /* ConfigVar implementation. */

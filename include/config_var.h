@@ -2,13 +2,18 @@
 #define CONFIG_VAR_H
 
 #include <map>
-#include <sstream>
 #include <string>
-#include <vector>
 
-#include <wx/fileconf.h>
-#include <wx/window.h>
+#include <wx/config.h>
+#include <wx/event.h>
 
+/**
+ * Notify/listen support for coordination between the MVC Model and
+ * Controller. Here is three use cases:
+ *   - GlobalVar handles notify/listening for changes in a global variable
+ *   - ConfigVar handles notify/listening on a configuration variable.
+ *   - EventVar offers generic notify/listen based on a shared variable.
+ */
 namespace ocpn {
 
 /** Return address as printable string. */
@@ -21,13 +26,14 @@ std::string ptr_key(const void* ptr);
 class SingletonVar {
 public:
   static SingletonVar* getInstance(const std::string& key);
-  std::map<wxWindow*, wxEventType> listeners;
+  std::map<wxEvtHandler*, wxEventType> listeners;
 
 private:
   SingletonVar() {}
   SingletonVar(const SingletonVar&);    // not implemented
   void operator=(const SingletonVar&);  // not implemented
 };
+
 
 /**  The observable notify/listen basic nuts and bolts.  */
 class ObservedVar {
@@ -36,29 +42,84 @@ public:
       : singleton(SingletonVar::getInstance(key)) {}
 
   /** Set object to send ev_type to listener on variable changes. */
-  void listen(wxWindow* listener, wxEventType ev_type);
+  void listen(wxEvtHandler* listener, wxEventType type);
 
   /** Notify all listeners about variable change. */
-  const void notify();
+  const virtual void notify();
+
+protected:
+  /**
+   * Notify all listeners: send them a 'type' wxCommandEvent message
+   * as defined by listen() with optional data available using GetString()
+   * and/or GetClientData().
+   */
+  const void notify(const std::string& s, void* client_data);
+
 
 private:
   SingletonVar* const singleton;
 };
 
 /**
- *  Wrapper for configuration variables which lives in the global wxFileConfig
+ * Generic event handling between MVC Model and Controller based on a
+ * shared EventVar variable
+ *
+ * Model usage:
+ *
+ *     class Model: ...
+ *     public:
+ *       EventVar change;
+ *
+ *       void some_method() {
+ *         ...
+ *         change.notify("new value")
+ *       }
+ *
+ * Controller/GUI usage:
+ *     wxDEFINE_EVENT(EVT_FOO, wxCommandEvent);
+ *     class  Gui: public wxWindow {
+ *     public:
+ *       Gui:Gui(Model& model) {
+ *         model.change.listen(this, EVT_FOO);
+ *         Bind(EVT_FOO, [&](wxCommandEvent ev) {
+ *           auto s = ev.GetString();    s -> "new value"
+ *           ... do something;
+ *         });
+ *       }
+ *     }
+ */
+class EventVar : public ObservedVar {
+public:
+  EventVar() : ObservedVar(autokey()) {}
+
+  /** Notify all listeners, no data supplied. */
+  const void notify() { ObservedVar::notify("", 0); }
+
+  /** Notify all listeners about variable change with ClientData. */
+  const void notify(void* data) { ObservedVar::notify("", data); }
+
+  /** Notify all listeners about variable change with a string. */
+  const void notify(const std::string& s) { ObservedVar::notify(s, 0); }
+
+private:
+  std::string autokey();
+};
+
+
+/**
+ *  Support for configuration variables which lives in a wxConfigBase
  *  object. Supports int, bool, double, std::string and wxString. Besides
  *  basic set()/get() also provides notification events when value changes.
  *
  *  Client usage, reading and setting a value:
  *
- *     ocpn::ConfigVar<bool> expert("/PlugIns", "CatalogExpert", &g_pConfig);
+ *     ocpn::ConfigVar<bool> expert("/PlugIns", "CatalogExpert", pConfig);
  *     bool old_value = expert.get(false);
  *     expert.set(false);
  *
  *  Client usage, listening to value changes:
  *
- *     ocpn::ConfigVar<bool> expert("/PlugIns", "CatalogExpert", &g_pConfig);
+ *     ocpn::ConfigVar<bool> expert("/PlugIns", "CatalogExpert", pConfig);
  *
  *     // expert sends a wxCommandEVent of type EVT_FOO to this on changes:
  *     wxDEFINE_EVENT(EVT_FOO, wxCommandEvent);
@@ -87,8 +148,8 @@ private:
 };
 
 /**
- *  Wrapper for global variable, supports notification events when value
- *  changes.
+ *  Notify/listen for global variables, supports notification events when
+ *  value changes.
  *
  *  Client usage, writing a value + notifying listeners:
  *
@@ -97,7 +158,7 @@ private:
  *
  *  Client usage, modifying a value + notifying listeners:
  *
- *     ocpn::GlobalVar<wxString> plugin_array_var(&plugin__array);
+ *     ocpn::GlobalVar<wxString> plugin_array_var(&plugin_array);
  *     plugin_array.Add(new_pic);
  *     plugin_array_var.notify();
  *
