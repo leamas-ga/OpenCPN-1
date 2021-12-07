@@ -34,9 +34,11 @@
 #include <unordered_map>
 #include <set>
 
-#include <wx/jsonreader.h>
-#include <wx/string.h>
+//#include <wx/jsonreader.h>
+#include <wx/dir.h>
 #include <wx/file.h>
+#include <wx/string.h>
+#include <wx/window.h>
 #include <wx/uri.h>
 
 #include <archive.h>
@@ -55,11 +57,11 @@ typedef __LA_INT64_T la_int64_t;  //  "older" libarchive versions support
 #include "logger.h"
 #include "navutil.h"
 #include "gui_lib.h"
-#include "OCPNPlatform.h"
+#include "BasePlatform.h"
 #include "ocpn_utils.h"
 #include "PluginHandler.h"
 #include "plugin_cache.h"
-#include "pluginmanager.h"
+#include "plugin_loader.h"
 #include "PluginPaths.h"
 
 #ifdef _WIN32
@@ -72,13 +74,12 @@ static std::string SEP("/");
 #define F_OK 0
 #endif
 
-extern OCPNPlatform* g_Platform;
-extern PlugInManager* g_pi_manager;
+extern BasePlatform* g_Platform;
+extern void* g_pi_manager;
 extern wxString g_winPluginDir;
 extern MyConfig* pConfig;
-extern OCPNPlatform* g_Platform;
 extern bool g_bportable;
-extern MyFrame* gFrame;
+extern wxWindow* gFrame;
 
 extern wxString g_compatOS;
 extern wxString g_compatOsVersion;
@@ -302,6 +303,8 @@ std::string PluginHandler::fileListPath(std::string name) {
   std::transform(name.begin(), name.end(), name.begin(), ::tolower);
   return pluginsConfigDir() + SEP + name + ".files";
 }
+
+PluginHandler::PluginHandler() {}
 
 bool PluginHandler::isCompatible(const PluginMetadata& metadata, const char* os,
                                  const char* os_version) {
@@ -1044,7 +1047,7 @@ bool PluginHandler::uninstall(const std::string plugin_name) {
   auto ix = PlugInIxByName(plugin_name, loader->GetPlugInArray());
   auto pic = loader->GetPlugInArray()->Item(ix);
   // g_pi_manager->ClosePlugInPanel(pic, wxID_OK);
-  PluginLoader::getInstance()->UnLoadPlugIn(ix);
+  loader->UnLoadPlugIn(ix);
   string path = PluginHandler::fileListPath(plugin_name);
   if (!ocpn::exists(path)) {
     wxLogWarning("Cannot find installation data for %s (%s)",
@@ -1127,19 +1130,13 @@ bool PluginHandler::installPluginFromCache(PluginMetadata plugin) {
     bool bOK = installPlugin(plugin, cacheFile);
     if (!bOK) {
       wxLogWarning("Cannot install tarball file %s", cacheFile.c_str());
-      wxString message = _("Please check system log for more info.");
-      OCPNMessageBox(gFrame, message, _("Installation error"),
-                     wxICON_ERROR | wxOK | wxCENTRE);
-
+      evt_download_failed.notify(cacheFile);
       return false;
     }
 
     wxString message;
     message.Printf("%s %s\n", plugin.name.c_str(), plugin.version.c_str());
-    message += _(" successfully installed from cache");
-    OCPNMessageBox(gFrame, message, _("Installation complete"),
-                   wxICON_INFORMATION | wxOK | wxCENTRE);
-
+    evt_download_ok.notify(message.ToStdString());
     return true;
   }
 
