@@ -1117,6 +1117,7 @@ set(
   src/PluginHandler.cpp
   src/pluginmanager.cpp
   src/PluginPaths.cpp
+  src/plugin_api.cpp
   src/PositionParser.cpp
   src/plugin_cache.cpp
   src/printtable.cpp

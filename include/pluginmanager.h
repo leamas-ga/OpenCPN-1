@@ -75,6 +75,8 @@
 #include <wx/json_defs.h>
 #include <wx/jsonwriter.h>
 
+#include "RoutePoint.h"
+
 //    Assorted static helper routines
 
 PlugIn_AIS_Target *Create_PI_AIS_Target(AIS_Target_Data *ptarget);
@@ -105,6 +107,9 @@ const BlackListedPlugin PluginBlacklist[] = {
     {_T("oesenc_pi"), 4, 2, true, true},
 
 };
+
+// translate O route class to Plugin one
+void PlugInFromRoutePoint(PlugIn_Waypoint *dst, /* const*/ RoutePoint *src);
 
 //----------------------------------------------------------------------------
 // PlugIn Messaging scheme Event
