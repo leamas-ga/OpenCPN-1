@@ -3844,9 +3844,7 @@ void MyFrame::OnCloseWindow(wxCloseEvent &event) {
   pConfig->UpdateSettings();
 
   //    Deactivate the PlugIns
-  if (g_pi_manager) {
-    g_pi_manager->DeactivateAllPlugIns();
-  }
+  PluginLoader::getInstance()->DeactivateAllPlugIns();
 
   wxLogMessage(_T("opencpn::MyFrame exiting cleanly."));
 
@@ -3941,8 +3939,8 @@ void MyFrame::OnCloseWindow(wxCloseEvent &event) {
 
   if (ChartData) ChartData->PurgeCachePlugins();
 
+  PluginLoader::getInstance()->UnLoadAllPlugIns();
   if (g_pi_manager) {
-    g_pi_manager->UnLoadAllPlugIns();
     delete g_pi_manager;
     g_pi_manager = NULL;
   }
@@ -6842,7 +6840,7 @@ void MyFrame::OnInitTimer(wxTimerEvent &event) {
     case 2: {
       if (m_initializing) break;
       m_initializing = true;
-      g_pi_manager->LoadAllPlugIns(true, false);
+      PluginLoader::getInstance()->LoadAllPlugIns(true);
 
       //            RequestNewToolbars();
       RequestNewMasterToolbar();
@@ -7501,7 +7499,8 @@ void MyFrame::OnFrameTimer1(wxTimerEvent &event) {
   //    refresh thus, ensuring at least 1 Hz. callback.
   bool brq_dynamic = false;
   if (g_pi_manager) {
-    ArrayOfPlugIns *pplugin_array = g_pi_manager->GetPlugInArray();
+    auto loader = PluginLoader::getInstance();  
+    ArrayOfPlugIns *pplugin_array = loader->GetPlugInArray();
     for (unsigned int i = 0; i < pplugin_array->GetCount(); i++) {
       PlugInContainer *pic = pplugin_array->Item(i);
       if (pic->m_bEnabled && pic->m_bInitState) {
@@ -7627,7 +7626,8 @@ double MyFrame::GetMag(double a) {
 
 double MyFrame::GetMag(double a, double lat, double lon) {
   double Variance = std::isnan(gVar) ? g_UserVar : gVar;
-  if (g_pi_manager && g_pi_manager->IsPlugInAvailable(_T("WMM"))) {
+
+  if (PluginLoader::getInstance()->IsPlugInAvailable("WMM")) {
     // Request variation at a specific lat/lon
 
     // Note that the requested value is returned sometime later in the event
@@ -11193,8 +11193,9 @@ void ApplyLocale() {
   //  Compliant Plugins will reload their locale message catalog during the
   //  Init() method. So it is sufficient to simply deactivate, and then
   //  re-activate, all "active" plugins.
-  g_pi_manager->DeactivateAllPlugIns();
-  g_pi_manager->UpdatePlugIns();
+  auto loader = PluginLoader::getInstance();
+  loader->DeactivateAllPlugIns();
+  loader->UpdatePlugIns();
 
   //         // Make sure the perspective saved in the config file is
   //         "reasonable"

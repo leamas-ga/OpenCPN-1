@@ -22,6 +22,8 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,  USA.         *
  **************************************************************************/
+#ifndef OCPN_AUIMANAGER_VH
+#define OCPN_AUIMANAGER_VH
 
 #ifndef WX_PRECOMP
 #include "wx/wx.h"
@@ -47,3 +49,6 @@ public:
 
   DECLARE_EVENT_TABLE()
 };
+
+#endif // OCPN_AUIMANAGER_VH
+

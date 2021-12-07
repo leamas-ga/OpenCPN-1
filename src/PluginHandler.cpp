@@ -810,7 +810,8 @@ bool PluginHandler::isPluginWritable(std::string name) {
   if (!g_pi_manager) {
     return false;
   }
-  return PlugInIxByName(name, g_pi_manager->GetPlugInArray()) == -1;
+  auto loader = PluginLoader::getInstance();
+  return PlugInIxByName(name, loader->GetPlugInArray()) == -1;
 }
 
 static std::string computeMetadataPath(void) {
@@ -976,7 +977,8 @@ const std::vector<PluginMetadata> PluginHandler::getInstalled() {
   vector<PluginMetadata> plugins;
 
   if (g_pi_manager) {
-    ArrayOfPlugIns* mgr_plugins = g_pi_manager->GetPlugInArray();
+    auto loader = PluginLoader::getInstance();
+    ArrayOfPlugIns* mgr_plugins = loader->GetPlugInArray();
     for (unsigned int i = 0; i < mgr_plugins->GetCount(); i += 1) {
       PlugInContainer* p = mgr_plugins->Item(i);
       PluginMetadata plugin;
@@ -1038,10 +1040,11 @@ bool PluginHandler::installPlugin(PluginMetadata plugin) {
 bool PluginHandler::uninstall(const std::string plugin_name) {
   using namespace std;
 
-  auto ix = PlugInIxByName(plugin_name, g_pi_manager->GetPlugInArray());
-  auto pic = g_pi_manager->GetPlugInArray()->Item(ix);
+  auto loader = PluginLoader::getInstance();
+  auto ix = PlugInIxByName(plugin_name, loader->GetPlugInArray());
+  auto pic = loader->GetPlugInArray()->Item(ix);
   // g_pi_manager->ClosePlugInPanel(pic, wxID_OK);
-  g_pi_manager->UnLoadPlugIn(ix);
+  PluginLoader::getInstance()->UnLoadPlugIn(ix);
   string path = PluginHandler::fileListPath(plugin_name);
   if (!ocpn::exists(path)) {
     wxLogWarning("Cannot find installation data for %s (%s)",
