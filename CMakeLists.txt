@@ -1110,6 +1110,7 @@ set(
   src/OCPNPlatform.cpp
   src/OCPNRegion.cpp
   src/OCPN_SignalKEvent.cpp
+  src/ocpn_plugin.cpp
   src/ocpn_utils.cpp
   src/options.cpp
   src/piano.cpp

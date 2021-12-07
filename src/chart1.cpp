@@ -2221,6 +2221,15 @@ bool MyApp::OnInit() {
 
   g_Platform->Initialize_2();
 
+  // Initiate the plugin default jigsaw icon
+  auto style = g_StyleManager->GetCurrentStyle();
+  auto bitmap = new wxBitmap(style->GetIcon("default_pi", 32, 32));
+  if (bitmap->IsOk())
+    opencpn_plugin::SetDefaultIcon(bitmap);
+  else
+    wxLogWarning("Cannot initiate plugin default jigsaw icon.");
+
+
   //  Set up the frame initial visual parameters
   //      Default size, resized later
   wxSize new_frame_size(-1, -1);
@@ -2229,7 +2238,7 @@ bool MyApp::OnInit() {
 
   InitializeUserColors();
 
-  if ((g_nframewin_x > 100) && (g_nframewin_y > 100) && (g_nframewin_x <= cw) &&
+    if ((g_nframewin_x > 100) && (g_nframewin_y > 100) && (g_nframewin_x <= cw) &&
       (g_nframewin_y <= ch))
     new_frame_size.Set(g_nframewin_x, g_nframewin_y);
   else
