@@ -147,6 +147,8 @@ public:
 
 protected:
   PluginHandler();
+  bool archive_check(int r, const char* msg, struct archive* a);
+  int copy_data(struct archive* ar, struct archive* aw);
 
 private:
   std::string metadataPath;
@@ -156,7 +158,6 @@ private:
   bool explodeTarball(struct archive* src, struct archive* dest,
                       std::string& filelist);
   bool extractTarball(const std::string path, std::string& filelist);
-  bool archive_check(int r, const char* msg, struct archive* a);
 };
 
 #endif  // PLUGIN_HANDLER_H__

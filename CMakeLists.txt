@@ -1123,6 +1123,7 @@ set(
   src/plugin_api.cpp
   src/plugin_loader.cpp
   src/PositionParser.cpp
+  src/plugin_api.cpp
   src/plugin_cache.cpp
   src/printtable.cpp
   src/pugixml.cpp
@@ -2985,3 +2986,51 @@ if (NOT TARGET uninstall)
     COMMAND ${CMAKE_COMMAND} -P ${CMAKE_BINARY_DIR}/uninstall.cmake
   )
 endif ()
+
+#
+# Piggy-back the cli executable on the configuration done for the main
+# GUI app -- the CLI is basically a subset.
+
+set(SRC_CLI
+  src/BasePlatform.cpp
+  src/catalog_parser.cpp
+  src/catalog_handler.cpp
+  src/cli.cpp
+  src/Downloader.cpp
+  src/config_var.cpp
+  src/logger.cpp
+  src/ocpn_plugin.cpp
+  src/ocpn_utils.cpp
+  src/plugin_api_shim.cpp
+  src/PluginHandler.cpp
+  src/PluginPaths.cpp
+  src/plugin_cache.cpp
+  src/plugin_loader.cpp
+  src/pugixml.cpp
+  src/semantic_vers.cpp
+)
+
+add_executable(opencpn-cli ${SRC_CLI})
+add_dependencies(opencpn-cli ${PACKAGE_NAME})
+
+target_include_directories(
+  opencpn-cli PRIVATE ${PROJECT_SOURCE_DIR}/include
+)
+target_link_libraries(opencpn-cli PRIVATE ${wxWidgets_LIBRARIES})
+target_link_libraries(opencpn-cli PRIVATE ocpn::wxsvg)
+
+target_include_directories(opencpn-cli PRIVATE ${LibArchive_INCLUDE_DIRS})
+target_link_libraries(opencpn-cli PRIVATE ${LibArchive_LIBRARIES})
+
+target_link_libraries(opencpn-cli PRIVATE ${CURL_LIBRARIES})
+target_link_libraries(opencpn-cli PRIVATE "${LIBELF_LIBRARY}")
+
+target_link_libraries(opencpn-cli PRIVATE ocpn::wxjson)
+
+if (MSVC)
+  target_link_libraries(opencpn-cli
+    PRIVATE ${CMAKE_BINARY_DIR}/$<CONFIG>/opencpn.lib
+  )
+endif ()
+
+install(TARGETS opencpn-cli RUNTIME DESTINATION ${PREFIX_BIN})

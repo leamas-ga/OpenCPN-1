@@ -397,28 +397,6 @@ static void saveVersion(const std::string& name, const std::string& version) {
   stream << version << endl;
 }
 
-static int copy_data(struct archive* ar, struct archive* aw) {
-  int r;
-  const void* buff;
-  size_t size;
-  la_int64_t offset;
-
-  while (true) {
-    r = archive_read_data_block(ar, &buff, &size, &offset);
-    if (r == ARCHIVE_EOF) return (ARCHIVE_OK);
-    if (r < ARCHIVE_OK) {
-      std::string s(archive_error_string(ar));
-      return (r);
-    }
-    r = archive_write_data_block(aw, buff, size, offset);
-    if (r < ARCHIVE_OK) {
-      std::string s(archive_error_string(aw));
-      wxLogWarning("Error copying install data: %s", archive_error_string(aw));
-      return (r);
-    }
-  }
-}
-
 static bool win_entry_set_install_path(struct archive_entry* entry,
                                        pathmap_t installPaths) {
   using namespace std;
@@ -691,6 +669,29 @@ static bool entry_set_install_path(struct archive_entry* entry,
   }
   return rv;
 }
+
+int PluginHandler::copy_data(struct archive* ar, struct archive* aw) {
+  int r;
+  const void* buff;
+  size_t size;
+  la_int64_t offset;
+
+  while (true) {
+    r = archive_read_data_block(ar, &buff, &size, &offset);
+    if (r == ARCHIVE_EOF) return (ARCHIVE_OK);
+    if (r < ARCHIVE_OK) {
+      std::string s(archive_error_string(ar));
+      return (r);
+    }
+    r = archive_write_data_block(aw, buff, size, offset);
+    if (r < ARCHIVE_OK) {
+      std::string s(archive_error_string(aw));
+      wxLogWarning("Error copying install data: %s", archive_error_string(aw));
+      return (r);
+    }
+  }
+}
+
 
 bool PluginHandler::archive_check(int r, const char* msg, struct archive* a) {
   if (r < ARCHIVE_OK) {
