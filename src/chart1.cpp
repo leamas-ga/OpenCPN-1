@@ -235,6 +235,7 @@ MyFrame *gFrame;
 ConsoleCanvas *console;
 
 MyConfig *pConfig;
+wxConfigBase *pBaseConfig;
 
 ChartBase *Current_Vector_Ch;
 ChartDB *ChartData;
@@ -1993,6 +1994,7 @@ bool MyApp::OnInit() {
   //      Open/Create the Config Object
   pConfig = g_Platform->GetConfigObject();
   pConfig->LoadMyConfig();
+  pBaseConfig = pConfig;
 
   //  Override for some safe and nice default values if the config file was
   //  created from scratch
@@ -7499,7 +7501,7 @@ void MyFrame::OnFrameTimer1(wxTimerEvent &event) {
   //    refresh thus, ensuring at least 1 Hz. callback.
   bool brq_dynamic = false;
   if (g_pi_manager) {
-    auto loader = PluginLoader::getInstance();  
+    auto loader = PluginLoader::getInstance();
     ArrayOfPlugIns *pplugin_array = loader->GetPlugInArray();
     for (unsigned int i = 0; i < pplugin_array->GetCount(); i++) {
       PlugInContainer *pic = pplugin_array->Item(i);

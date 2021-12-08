@@ -39,7 +39,6 @@
 
 #include "ocpn_plugin.h"
 #include "chart1.h"  // for MyFrame
-//#include "chcanv.h"                 // for ViewPort
 #include "OCPN_Sound.h"
 #include "chartimg.h"
 #include "catalog_parser.h"
@@ -194,7 +193,6 @@ public:
   PlugInManager(MyFrame *parent);
   virtual ~PlugInManager();
 
-  /** Unload, delete and remove item ix in GetPlugInArray(). */
   bool UpdateConfig();
 
   bool RenderAllCanvasOverlayPlugIns(ocpnDC &dc, const ViewPort &vp,

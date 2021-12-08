@@ -375,7 +375,7 @@ WX_DEFINE_ARRAY_PTR(PlugIn_AIS_Target *, ArrayOfPlugIn_AIS_Targets);
 //----------------------------------------------------------------------------------------------------------
 class DECL_EXP opencpn_plugin {
 public:
-  opencpn_plugin(void *pmgr)  {}
+  opencpn_plugin(void *pmgr) {}
   virtual ~opencpn_plugin();
 
   //    Public API to the PlugIn class

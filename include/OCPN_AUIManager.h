@@ -51,4 +51,3 @@ public:
 };
 
 #endif // OCPN_AUIMANAGER_VH
-

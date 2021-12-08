@@ -74,8 +74,8 @@
 #include <dlfcn.h>
 #endif
 
-extern wxConfigBase* pConfig;
-extern BasePlatform* g_Platform;
+extern wxConfigBase* pBaseConfig;
+extern BasePlatform* g_BasePlatform;
 extern wxWindow* gFrame;
 
 const char* const LINUX_LOAD_PATH = "~/.local/lib:/usr/local/lib:/usr/lib";
@@ -293,7 +293,7 @@ bool PluginLoader::LoadPluginCandidate(wxString file_name, bool load_enabled) {
   //    Check the config file to see if this PlugIn is user-enabled
 
   const auto path = std::string("/PlugIns/") + plugin_file.ToStdString();
-  ocpn::ConfigVar<bool> enabled(path, "bEnabled", pConfig);
+  ocpn::ConfigVar<bool> enabled(path, "bEnabled", pBaseConfig);
 
   // only loading enabled plugins? check that it is enabled
   if (load_enabled && !enabled.get(true)) {
@@ -408,7 +408,7 @@ bool PluginLoader::LoadPlugInDirectory(const wxString& plugin_dir,
     return false;
   }
 
-  if (!g_Platform->isPlatformCapable(PLATFORM_CAP_PLUGINS)) return false;
+  if (!g_BasePlatform->isPlatformCapable(PLATFORM_CAP_PLUGINS)) return false;
 
   wxArrayString file_list;
 

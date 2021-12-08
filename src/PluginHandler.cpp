@@ -21,25 +21,22 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,  USA.         *
  ***************************************************************************
  */
+#include "config.h"
+
 #include <algorithm>
-#include <cstdio>
 #include <fstream>
 #include <iomanip>
 #include <memory>
 #include <ostream>
-#include <regex>
-#include <stdexcept>
-#include <streambuf>
 #include <sstream>
+#include <streambuf>
 #include <unordered_map>
-#include <set>
 
-//#include <wx/jsonreader.h>
 #include <wx/dir.h>
 #include <wx/file.h>
 #include <wx/string.h>
-#include <wx/window.h>
 #include <wx/uri.h>
+#include <wx/window.h>
 
 #include <archive.h>
 #include <archive_entry.h>
@@ -55,7 +52,6 @@ typedef __LA_INT64_T la_int64_t;  //  "older" libarchive versions support
 #include "catalog_handler.h"
 #include "Downloader.h"
 #include "logger.h"
-#include "navutil.h"
 #include "gui_lib.h"
 #include "BasePlatform.h"
 #include "ocpn_utils.h"
@@ -74,15 +70,12 @@ static std::string SEP("/");
 #define F_OK 0
 #endif
 
-extern BasePlatform* g_Platform;
-extern void* g_pi_manager;
-extern wxString g_winPluginDir;
-extern MyConfig* pConfig;
+extern BasePlatform* g_BasePlatform;
 extern bool g_bportable;
-extern wxWindow* gFrame;
 
 extern wxString g_compatOS;
 extern wxString g_compatOsVersion;
+
 
 /** split s on first occurrence of delim, or return s in first result. */
 static std::vector<std::string> split(const std::string& s,
@@ -132,7 +125,8 @@ static ssize_t PlugInIxByName(const std::string name, ArrayOfPlugIns* plugins) {
 }
 
 static std::string pluginsConfigDir() {
-  std::string pluginDataDir = g_Platform->GetPrivateDataDir().ToStdString();
+  std::string pluginDataDir =
+     g_BasePlatform->GetPrivateDataDir().ToStdString();
   pluginDataDir += SEP + "plugins";
   if (!ocpn::exists(pluginDataDir)) {
     mkdir(pluginDataDir);
@@ -218,7 +212,7 @@ public:
   // host abi. Typically a host on a Ubuntu derivative which might be
   // compatible with a plugin built for the derivative's Ubuntu base.
   bool is_similar_plugin_compatible(const Plugin& plugin) const {
-    OCPN_OSDetail* os_detail = g_Platform->GetOSDetail();
+    OCPN_OSDetail* os_detail = g_BasePlatform->GetOSDetail();
     for (auto& name_like : os_detail->osd_names_like) {
       const std::string osd_abi = name_like + "-" + os_detail->osd_arch;
       if (osd_abi == plugin.abi()) {
@@ -235,7 +229,7 @@ public:
   // For example, Ubuntu PPA builds for armhf define PKG_TARGET as ubuntu-armhf
   // But run-time reports as raspbian on "Raspberry Pi OS".
   bool is_plugin_compatible_runtime(const Plugin& plugin) const {
-    OCPN_OSDetail* os_detail = g_Platform->GetOSDetail();
+    OCPN_OSDetail* os_detail = g_BasePlatform->GetOSDetail();
     const std::string host_osd_abi = os_detail->osd_ID + "-" + os_detail->osd_arch;
     wxLogDebug("Checking for compatible run-time, host_osd_abi: %s : %s", host_osd_abi, os_detail->osd_version);
     wxLogDebug("   plugin_abi + version: %s %s", plugin.abi(), plugin.major_version());
@@ -559,14 +553,15 @@ static bool linux_entry_set_install_path(struct archive_entry* entry,
       suffix = suffix.substr(16);
 
       dest =
-          g_Platform->GetPrivateDataDir().ToStdString() + "/plugins/" + suffix;
+          g_BasePlatform->GetPrivateDataDir().ToStdString() +
+              "/plugins/" + suffix;
     }
     if (ocpn::startswith(location, "lib") &&
         ocpn::startswith(suffix, "opencpn/")) {
       suffix = suffix.substr(8);
 
-      dest = g_Platform->GetPrivateDataDir().ToStdString() + "/plugins/lib/" +
-             suffix;
+      dest = g_BasePlatform->GetPrivateDataDir().ToStdString() +
+          "/plugins/lib/" + suffix;
     }
   }
 
@@ -676,7 +671,7 @@ static bool entry_set_install_path(struct archive_entry* entry,
   rv = android_entry_set_install_path(entry, installPaths);
 #else
   const auto osSystemId = wxPlatformInfo::Get().GetOperatingSystemId();
-  if (g_Platform->isFlatpacked()) {
+  if (g_BasePlatform->isFlatpacked()) {
     rv = flatpak_entry_set_install_path(entry, installPaths);
   } else if (osSystemId & wxOS_UNIX_LINUX) {
     rv = linux_entry_set_install_path(entry, installPaths);
@@ -810,15 +805,12 @@ bool PluginHandler::isPluginWritable(std::string name) {
   if (isRegularFile(PluginHandler::fileListPath(name).c_str())) {
     return true;
   }
-  if (!g_pi_manager) {
-    return false;
-  }
   auto loader = PluginLoader::getInstance();
   return PlugInIxByName(name, loader->GetPlugInArray()) == -1;
 }
 
 static std::string computeMetadataPath(void) {
-  std::string path = g_Platform->GetPrivateDataDir().ToStdString();
+  std::string path = g_BasePlatform->GetPrivateDataDir().ToStdString();
   path += SEP;
   path += "ocpn-plugins.xml";
   if (ocpn::exists(path)) {
@@ -835,7 +827,7 @@ static std::string computeMetadataPath(void) {
 
   // And if that does not work, use the empty metadata file found in the
   // distribution "data" directory
-  path = g_Platform->GetSharedDataDir();
+  path = g_BasePlatform->GetSharedDataDir();
   path += SEP;
   path += "ocpn-plugins.xml";
   if (!ocpn::exists(path)) {
@@ -979,27 +971,25 @@ const std::vector<PluginMetadata> PluginHandler::getInstalled() {
   using namespace std;
   vector<PluginMetadata> plugins;
 
-  if (g_pi_manager) {
-    auto loader = PluginLoader::getInstance();
-    ArrayOfPlugIns* mgr_plugins = loader->GetPlugInArray();
-    for (unsigned int i = 0; i < mgr_plugins->GetCount(); i += 1) {
-      PlugInContainer* p = mgr_plugins->Item(i);
-      PluginMetadata plugin;
-      auto name = string(p->m_common_name);
-      // std::transform(name.begin(), name.end(), name.begin(), ::tolower);
-      plugin.name = name;
-      std::stringstream ss;
-      ss << p->m_version_major << "." << p->m_version_minor;
-      plugin.version = ss.str();
-      plugin.readonly = !isPluginWritable(plugin.name);
-      string path = PluginHandler::versionPath(plugin.name);
-      if (path != "" && wxFileName::IsFileReadable(path)) {
-        std::ifstream stream;
-        stream.open(path, ifstream::in);
-        stream >> plugin.version;
-      }
-      plugins.push_back(plugin);
+  auto loader = PluginLoader::getInstance();
+  ArrayOfPlugIns* mgr_plugins = loader->GetPlugInArray();
+  for (unsigned int i = 0; i < mgr_plugins->GetCount(); i += 1) {
+    PlugInContainer* p = mgr_plugins->Item(i);
+    PluginMetadata plugin;
+    auto name = string(p->m_common_name);
+    // std::transform(name.begin(), name.end(), name.begin(), ::tolower);
+    plugin.name = name;
+    std::stringstream ss;
+    ss << p->m_version_major << "." << p->m_version_minor;
+    plugin.version = ss.str();
+    plugin.readonly = !isPluginWritable(plugin.name);
+    string path = PluginHandler::versionPath(plugin.name);
+    if (path != "" && wxFileName::IsFileReadable(path)) {
+      std::ifstream stream;
+      stream.open(path, ifstream::in);
+      stream >> plugin.version;
     }
+    plugins.push_back(plugin);
   }
   return plugins;
 }
@@ -1046,7 +1036,6 @@ bool PluginHandler::uninstall(const std::string plugin_name) {
   auto loader = PluginLoader::getInstance();
   auto ix = PlugInIxByName(plugin_name, loader->GetPlugInArray());
   auto pic = loader->GetPlugInArray()->Item(ix);
-  // g_pi_manager->ClosePlugInPanel(pic, wxID_OK);
   loader->UnLoadPlugIn(ix);
   string path = PluginHandler::fileListPath(plugin_name);
   if (!ocpn::exists(path)) {

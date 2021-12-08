@@ -47,9 +47,10 @@
 
 #include <wx/app.h>
 #include <wx/apptrait.h>
-#include "wx/stdpaths.h"
+#include "wx/fileconf.h"
 #include <wx/filename.h>
 #include <wx/tokenzr.h>
+#include "wx/stdpaths.h"
 #include <wx/textfile.h>
 
 #include "config.h"
@@ -82,6 +83,8 @@ extern wxString g_winPluginDir;
 extern bool g_bportable;
 
 extern wxLog* g_logger;
+
+extern wxConfigBase* pBaseConfig;
 
 
 static bool checkIfFlatpacked() {
@@ -138,6 +141,7 @@ BasePlatform::BasePlatform() {
   m_osDetail = new OCPN_OSDetail;
   DetectOSDetail(m_osDetail);
   InitializeLogFile();
+  pBaseConfig = new wxFileConfig("", "", GetConfigFileName());
 }
 
 

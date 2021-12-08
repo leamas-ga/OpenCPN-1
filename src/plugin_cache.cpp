@@ -29,17 +29,17 @@
 
 #include "plugin_cache.h"
 #include "ocpn_utils.h"
-#include "OCPNPlatform.h"
+#include "BasePlatform.h"
 
 #ifdef __OCPN__ANDROID__
 #include "androidUTIL.h"
 #endif
 
-extern OCPNPlatform* g_Platform;
+extern BasePlatform* g_BasePlatform;
 
 static std::string cache_path() {
   wxFileName path;
-  path.AssignDir(g_Platform->GetPrivateDataDir());
+  path.AssignDir(g_BasePlatform->GetPrivateDataDir());
   path.AppendDir("plugins");
   path.AppendDir("cache");
   return path.GetFullPath().ToStdString();
