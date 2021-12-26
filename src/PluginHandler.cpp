@@ -344,8 +344,6 @@ std::string PluginHandler::versionPath(std::string name) {
   return pluginsConfigDir() + SEP + name + ".version";
 }
 
-typedef std::unordered_map<std::string, std::string> pathmap_t;
-
 /**
  * Platform-specific mapping of tarball paths to user-writable
  * installation directories.

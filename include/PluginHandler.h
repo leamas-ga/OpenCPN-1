@@ -61,6 +61,7 @@
 #include <string>
 #include <map>
 #include <memory>
+#include <unordered_map>
 #include <vector>
 
 #include <wx/cmdline.h>
@@ -83,6 +84,8 @@ private:
   std::string _name;
   std::string _version;
 };
+
+typedef std::unordered_map<std::string, std::string> pathmap_t;
 
 class PluginHandler {
 public:
