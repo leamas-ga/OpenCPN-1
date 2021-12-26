@@ -97,5 +97,6 @@ struct catalog_ctx {
 };
 
 bool ParseCatalog(const std::string xml, catalog_ctx* ctx);
+bool ParseMetadata(const std::string& xml, PluginMetadata& metadata);
 
 #endif  // CATALOG_PARSER_H__

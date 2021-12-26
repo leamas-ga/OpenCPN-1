@@ -37,6 +37,56 @@
 #include "ocpn_utils.h"
 #include "pugixml.hpp"
 
+bool ParseMetadataNode(pugi::xml_node plugin, PluginMetadata& metadata) {
+
+  pugi::xml_node node;
+  for (node = plugin.first_child(); node; node = node.next_sibling())
+  {
+    if (strcmp(node.name(), "name") == 0) {
+      metadata.name = ocpn::trim(node.first_child().value());
+    } else if (strcmp(node.name(), "version") == 0) {
+      metadata.version = ocpn::trim(node.first_child().value());
+    } else if (strcmp(node.name(), "release") == 0) {
+      metadata.release = ocpn::trim(node.first_child().value());
+    } else if (strcmp(node.name(), "summary") == 0) {
+      metadata.summary = ocpn::trim(node.first_child().value());
+    } else if (strcmp(node.name(), "api_version") == 0) {
+      metadata.api_version = ocpn::trim(node.first_child().value());
+    } else if (strcmp(node.name(), "author") == 0) {
+      metadata.author = ocpn::trim(node.first_child().value());
+    } else if (strcmp(node.name(), "description") == 0) {
+      metadata.description = ocpn::trim(node.first_child().value());
+    } else if (strcmp(node.name(), "git-commit") == 0) {
+      metadata.git_commit = ocpn::trim(node.first_child().value());
+    } else if (strcmp(node.name(), "git-date") == 0) {
+      metadata.git_date = ocpn::trim(node.first_child().value());
+    } else if (strcmp(node.name(), "source") == 0) {
+      metadata.source = ocpn::trim(node.first_child().value());
+    } else if (strcmp(node.name(), "tarball-url") == 0) {
+      metadata.tarball_url = ocpn::trim(node.first_child().value());
+    } else if (strcmp(node.name(), "info-url") == 0) {
+      metadata.info_url = ocpn::trim(node.first_child().value());
+    } else if (strcmp(node.name(), "target") == 0) {
+      metadata.target = ocpn::trim(node.first_child().value());
+    } else if (strcmp(node.name(), "target-version") == 0) {
+      metadata.target_version = ocpn::trim(node.first_child().value());
+    } else if (strcmp(node.name(), "target-arch") == 0) {
+      metadata.target_arch = ocpn::trim(node.first_child().value());
+    } else if (strcmp(node.name(), "tarball-checksum") == 0) {
+      metadata.checksum = ocpn::trim(node.first_child().value());
+    } else if (strcmp(node.name(), "open-source") == 0) {
+      metadata.openSource = ocpn::trim(node.first_child().value()) == "yes";
+    }
+  }
+  return true;
+}
+
+bool ParseMetadata(const std::string& xml, PluginMetadata& metadata) {
+  pugi::xml_document doc;
+  doc.load_string(xml.c_str());
+  pugi::xml_node plugin = doc.child("plugin");
+  return ParseMetadataNode(plugin, metadata);
+}
 
 bool ParseCatalog(const std::string xml, catalog_ctx* ctx) {
   bool ok = true;
