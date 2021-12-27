@@ -200,6 +200,7 @@ endif (APPLE OR WIN32)
 
 option(OCPN_VERBOSE "Make verbose builds"  ON)
 option(OCPN_PEDANTIC "Enable more compiler warnings" OFF)
+option(OCPN_ENABLE_TESTS "Enable build of tests" ON)
 
 set(OCPN_PACKAGE_RELEASE "1" CACHE STRING "Package release number")
 
@@ -3034,3 +3035,8 @@ if (MSVC)
 endif ()
 
 install(TARGETS opencpn-cli RUNTIME DESTINATION ${PREFIX_BIN})
+
+if (OCPN_ENABLE_TESTS)
+  enable_testing()
+  add_subdirectory(test)
+endif ()
