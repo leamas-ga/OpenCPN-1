@@ -338,5 +338,3 @@ bool PlugInHasNormalizedViewPort(PlugIn_ViewPort* vp) { return true; }
 
 void PlugInMultMatrixViewport(PlugIn_ViewPort* vp, float lat, float lon) {}
 void PlugInNormalizeViewport(PlugIn_ViewPort* vp, float lat, float lon) {}
-
-wxString GetPluginDataDir(const char* plugin_name) { return ""; }

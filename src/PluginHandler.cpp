@@ -35,6 +35,7 @@
 #include <wx/dir.h>
 #include <wx/file.h>
 #include <wx/string.h>
+#include <wx/tokenzr.h>
 #include <wx/uri.h>
 #include <wx/window.h>
 
@@ -142,6 +143,35 @@ static std::string dirListPath(std::string name) {
   std::transform(name.begin(), name.end(), name.begin(), ::tolower);
   return pluginsConfigDir() + SEP + name + ".dirs";
 }
+
+/** Part of the plugin API. */
+wxString GetPluginDataDir(const char *plugin_name) {
+  static const wxString sep = wxFileName::GetPathSeparator();
+
+  wxString datadirs = g_BasePlatform->GetPluginDataPath();
+  wxLogMessage(_T("PlugInManager: Using data dirs from: ") + datadirs);
+  wxStringTokenizer dirs(datadirs, ";");
+  while (dirs.HasMoreTokens()) {
+    wxString dir = dirs.GetNextToken();
+    wxFileName tryDirName(dir);
+    wxDir tryDir;
+    if (!tryDir.Open(tryDirName.GetFullPath())) continue;
+    wxString next;
+    bool more = tryDir.GetFirst(&next);
+    while (more) {
+      if (next == plugin_name) {
+        next = next.Prepend(tryDirName.GetFullPath() + sep);
+        wxLogMessage(_T("PlugInManager: using data dir: %s"), next);
+        return next;
+      }
+      more = tryDir.GetNext(&next);
+    }
+    tryDir.Close();
+  }
+  wxLogMessage(_T("Warnińg: no data directory found, using \"\""));
+  return "";
+}
+
 
 /** Plugin ABI encapsulation. */
 class Plugin {

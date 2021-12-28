@@ -35,8 +35,6 @@
 #include <cstdio>
 #include <string>
 
-#include <wx/tokenzr.h>
-
 #ifdef ocpnUSE_SVG
 #include <wxSVG/svg.h>
 #endif  // ocpnUSE_SVG
@@ -1204,33 +1202,6 @@ void PlugInNormalizeViewport(PlugIn_ViewPort *vp, float lat, float lon) {
   vp->rotation = ocpn_vp.rotation;
   vp->skew = ocpn_vp.skew;
 #endif
-}
-
-wxString GetPluginDataDir(const char *plugin_name) {
-  static const wxString sep = wxFileName::GetPathSeparator();
-
-  wxString datadirs = g_Platform->GetPluginDataPath();
-  wxLogMessage(_T("PlugInManager: Using data dirs from: ") + datadirs);
-  wxStringTokenizer dirs(datadirs, ";");
-  while (dirs.HasMoreTokens()) {
-    wxString dir = dirs.GetNextToken();
-    wxFileName tryDirName(dir);
-    wxDir tryDir;
-    if (!tryDir.Open(tryDirName.GetFullPath())) continue;
-    wxString next;
-    bool more = tryDir.GetFirst(&next);
-    while (more) {
-      if (next == plugin_name) {
-        next = next.Prepend(tryDirName.GetFullPath() + sep);
-        wxLogMessage(_T("PlugInManager: using data dir: %s"), next);
-        return next;
-      }
-      more = tryDir.GetNext(&next);
-    }
-    tryDir.Close();
-  }
-  wxLogMessage(_T("Warnińg: no data directory found, using \"\""));
-  return "";
 }
 
 
