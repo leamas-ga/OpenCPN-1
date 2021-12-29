@@ -31,13 +31,31 @@ target_link_libraries(o_tests PRIVATE ocpn::wxsvg)
 target_link_libraries(o_tests PRIVATE ${wxWidgets_LIBRARIES})
 target_link_libraries(o_tests PRIVATE ${LibArchive_LIBRARIES})
 target_link_libraries(o_tests PRIVATE "${LIBELF_LIBRARY}")
-
-find_package(GTest REQUIRED)
-target_link_libraries(o_tests PUBLIC GTest::gtest)
-target_link_libraries(o_tests PUBLIC GTest::gtest_main)
 target_compile_definitions(o_tests PRIVATE
   TESTDATA_DIR="${CMAKE_CURRENT_LIST_DIR}/data"
 )
+
+find_package(GTest)
+if (GTest_FOUND)
+  target_link_libraries(o_tests PUBLIC GTest::GTest)
+  target_link_libraries(o_tests PUBLIC GTest::Main)
+else ()
+  set(GTEST_DIR ${CMAKE_BINARY_DIR})
+  if (NOT EXISTS ${GTEST_DIR}/googletest)
+    include(${CMAKE_CURRENT_LIST_DIR}/cmake_git_clone/cmake/GitUtils.cmake)
+    git_clone(PROJECT_NAME  googletest
+              GIT_URL       https://github.com/google/googletest.git
+              GIT_TAG       release-1.11.0
+              DIRECTORY     ${GTEST_DIR}
+    )
+  endif ()
+  set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+  add_subdirectory( ${GTEST_DIR}/googletest ${GTEST_DIR}/googletest/build)
+  target_link_libraries(o_tests PRIVATE gtest_main)
+  target_include_directories(
+    o_tests PRIVATE ${GTEST_DIR}/googletest/googletest/include
+  )
+endif ()
 
 include(GoogleTest)
 enable_testing()
