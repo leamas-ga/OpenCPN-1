@@ -1529,11 +1529,14 @@ if (OCPN_USE_SVG)
       # On Windows, we have our own expat and cairo
       file(GLOB gtkdll_files "${CMAKE_CURRENT_SOURCE_DIR}/buildwin/gtk/*.dll")
       install(FILES ${gtkdll_files} DESTINATION ".")
-      file(
-        GLOB
-          expatdll_files
-          "${CMAKE_CURRENT_SOURCE_DIR}/buildwin/expat-2.2.5/*.dll"
+      file(GLOB expatdll_files
+        "${CMAKE_CURRENT_SOURCE_DIR}/buildwin/expat-2.2.5/*.dll"
       )
+      set(
+        EXPAT_INCLUDE_DIRS
+        "${CMAKE_CURRENT_SOURCE_DIR}/buildwin/expat-2.2.5/include"
+      )
+      target_include_directories(${PACKAGE_NAME} PUBLIC ${EXPAT_INCLUDE_DIRS})
       install(FILES ${expatdll_files} DESTINATION ".")
       message(STATUS "GTK and Expat DLLs bundled into the installer package...")
     else (CMAKE_HOST_WIN32)

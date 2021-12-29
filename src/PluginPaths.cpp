@@ -6,7 +6,6 @@
 
 #include "BasePlatform.h"
 #include "PluginPaths.h"
-#include "ocpn_plugin.h"
 
 /*
  * The user-writable paths for libraries, binaries and plugin data,

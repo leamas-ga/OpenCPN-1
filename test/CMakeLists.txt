@@ -31,6 +31,7 @@ target_link_libraries(o_tests PRIVATE ocpn::wxsvg)
 target_link_libraries(o_tests PRIVATE ${wxWidgets_LIBRARIES})
 target_link_libraries(o_tests PRIVATE ${LibArchive_LIBRARIES})
 target_link_libraries(o_tests PRIVATE "${LIBELF_LIBRARY}")
+target_include_directories(o_tests PUBLIC ${EXPAT_INCLUDE_DIRS})
 target_compile_definitions(o_tests PRIVATE
   TESTDATA_DIR="${CMAKE_CURRENT_LIST_DIR}/data"
 )
