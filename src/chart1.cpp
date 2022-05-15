@@ -93,6 +93,7 @@
 #include "chartdb.h"
 #include "chartimg.h"  // for ChartBaseBSB
 #include "chcanv.h"
+#include "check_platform.h"
 #include "cm93.h"
 #include "compass.h"
 #include "concanv.h"
@@ -2919,6 +2920,7 @@ MyFrame::MyFrame(wxFrame *frame, const wxString &title, const wxPoint &pos,
 
   m_resizeTimer.SetOwner(this, RESIZE_TIMER);
   m_recaptureTimer.SetOwner(this, RECAPTURE_TIMER);
+  check_platform(this);
 
 #ifdef __WXOSX__
   // Enable native fullscreen on macOS
