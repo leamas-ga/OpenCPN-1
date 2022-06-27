@@ -47,7 +47,7 @@
 #include "ocpn_plugin.h"
 #include "BasePlatform.h"
 
-extern BasePlatform* g_Platform;
+extern BasePlatform* g_BasePlatform;
 
 typedef unsigned short OCushort;
 
@@ -1577,7 +1577,7 @@ DECL_EXP int PlugInGetMaxAvailableGshhgQuality() { return 0; }
 DECL_EXP void PlugInHandleAutopilotRoute(bool enable) {}
 
 wxString *GetpSharedDataLocation(void) {
-  return g_Platform->GetSharedDataDirPtr();
+  return g_BasePlatform->GetSharedDataDirPtr();
 }
 DECL_EXP bool ShuttingDown(void) { return true; }
 

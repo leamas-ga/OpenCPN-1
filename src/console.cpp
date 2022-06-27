@@ -55,10 +55,10 @@
 #include "PluginHandler.h"
 #include "BasePlatform.h"
 
-BasePlatform* g_Platform = 0;
+BasePlatform* g_BasePlatform = 0;
 bool g_bportable = false;
 wxString g_winPluginDir;
-wxFileConfig* pConfig = 0;
+wxConfigBase* pBaseConfig = 0;
 void* g_pi_manager = reinterpret_cast<void*>(1L);
 wxString g_compatOS = PKG_TARGET;
 wxString g_compatOsVersion = PKG_TARGET_VERSION;
@@ -131,15 +131,15 @@ public:
     wxLog::SetTimestamp("");
     wxLog::SetLogLevel(wxLOG_Warning);
 
-    g_Platform = new BasePlatform();
-    auto config_file = g_Platform->GetConfigFileName();
-    pConfig = new wxFileConfig("", "", config_file);
+    g_BasePlatform = new BasePlatform();
+    auto config_file = g_BasePlatform->GetConfigFileName();
+    pBaseConfig = new wxFileConfig("", "", config_file);
   }
 
   void list_plugins() {
     using namespace std;
     wxImage::AddHandler(new wxPNGHandler());
-    g_Platform->GetSharedDataDir();    // See #2619
+    g_BasePlatform->GetSharedDataDir();    // See #2619
     PluginLoader::getInstance()->LoadAllPlugIns(false);
     auto plugins = PluginHandler::getInstance()->getInstalled();
     for (const auto& p : plugins) {
@@ -161,7 +161,7 @@ public:
 
   void uninstall_plugin(const std::string& plugin) {
     using namespace std;
-    g_Platform->GetSharedDataDir();    // See #2619
+    g_BasePlatform->GetSharedDataDir();    // See #2619
     PluginLoader::getInstance()->LoadAllPlugIns(false);
     auto plugins = PluginHandler::getInstance()->getInstalled();
     vector<PluginMetadata> found;
@@ -181,7 +181,7 @@ public:
 
   void install_plugin(const std::string& plugin) {
     using namespace std;
-    g_Platform->GetSharedDataDir();   // See #2619
+    g_BasePlatform->GetSharedDataDir();   // See #2619
     wxImage::AddHandler(new wxPNGHandler());
     auto handler = PluginHandler::getInstance();
     auto plugins = handler->getAvailable();
@@ -208,7 +208,7 @@ public:
   bool load_plugin(const std::string& plugin) {
     auto loader = PluginLoader::getInstance();
     wxImage::AddHandler(new wxPNGHandler());
-    g_Platform->GetSharedDataDir();   // See #2619
+    g_BasePlatform->GetSharedDataDir();   // See #2619
     wxDEFINE_EVENT(EVT_FILE_NOTFOUND, wxCommandEvent);
     auto file_notfound_listener =
         loader->evt_unreadable_plugin.get_listener(this, EVT_FILE_NOTFOUND);
