@@ -75,7 +75,7 @@ static std::string SEP("/");
 #endif
 
 extern BasePlatform* g_BasePlatform;
-extern PlugInManager* g_pi_manager;
+extern void* g_pi_manager;
 extern wxString g_winPluginDir;
 extern MyConfig* pConfig;
 extern bool g_bportable;
