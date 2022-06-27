@@ -75,7 +75,6 @@ static std::string SEP("/");
 #endif
 
 extern BasePlatform* g_BasePlatform;
-extern void* g_pi_manager;
 extern wxString g_winPluginDir;
 extern MyConfig* pConfig;
 extern bool g_bportable;
@@ -835,9 +834,6 @@ bool PluginHandler::isPluginWritable(std::string name) {
   if (isRegularFile(PluginHandler::fileListPath(name).c_str())) {
     return true;
   }
-  if (!g_pi_manager) {
-    return false;
-  }
   auto loader = PluginLoader::getInstance();
   return PlugInIxByName(name, loader->GetPlugInArray()) == -1;
 }
@@ -1004,27 +1000,25 @@ const std::vector<PluginMetadata> PluginHandler::getInstalled() {
   using namespace std;
   vector<PluginMetadata> plugins;
 
-  if (g_pi_manager) {
-    auto loader = PluginLoader::getInstance();
-    ArrayOfPlugIns* mgr_plugins = loader->GetPlugInArray();
-    for (unsigned int i = 0; i < mgr_plugins->GetCount(); i += 1) {
-      PlugInContainer* p = mgr_plugins->Item(i);
-      PluginMetadata plugin;
-      auto name = string(p->m_common_name);
-      // std::transform(name.begin(), name.end(), name.begin(), ::tolower);
-      plugin.name = name;
-      std::stringstream ss;
-      ss << p->m_version_major << "." << p->m_version_minor;
-      plugin.version = ss.str();
-      plugin.readonly = !isPluginWritable(plugin.name);
-      string path = PluginHandler::versionPath(plugin.name);
-      if (path != "" && wxFileName::IsFileReadable(path)) {
-        std::ifstream stream;
-        stream.open(path, ifstream::in);
-        stream >> plugin.version;
-      }
-      plugins.push_back(plugin);
+  auto loader = PluginLoader::getInstance();
+  ArrayOfPlugIns* mgr_plugins = loader->GetPlugInArray();
+  for (unsigned int i = 0; i < mgr_plugins->GetCount(); i += 1) {
+    PlugInContainer* p = mgr_plugins->Item(i);
+    PluginMetadata plugin;
+    auto name = string(p->m_common_name);
+    // std::transform(name.begin(), name.end(), name.begin(), ::tolower);
+    plugin.name = name;
+    std::stringstream ss;
+    ss << p->m_version_major << "." << p->m_version_minor;
+    plugin.version = ss.str();
+    plugin.readonly = !isPluginWritable(plugin.name);
+    string path = PluginHandler::versionPath(plugin.name);
+    if (path != "" && wxFileName::IsFileReadable(path)) {
+      std::ifstream stream;
+      stream.open(path, ifstream::in);
+      stream >> plugin.version;
     }
+    plugins.push_back(plugin);
   }
   return plugins;
 }
