@@ -75,7 +75,7 @@
 #endif
 
 extern wxConfigBase* pConfig;
-extern BasePlatform* g_Platform;
+extern BasePlatform* g_BasePlatform;
 extern wxWindow* gFrame;
 
 const char* const LINUX_LOAD_PATH = "~/.local/lib:/usr/local/lib:/usr/lib";
@@ -410,7 +410,7 @@ bool PluginLoader::LoadPlugInDirectory(const wxString& plugin_dir,
     return false;
   }
 
-  if (!g_Platform->isPlatformCapable(PLATFORM_CAP_PLUGINS)) return false;
+  if (!g_BasePlatform->isPlatformCapable(PLATFORM_CAP_PLUGINS)) return false;
 
   wxArrayString file_list;
 
@@ -1039,7 +1039,7 @@ bool PluginLoader::CheckPluginCompatibility(wxString plugin_file) {
         ReadModuleInfoFromELF(plugin_file, dependencies, pi_info);
     if (b_pi_info_usable) {
       b_compat = (pi_info.type_magic == own_info.type_magic);
-      if (1 /*g_Platform->isFlatpacked()*/) {  // Ignore specific difference in
+      if (1 /*g_BasePlatform->isFlatpacked()*/) {  // Ignore specific difference in
                                                // OSABI field on flatpak builds
         if ((pi_info.type_magic ^ own_info.type_magic) == 0x00030000)
           b_compat = true;
