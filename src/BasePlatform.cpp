@@ -84,7 +84,7 @@ extern bool g_bportable;
 
 extern wxLog* g_logger;
 
-extern BasePlatform* g_Platform;
+extern BasePlatform* g_BasePlatform;
 
 
 static bool checkIfFlatpacked() {
@@ -266,7 +266,7 @@ wxString& BasePlatform::GetSharedDataDir() {
 wxString GetPluginDataDir(const char *plugin_name) {
   static const wxString sep = wxFileName::GetPathSeparator();
 
-  wxString datadirs = g_Platform->GetPluginDataPath();
+  wxString datadirs = g_BasePlatform->GetPluginDataPath();
   wxLogMessage(_T("PlugInManager: Using data dirs from: ") + datadirs);
   wxStringTokenizer dirs(datadirs, ";");
   while (dirs.HasMoreTokens()) {
