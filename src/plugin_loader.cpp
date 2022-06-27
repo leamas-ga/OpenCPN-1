@@ -74,7 +74,7 @@
 #include <dlfcn.h>
 #endif
 
-extern wxConfigBase* pConfig;
+extern wxConfigBase* pBaseConfig;
 extern BasePlatform* g_BasePlatform;
 extern wxWindow* gFrame;
 
@@ -292,7 +292,7 @@ bool PluginLoader::LoadPluginCandidate(wxString file_name, bool load_enabled) {
   //    Check the config file to see if this PlugIn is user-enabled
 
   const auto path = std::string("/PlugIns/") + plugin_file.ToStdString();
-  ConfigVar<bool> enabled(path, "bEnabled", pConfig);
+  ConfigVar<bool> enabled(path, "bEnabled", pBaseConfig);
 
   // only loading enabled plugins? check that it is enabled
   if (load_enabled && !enabled.get(true)) {
