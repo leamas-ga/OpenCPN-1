@@ -2520,6 +2520,7 @@ endif ()
 # Build a CPack driven installer package
 #
 # include (InstallRequiredSystemLibraries)
+set(CPACK_BINDIR "${CMAKE_BINARY_DIR}")
 set(CPACK_PACKAGE_NAME "OpenCPN")
 set(CPACK_PACKAGE_VENDOR "opencpn.org")
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "OpenCPN ${PACKAGE_VERSION}")
