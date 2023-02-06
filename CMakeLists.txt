@@ -1255,6 +1255,9 @@ target_link_libraries(${PACKAGE_NAME} PRIVATE pico_sha2)
 add_subdirectory(libs/mongoose)
 target_link_libraries(${PACKAGE_NAME} PUBLIC ocpn::mongoose)
 
+add_subdirectory(libs/rapidjson)
+target_link_libraries(${PACKAGE_NAME} PUBLIC ocpn::rapidjson)
+
 add_subdirectory(libs/mDNS)
 target_link_libraries(${PACKAGE_NAME} PUBLIC ocpn::mDNS)
 
@@ -3128,6 +3131,7 @@ if (NOT QT_ANDROID)
   target_link_libraries(opencpn-cmd PRIVATE ocpn::N2KParser)
   target_link_libraries(opencpn-cmd PRIVATE ocpn::nmea0183)
   target_link_libraries(opencpn-cmd PRIVATE ocpn::pugixml)
+  target_link_libraries(opencpn-cmd PRIVATE ocpn::rapidjson)
   target_link_libraries(opencpn-cmd PRIVATE ocpn::s52plib)
   target_link_libraries(opencpn-cmd PRIVATE ocpn::serial)
   target_link_libraries(opencpn-cmd PRIVATE ocpn::sound)
