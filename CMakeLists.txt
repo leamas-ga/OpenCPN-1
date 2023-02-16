@@ -845,6 +845,10 @@ set(
   include/AISTargetQueryDialog.h
   include/ais_info_gui.h
   include/atomic_queue.h
+  include/bad_library_dlg.h
+  include/bad_plugin_dlg.h
+  include/bad_plugvers_dlg.h
+  include/bad_symbol_dlg.h
   include/base_platform.h
   include/canvasMenu.h
   include/catalog_handler.h
@@ -909,6 +913,7 @@ set(
   include/MarkInfo.h
   include/mbtiles.h
   include/multiplexer.h
+  include/mvc_gui_control.h
   include/nav_object_database.h
   include/navutil.h
   include/navutil_base.h
@@ -1097,6 +1102,7 @@ set(
   src/mbtiles.cpp
   src/mDNS_query.cpp
   src/mDNS_service.cpp
+  src/mvc_gui_control.cpp
   src/MUIBar.cpp
   src/multiplexer.cpp
   src/navutil.cpp
