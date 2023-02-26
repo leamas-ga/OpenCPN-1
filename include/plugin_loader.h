@@ -115,21 +115,30 @@ public:
   std::string m_InstalledManagedVersion;  //!< As detected from manifest
 };
 
-/** Error info for incompatible plugins. */
-class PluginInfo {
+
+class LoadError {
 public:
-  const  int api_major;  //!< 0 if the API version is unknown
-  const  int api_minor;
-  const std::string name;
-  const int version_major;
-  const int version_minor;
-  PluginInfo(const std::string& n, int api_mjr, int api_mnr, int v_mjr,
-             int v_mnr)
-   : api_major(api_mjr), api_minor(api_mnr), name(n), version_major(v_mjr),
-     version_minor(v_mnr) {}
-  PluginInfo(const std::string& n, int v_mjr, int v_mnr)
-   : api_major(0), api_minor(0), name(n), version_major(v_mjr),
-     version_minor(v_mnr) {}
+  enum class Type { Unloadable,  //<! wrong magic, wrong type of binary...
+                    Unreadable,
+	            Incompatible,
+		    NoCreate,    //<! Missing linkage (is this a plugin?)
+		    NoDestroy,   //<! Missing linkage (is this a plugin?)
+	            Blacklisted }
+     type;
+  const std::string lib_path;   //<! Complete path to failing library
+  const int api_version;        //<! As determined from plugin API
+  const SemanticVersion plugin_version;  //<! As determined from plugin API
+
+  LoadError(Type t, const std::string& l, int av, SemanticVersion pv) 
+    : type(t), lib_path(l), api_version(av), plugin_version(pv) {}
+
+  LoadError(Type t, const std::string& l, int av)
+    : type(t),  lib_path(l), api_version(av),
+      plugin_version(SemanticVersion()) {}
+
+  LoadError(Type t, const std::string& l) 
+    : type(t),  lib_path(l), api_version(0),
+      plugin_version(SemanticVersion()) {}
 };
 
 
@@ -163,45 +172,12 @@ public:
 
   EventVar evt_blacklisted_plugin;
 
-  /**
-   * Receives a read-only malloc'ed copy of a PlugInContainer owned by
-   * listener.
-   */
-  EventVar evt_deactivate_plugin;
-
-  /**
-   * An unloadable library, not part of of any plugin is detected.
-   * Event carries library name.
-   */
-  EventVar evt_unloadable_lib;
-
-  /** An unloadable plugin is detected, event carries plugin name. */
-  EventVar evt_unloadable_plugin;
-
-  /**
-   * Plugin is missing the create_pi symbol (is this a plugin?). Event
-   * carries plugin name in GetString();
-   */
-  EventVar evt_no_create_plugin;
-  /**
-   * Plugin is missing the destroy_pi symbol (is this a plugin?). Event
-   * carries plugin name in GetString();
-   */
-  EventVar evt_no_destroy_plugin;
-
-  /**
-   * Plugin with incompatible version detected. Event carries a PluginInfo
-   * object in GetSharedPtr();
-   */
-  EventVar evt_incompat_plugin;
-
-
-
   EventVar evt_load_directory;
   EventVar evt_load_plugin;
   EventVar evt_plugin_unload;
   EventVar evt_pluglist_change;
   EventVar evt_unreadable_plugin;
+  EventVar evt_deactivate_plugin;
 
   EventVar evt_update_chart_types;
   EventVar evt_plugin_loadall_finalize;
@@ -221,6 +197,7 @@ public:
   bool DeactivatePlugIn(PlugInContainer* pic);
   bool UpdatePlugIns();
   void UpdateManagedPlugins();
+  const std::vector<LoadError>& LoadErrors() { return load_errors; }
   PlugInContainer* LoadPlugIn(wxString plugin_file);
   PlugInContainer* LoadPlugIn(wxString plugin_file, PlugInContainer* pic);
 
@@ -228,32 +205,8 @@ public:
   bool IsPlugInAvailable(wxString commonName);
   bool CheckPluginCompatibility(wxString plugin_file);
 
-  /** Send deferred notifications deferred at early boot stages. */
-  void SendDeferredEvents();
-
 private:
   static EventVar InitedUnused;
-
-  class DeferredNotify {
-  public:
-    EventVar& evt_var;
-    std::string stringval;
-    int intval;
-    void* user_data;
-    std::shared_ptr<PluginInfo> plugin_info;
-
-    DeferredNotify()
-        : evt_var(InitedUnused), intval(0), user_data(0), plugin_info(nullptr)
-          {}
-    DeferredNotify(EventVar& ev, std::string s, int iv, void* data)
-        : evt_var(ev), stringval(s), intval(iv), user_data(data),
-          plugin_info(nullptr) {}
-    DeferredNotify(EventVar& ev, std::shared_ptr<PluginInfo> ptr)
-        : evt_var(ev), plugin_info(ptr) {}
-  };
-
-  void DelayedNotify(EventVar& v, std::string s, int iv = 0, void* data = 0);
-  void DelayedNotify(EventVar& v, std::shared_ptr<PluginInfo> ptr);
 
   void HandleBadLib(const std::string& library_path);
   void HandleBadLib(const std::string& path, EventVar& ev);
@@ -267,7 +220,8 @@ private:
   wxString m_plugin_location;
   const wxBitmap* m_default_plugin_icon;
   bool delay_notifications;
-  std::vector<DeferredNotify> deferred_notifies;
+
+  std::vector<LoadError> load_errors;
 };
 
 #endif  // _PLUGIN_LOADER_H_

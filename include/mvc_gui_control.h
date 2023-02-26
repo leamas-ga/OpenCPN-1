@@ -31,14 +31,8 @@ public:
   MvcGuiControl(wxWindow* parent);
 
 private:
- ObservableListener bad_library_listener;
- ObservableListener bad_plugin_listener;
- ObservableListener incompat_lib_listener;
- ObservableListener no_createpi_listener;
- ObservableListener no_destroy_listener;
- ObservableListener unreadable_lib_listener;
-
- wxWindow* m_parent;
+  ObservableListener load_complete_listener;
+  wxWindow* m_parent;
 };
 
 #endif //  _MVC_GUI_CTRL_H__

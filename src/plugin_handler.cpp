@@ -870,24 +870,23 @@ void PluginHandler::cleanupFiles(const std::string& manifestFile,
   }
 }
 
-/** Remove all empty dirs found below root + also (empty) root. */
+/** Remove all empty dirs found from root containing string "opencpn". */
 static void PurgeEmptyDirs(const std::string& root) {
   if (!wxFileName::IsDirWritable(root)) return;
+  if (ocpn::tolower(root).find("opencpn") == std::string::npos) return;
   wxDir rootdir(root);
   if (!rootdir.IsOpened()) return;
   wxString dirname;
   bool cont = rootdir.GetFirst(&dirname, "", wxDIR_DIRS);
   while (cont) {
-    std::string subdir_path(rootdir.GetNameWithSep() + dirname);
-    PurgeEmptyDirs(subdir_path);
-    wxDir subdir(subdir_path);
-    if (!subdir.HasFiles() && !subdir.HasSubDirs())
-      wxFileName::Rmdir(subdir.GetName());
+    PurgeEmptyDirs((rootdir.GetNameWithSep() + dirname).ToStdString());
     cont = rootdir.GetNext(&dirname);
   }
   rootdir.Close();
   rootdir.Open(root);
-  if (!rootdir.HasFiles()) wxFileName::Rmdir(rootdir.GetName());
+  if (!(rootdir.HasFiles() || rootdir.HasSubDirs())) {
+    wxFileName::Rmdir(rootdir.GetName());
+  }
 }
 
 void PluginHandler::cleanup(const std::string& filelist,
@@ -1130,6 +1129,7 @@ static std::string FindMatchingLibFile(std::regex name_re) {
       cont = dir.GetNext(&filename);
     }
   }
+  return "";
 }
 
 /** Best effort to return plugin name with correct case. */

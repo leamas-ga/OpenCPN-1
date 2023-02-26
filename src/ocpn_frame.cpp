@@ -4891,7 +4891,6 @@ void MyFrame::OnInitTimer(wxTimerEvent &event) {
 
       //  Give the user dialog on any blacklisted PlugIns
       g_pi_manager ->ShowDeferredBlacklistMessages();
-      PluginLoader::getInstance()->SendDeferredEvents();
 
       g_pi_manager->CallLateInit();
 
