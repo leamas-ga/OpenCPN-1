@@ -250,7 +250,8 @@ bool PluginLoader::LoadAllPlugIns(bool load_enabled) {
 
   // Some additional actions needed after all plugins are loaded.
   evt_update_chart_types.Notify();
-  evt_plugin_loadall_finalize.Notify();
+  auto errors = std::make_shared<std::vector<LoadError>>(load_errors);
+  evt_plugin_loadall_finalize.Notify(errors, "");
 
   return any_dir_loaded;
 }
@@ -1177,6 +1178,8 @@ PlugInContainer* PluginLoader::LoadPlugIn(wxString plugin_file,
   wxLogMessage(wxString("PluginLoader: Loading PlugIn: ") + plugin_file);
 
   if (!wxIsReadable(plugin_file)) {
+    wxLogMessage("Ignoring unreadable plugin %s",
+		 plugin_file.ToStdString().c_str());
     LoadError le(LoadError::Type::Unreadable,  plugin_file.ToStdString());
     load_errors.push_back(le);
     return 0;
@@ -1212,13 +1215,13 @@ PlugInContainer* PluginLoader::LoadPlugIn(wxString plugin_file,
     std::string name = fn.GetName().ToStdString();
     auto found = m_blacklist->get_library_data(name);
     if (m_blacklist->mark_unloadable(plugin_file.ToStdString())) {
+      wxLogMessage("Ignoring blacklisted plugin %s", name.c_str());
       if (found.name != "") {
         SemanticVersion v(found.major, found.minor);	
-	LoadError le(LoadError::Type::Unloadable, plugin_file.ToStdString(),
-                     0, v);
+	LoadError le(LoadError::Type::Unloadable, name, 0, v);
 	load_errors.push_back(le);
       } else {
-	LoadError le(LoadError::Type::Unloadable, plugin_file.ToStdString());
+	LoadError le(LoadError::Type::Unloadable, name);
 	load_errors.push_back(le);
       }
     }

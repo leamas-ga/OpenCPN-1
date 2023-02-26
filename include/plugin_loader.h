@@ -129,14 +129,14 @@ public:
   const int api_version;        //<! As determined from plugin API
   const SemanticVersion plugin_version;  //<! As determined from plugin API
 
-  LoadError(Type t, const std::string& l, int av, SemanticVersion pv) 
+  LoadError(Type t, const std::string& l, int av, SemanticVersion pv)
     : type(t), lib_path(l), api_version(av), plugin_version(pv) {}
 
   LoadError(Type t, const std::string& l, int av)
     : type(t),  lib_path(l), api_version(av),
       plugin_version(SemanticVersion()) {}
 
-  LoadError(Type t, const std::string& l) 
+  LoadError(Type t, const std::string& l)
     : type(t),  lib_path(l), api_version(0),
       plugin_version(SemanticVersion()) {}
 };
@@ -180,7 +180,13 @@ public:
   EventVar evt_deactivate_plugin;
 
   EventVar evt_update_chart_types;
+
+  /**
+   * Emitted after all plugins are loaded. Event carries
+   * a std::vector<LoadError> available though GetSharedPtr()
+   */
   EventVar evt_plugin_loadall_finalize;
+
   EventVar evt_version_incompatible_plugin;
 
 
@@ -197,7 +203,6 @@ public:
   bool DeactivatePlugIn(PlugInContainer* pic);
   bool UpdatePlugIns();
   void UpdateManagedPlugins();
-  const std::vector<LoadError>& LoadErrors() { return load_errors; }
   PlugInContainer* LoadPlugIn(wxString plugin_file);
   PlugInContainer* LoadPlugIn(wxString plugin_file, PlugInContainer* pic);
 

@@ -132,7 +132,7 @@
 #include "MarkInfo.h"
 #include "MUIBar.h"
 #include "multiplexer.h"
-#include "mvc_gui_control.h"
+#include "load_errors_dlg.h"
 #include "nav_object_database.h"
 #include "navutil.h"
 #include "navutil_base.h"
@@ -758,7 +758,7 @@ MyFrame::MyFrame(wxFrame *frame, const wxString &title, const wxPoint &pos,
   m_pMenuBar = NULL;
   g_options = NULL;
   piano_ctx_menu = NULL;
-  m_mvc_gui_control = std::make_unique<MvcGuiControl>(this);
+  m_load_errors_dlg_ctrl = std::make_unique<LoadErrorsDlgCtrl>(this);
 
   //      Redirect the initialization timer to this frame
   InitTimer.SetOwner(this, INIT_TIMER);

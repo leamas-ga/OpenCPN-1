@@ -42,7 +42,7 @@
 #include "SencManager.h"
 #include "comm_appmsg_bus.h"
 #include "bbox.h"
-#include "mvc_gui_control.h"
+#include "load_errors_dlg.h"
 
 wxColour GetGlobalColor(wxString colorName);
 wxColour GetDialogColor(DialogColor color);
@@ -432,7 +432,7 @@ private:
   wxTimer m_recaptureTimer;
   bool m_b_new_data;
 
-  std::unique_ptr<MvcGuiControl> m_mvc_gui_control;
+  std::unique_ptr<LoadErrorsDlgCtrl> m_load_errors_dlg_ctrl;
 
   ObservableListener listener_basic_navdata;
   ObservableListener listener_gps_watchdog;
